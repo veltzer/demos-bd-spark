@@ -1,0 +1,11 @@
+Hands-On Practice:
+
+1. Reading a CSV file, performing transformations (like joins , agg , datatype changes), and saving it to another CSV file or table.
+
+2. Building a JAR and running a job using the `spark-submit` command.
+
+3. Viewing the Spark Application while the job is running.
+
+4. Reading error logs in the application logs.                   
+
+5. Hands on Hadoop cluster and RDD, and running scala commands.
