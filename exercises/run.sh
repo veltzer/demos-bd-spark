@@ -1,9 +1,8 @@
 #!/bin/bash -e
 docker run -it --rm\
-	-v ../../data:/opt/data\
-	-v .:/opt/code\
+	-v "${PWD}:/opt/exercise"\
 	apache/spark\
 	spark-submit\
 	--class TransformCSV\
 	--master local[*]\
-	/opt/code/transform_csv.scala
+	"/opt/exercise/transform_csv.scala"
