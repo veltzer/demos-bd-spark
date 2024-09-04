@@ -1,0 +1,20 @@
+#!/bin/bash -e	
+
+if [ ! -d "${HOME}/install" ]
+then
+	mkdir "${HOME}/install"
+fi
+version="3.5.2"
+toplevel="spark-${version}-bin-hadoop3"
+if [ -f "${HOME}/install/spark" ]
+then
+	rm "${HOME}/install/spark"
+fi
+if [ -d "${HOME}/install/${toplevel}" ]
+then
+	rm -rf "${HOME}/install/${toplevel}"
+fi
+url="https://dlcdn.apache.org/spark/spark-${version}/spark-${version}-bin-hadoop3.tgz"
+echo "url is [${url}]..."
+curl --location --silent "${url}" | tar xz -C "${HOME}/install"
+ln -s "${HOME}/install/${toplevel}" "${HOME}/install/spark"
