@@ -1,0 +1,3 @@
+- add checks of bash scripts
+- add checks of markdown files
+- add spell checking of markdown files.

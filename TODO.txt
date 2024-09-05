@@ -10,6 +10,3 @@ Hands-On Practice:
 
 5. Hands on Hadoop cluster and RDD, and running scala commands.
 
-- add checks of bash scripts
-- add checks of markdown files
-- add spell checking of markdown files.
