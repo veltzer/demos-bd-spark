@@ -6,6 +6,6 @@
 
 * Add `~/install/spark/bin` to your `PATH` variable in your `~/.bashrc`.
 
-* In your `~/.bashrc` create an envrionment variable called `SPARK_HOME` that points to `~/install/spark`.
+* In your `~/.bashrc` create an environment variable called `SPARK_HOME` that points to `~/install/spark`.
 
 * Check that your setup works by running `spark-shell`.
