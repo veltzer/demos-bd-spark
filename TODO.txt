@@ -9,4 +9,3 @@ Hands-On Practice:
 4. Reading error logs in the application logs.                   
 
 5. Hands on Hadoop cluster and RDD, and running scala commands.
-
