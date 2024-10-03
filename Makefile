@@ -12,10 +12,8 @@ DO_MD_ASPELL:=1
 # do you want to run mdl on md files?
 DO_MD_MDL:=1
 
-#############
-# variables #
-#############
-ALL:=
+########
+# code #
 
 ALL_SH:=$(shell find . -type f -name "*.sh" -and -not -path "./.venv/*" -printf "%P\n")
 ALL_SHELLCHECK:=$(addprefix out/, $(addsuffix .shellcheck, $(ALL_SH)))
@@ -37,9 +35,6 @@ ifeq ($(DO_MD_MDL),1)
 ALL+=$(MD_MDL)
 endif # DO_MD_MDL
 
-########
-# code #
-########
 # silent stuff
 ifeq ($(DO_MKDBG),1)
 Q:=
