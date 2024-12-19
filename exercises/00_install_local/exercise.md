@@ -9,6 +9,12 @@
 
 * In your `~/.bashrc` create an environment variable called `SPARK_HOME` that points to `~/install/spark`.
 
+then do:
+
+```bash
+source ~/.bashrc
+```
+
 * Instal java on your machine using the following commands:
 
 ```bash
