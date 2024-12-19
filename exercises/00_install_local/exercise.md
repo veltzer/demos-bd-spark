@@ -5,6 +5,7 @@
 * Use the provided `install_spark.bash` script to download and install spark on your system.
 
 * Add `~/install/spark/bin` to your `PATH` variable in your `~/.bashrc`.
+    Add `PATH=${PATH}:${HOME}/install/spark/bin` to your ~/.bashrc.
 
 * In your `~/.bashrc` create an environment variable called `SPARK_HOME` that points to `~/install/spark`.
 
