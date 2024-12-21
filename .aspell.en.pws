@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1131 
+personal_ws-1.1 en 1134 
 AARRR
 ACLs
 ADPlus
@@ -499,6 +499,7 @@ Provisioners
 Pulseaudio
 PyCharm
 PyQt
+PySpark
 PyTest
 Pycharm
 Pypi
@@ -725,6 +726,7 @@ atomics
 autotools
 awk
 balancers
+bashrc
 bbclass
 benchmarking
 bitbucket
@@ -990,6 +992,7 @@ py
 pydoc
 pylint
 pypi
+pyspark
 pytest
 qcow
 qemu

@@ -15,7 +15,7 @@ then do:
 source ~/.bashrc
 ```
 
-* Instal java on your machine using the following commands:
+* Install java on your machine using the following commands:
 
 ```bash
 sudo apt update

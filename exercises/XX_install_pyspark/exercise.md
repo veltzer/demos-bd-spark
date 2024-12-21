@@ -33,4 +33,4 @@ print(doubled.collect())
 spark.stop()
 ```
 
-* python [yourapp.py]
+* python [your_script.py]
