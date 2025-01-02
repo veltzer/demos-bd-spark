@@ -1,13 +1,19 @@
 #!/usr/bin/env python
 
+import os
+from contextlib import redirect_stdout, redirect_stderr
 from pyspark import SparkContext, SparkConf
+from wurlitzer import pipes
 
-# Create SparkConf object
-conf = SparkConf().setAppName("VersionCheck").setMaster("spark://localhost:7077")
-
-# Create SparkContext
-sc = SparkContext(conf=conf)
-
+os.environ["SPARK_LOCAL_IP"] = "localhost"
+with open(os.devnull, "w") as devnull:
+    with pipes(stdout=devnull, stderr=devnull), \
+         redirect_stdout(devnull), \
+         redirect_stderr(devnull):
+        conf = SparkConf().setAppName("VersionCheck").setMaster("spark://localhost:7077")
+        sc = SparkContext(conf=conf)
+# with open(os.devnull, "w") as devnull:
+#    with redirect_stdout(devnull), redirect_stderr(devnull):
 
 # Print Spark version
 print(f"Spark Version: {sc.version}")
