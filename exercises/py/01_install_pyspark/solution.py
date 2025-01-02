@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from pyspark.sql import SparkSession
 
 # Create Spark session
