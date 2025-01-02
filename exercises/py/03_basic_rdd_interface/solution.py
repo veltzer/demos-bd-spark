@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from pyspark import SparkContext, SparkConf
 
 # Initialize Spark
