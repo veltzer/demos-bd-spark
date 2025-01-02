@@ -4,6 +4,6 @@ You are given a simple file, numbers.txt and you need to find the sum of all the
 
 Write a pyspark script to do it.
 
-You the `sc.textFile` method.
+Use the `sc.textFile` method.
 
 Remember to convert strings to integers.
