@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1134 
+personal_ws-1.1 en 1136 
 AARRR
 ACLs
 ADPlus
@@ -500,6 +500,7 @@ Pulseaudio
 PyCharm
 PyQt
 PySpark
+PySpark's
 PyTest
 Pycharm
 Pypi
@@ -599,6 +600,7 @@ Solrconfig
 SourceTree
 SpacialMultiplexing
 SparkContext
+SparkContexts
 Spectre
 Splunk
 SpringBoot

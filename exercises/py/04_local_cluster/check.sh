@@ -6,4 +6,4 @@ jps
 # You should see processes like:
 # org.apache.spark.deploy.master.Master
 # org.apache.spark.deploy.worker.Worker
-ps aux | grep spark
+pgrep -a java

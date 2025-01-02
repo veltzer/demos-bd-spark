@@ -33,7 +33,7 @@ print(doubled.collect())
 spark.stop()
 ```
 
-* run 
+* run
 
 ```bash
 python solution.py

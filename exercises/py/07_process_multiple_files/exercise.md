@@ -1,7 +1,7 @@
 # Processing multiple files using pyspark
 
 Write a spark script to find the most common word used
-in all linux documentation.
+in all Linux documentation.
 
 Linux documentation is in the folder `/usr/share/doc`
 

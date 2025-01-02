@@ -18,6 +18,7 @@ Learn how to create and manipulate RDDs (Resilient Distributed Datasets) in Apac
 
 ### 1. Creating a SparkContext
 First, you'll need to create a SparkContext, which is the entry point for Spark functionality:
+
 ```python
 from pyspark import SparkContext, SparkConf
 
@@ -38,6 +39,7 @@ Practice these operations:
 
 ## Sample Data
 Use these Python collections:
+
 ```python
 numbers = [1, 2, 3, 4, 5]
 pairs = [("a", 1), ("b", 2), ("c", 3)]
@@ -46,10 +48,10 @@ pairs = [("a", 1), ("b", 2), ("c", 3)]
 ## Tasks to Complete
 
 1. Create an RDD from the numbers list
-2. Create an RDD from the pairs list
-3. Print all elements in both RDDs
-4. Transform the numbers RDD by squaring each element
-5. Print the transformed results
+1. Create an RDD from the pairs list
+1. Print all elements in both RDDs
+1. Transform the numbers RDD by squaring each element
+1. Print the transformed results
 
 ## Expected Output
 The program should show:
@@ -59,14 +61,14 @@ The program should show:
 
 ## Common Pitfalls to Avoid
 1. Don't forget to stop the SparkContext when done
-2. Remember that `collect()` brings all data to the driver - use with caution on large datasets
-3. Don't create multiple SparkContexts
+1. Remember that `collect()` brings all data to the driver - use with caution on large datasets
+1. Don't create multiple SparkContexts
 
 ## Extensions
 Once you complete the basic exercise, try these extensions:
 1. Create an RDD from a larger dataset (100+ elements)
-2. Try different transformations (multiply by 2, add 5, etc.)
-3. Filter elements based on a condition
+1. Try different transformations (multiply by 2, add 5, etc.)
+1. Filter elements based on a condition
 
 ## Assessment Criteria
 You should be able to:
