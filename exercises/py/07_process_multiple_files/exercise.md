@@ -10,4 +10,4 @@ How do you find the most common word?
 - Output tuple of (word, count) for every word encountered.
 - Merge of those tuples using addition.
 - Sort the result
-- Bring the top-most result.
+- Print the top-most result.
