@@ -10,7 +10,7 @@ sc = SparkContext(conf=conf)
 sc.setLogLevel("ERROR")
 
 # Read the file
-# Note: textFile is the correct method (not sc.read as mentioned in exercise)
+# Note: textFile is the correct method
 numbers_rdd = sc.textFile("numbers.txt")
 
 # Convert strings to integers and filter odd numbers
