@@ -13,7 +13,10 @@ numbers = [1, 2, 3, 4, 5]
 rdd = spark.sparkContext.parallelize(numbers)
 
 # Double each number
-doubled = rdd.map(lambda x: x * 2)
+doubled = rdd.map(lambda x: x * x)
+
+import time
+time.sleep(100);
 
 # Print the result
 print(doubled.collect())
