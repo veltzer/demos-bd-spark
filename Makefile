@@ -14,6 +14,7 @@ DO_MD_MDL:=1
 
 ########
 # code #
+########
 
 ALL_SH:=$(shell find . -type f -name "*.sh" -and -not -path "./.venv/*" -printf "%P\n")
 ALL_SHELLCHECK:=$(addprefix out/, $(addsuffix .shellcheck, $(ALL_SH)))
