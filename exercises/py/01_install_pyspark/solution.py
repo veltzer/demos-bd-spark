@@ -1,16 +1,3 @@
-# Installing PySpark
-
-* install packages needed for python
-
-```bash
-sudo apt update
-sudo apt install python3 python-is-python3 python3-pip
-pip install pyspark
-```
-
-* write your first pyspark application
-
-```python
 from pyspark.sql import SparkSession
 
 # Create Spark session
@@ -31,10 +18,3 @@ print(doubled.collect())
 
 # Stop Spark
 spark.stop()
-```
-
-* run 
-
-```bash
-python solution.py
-```
