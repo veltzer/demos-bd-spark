@@ -22,4 +22,4 @@ docker images
 https://hub.docker.com/r/apache/spark
 https://hub.docker.com/r/apache/spark-py
 
-Mark Veltzer, Copyright © 2020, 2021, 2022, 2023, 2024
+Mark Veltzer, Copyright © 2020, 2021, 2022, 2023, 2024, 2025

@@ -16,11 +16,13 @@ logging_tree==1.10
 Mako==1.3.8
 MarkupSafe==3.0.2
 packaging==24.2
+py4j==0.10.9.7
 pydmt==0.3.18
 pyfakeuse==0.0.9
 Pygments==2.18.0
 pylogconf==0.0.38
 pymakehelper==0.0.31
+pyspark==3.5.4
 pytconf==0.1.18
 python-dateutil==2.9.0.post0
 PyYAML==6.0.2
