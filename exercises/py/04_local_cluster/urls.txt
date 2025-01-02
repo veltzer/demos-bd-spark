@@ -1,0 +1,2 @@
+Master UI: http://localhost:8080
+Application UI: http://localhost:4040
