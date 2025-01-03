@@ -15,9 +15,6 @@ rdd = spark.sparkContext.parallelize(numbers)
 # Double each number
 doubled = rdd.map(lambda x: x * x)
 
-import time
-time.sleep(100);
-
 # Print the result
 print(doubled.collect())
 
