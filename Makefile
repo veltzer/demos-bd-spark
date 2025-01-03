@@ -11,6 +11,8 @@ DO_SHELLCHECK:=1
 DO_MD_ASPELL:=1
 # do you want to run mdl on md files?
 DO_MD_MDL:=1
+# do you want to lint python files?
+DO_LINT:=1
 
 ########
 # code #
@@ -23,6 +25,9 @@ MD_SRC:=$(shell find exercises -type f -and -name "*.md")
 MD_BAS:=$(basename $(MD_SRC))
 MD_ASPELL:=$(addprefix out/,$(addsuffix .aspell,$(MD_BAS)))
 MD_MDL:=$(addprefix out/,$(addsuffix .mdl,$(MD_BAS)))
+
+ALL_PY:=$(shell find src python -type f -and -name "*.py")
+ALL_LINT:=$(addprefix out/,$(addsuffix .lint, $(basename $(ALL_PY))))
 
 ifeq ($(DO_SHELLCHECK),1)
 ALL+=$(ALL_SHELLCHECK)
