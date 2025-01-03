@@ -3,3 +3,4 @@ pyspark
 pymakehelper
 pydmt
 faker
+pylint
