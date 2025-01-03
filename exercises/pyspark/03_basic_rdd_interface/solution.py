@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
-import sys
+# import sys
+# import time
 from pyspark import SparkContext, SparkConf
 
 # Initialize Spark
@@ -13,7 +14,6 @@ sc = SparkContext(conf=conf)
 
 # this is called a python "generator"
 def create_some_numbers():
-    import time
     for x in range(10000000000):
         print("im going to sleep...")
         # time.sleep(5)

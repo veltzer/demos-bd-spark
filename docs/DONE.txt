@@ -2,3 +2,4 @@
 - add checks of markdown files
 - add spell checking of markdown files.
 - add shell checking.
+- added linting of python files.

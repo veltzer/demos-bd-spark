@@ -26,7 +26,7 @@ MD_BAS:=$(basename $(MD_SRC))
 MD_ASPELL:=$(addprefix out/,$(addsuffix .aspell,$(MD_BAS)))
 MD_MDL:=$(addprefix out/,$(addsuffix .mdl,$(MD_BAS)))
 
-ALL_PY:=$(shell find src python -type f -and -name "*.py")
+ALL_PY:=$(shell find exercises -type f -and -name "*.py")
 ALL_LINT:=$(addprefix out/,$(addsuffix .lint, $(basename $(ALL_PY))))
 
 ifeq ($(DO_SHELLCHECK),1)
@@ -40,6 +40,10 @@ endif # DO_MD_ASPELL
 ifeq ($(DO_MD_MDL),1)
 ALL+=$(MD_MDL)
 endif # DO_MD_MDL
+
+ifeq ($(DO_LINT),1)
+ALL+=$(ALL_LINT)
+endif # DO_LINT
 
 # silent stuff
 ifeq ($(DO_MKDBG),1)
@@ -75,6 +79,8 @@ debug:
 	$(info MD_SRC is $(MD_SRC))
 	$(info MD_ASPELL is $(MD_ASPELL))
 	$(info MD_MDL is $(MD_MDL))
+	$(info ALL_PY is $(ALL_PY))
+	$(info ALL_LINT is $(ALL_LINT))
 
 .PHONY: spell_many
 spell_many:
@@ -95,6 +101,10 @@ $(MD_ASPELL): out/%.aspell: %.md .aspell.conf .aspell.en.prepl .aspell.en.pws
 $(MD_MDL): out/%.mdl: %.md .mdlrc .mdl.style.rb
 	$(info doing [$@])
 	$(Q)GEM_HOME=gems gems/bin/mdl $<
+	$(Q)pymakehelper touch_mkdir $@
+$(ALL_LINT): out/%.lint: %.py .pylintrc
+	$(info doing [$@])
+	$(Q)PYTHONPATH=python python -m pylint --reports=n --score=n $<
 	$(Q)pymakehelper touch_mkdir $@
 
 ##########

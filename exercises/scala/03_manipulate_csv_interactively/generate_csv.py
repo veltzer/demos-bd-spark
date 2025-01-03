@@ -4,15 +4,15 @@ import csv
 import random
 from faker import Faker
 
-fake = Faker()
 
 def generate_csv(filename, num_rows):
+    fake = Faker()
     departments = ["Engineering", "Marketing", "HR", "Sales", "Finance"]
-    
+
     with open(filename, "w", newline="") as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(["id", "name", "age", "department", "salary"])
-        
+
         for i in range(num_rows):
             writer.writerow([
                 i + 1,
