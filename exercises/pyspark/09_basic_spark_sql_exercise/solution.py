@@ -37,7 +37,7 @@ def main():
     project_df.createOrReplaceTempView("projects")
 
     # Basic Query 1: Find Engineering employees
-    print("\nQuery 1: Engineering employees by salary:")
+    print("Query 1: Engineering employees by salary:")
     query1 = """
     SELECT name, salary
     FROM employees
@@ -47,7 +47,7 @@ def main():
     spark.sql(query1).show()
 
     # Basic Query 2: Department statistics
-    print("\nQuery 2: Department statistics:")
+    print("Query 2: Department statistics:")
     query2 = """
     SELECT
         department,
@@ -62,7 +62,7 @@ def main():
     spark.sql(query2).show()
 
     # Exercise 1: Employee count by department
-    print("\nExercise 1: Employee count by department:")
+    print("Exercise 1: Employee count by department:")
     query3 = """
     SELECT
         department,
@@ -74,7 +74,7 @@ def main():
     spark.sql(query3).show()
 
     # Exercise 2: Projects and their leads
-    print("\nExercise 2: Projects and their leads:")
+    print("Exercise 2: Projects and their leads:")
     query4 = """
     SELECT
         p.project_name,
@@ -87,7 +87,7 @@ def main():
     spark.sql(query4).show(truncate=False)
 
     # Exercise 3: Company-wide salary range
-    print("\nExercise 3: Company-wide salary range:")
+    print("Exercise 3: Company-wide salary range:")
     query5 = """
     SELECT
         MIN(salary) as min_salary,
@@ -99,7 +99,7 @@ def main():
     spark.sql(query5).show()
 
     # Additional analysis: Salary distribution
-    print("\nBonus: Salary distribution by department:")
+    print("Bonus: Salary distribution by department:")
     query6 = """
     SELECT
         department,
@@ -116,7 +116,7 @@ def main():
     spark.sql(query6).show()
 
     # Clean up
-    print("\nCleaning up...")
+    print("Cleaning up...")
     spark.stop()
     print("Done!")
 
