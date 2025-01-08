@@ -4,10 +4,14 @@
 Solution to exercise of word counting of linux documentation
 """
 
+import os
+from operator import add
 from pyspark import SparkContext, SparkConf
 
 # Initialize Spark
-conf = SparkConf().setAppName("Linux Docs Word Count").setMaster("spark://localhost:7077")
+
+master_url = os.environ["SPARK_MASTER_HOST"]
+conf = SparkConf().setAppName("Linux Docs Word Count").setMaster(master_url)
 sc = SparkContext(conf=conf)
 
 # Set log level to reduce noise
@@ -30,9 +34,9 @@ lines_rdd = files_rdd.flatMap(lambda x: x[1].splitlines())
 # 4. Create (word, 1) pairs
 word_counts = lines_rdd \
     .flatMap(lambda line: line.lower().split()) \
-    .filter(lambda word: word.strip() != "") \
+    .filter(lambda word: word.strip() != "")\
     .map(lambda word: (word, 1)) \
-    .reduceByKey(lambda a, b: a + b)
+    .reduceByKey(add)
 
 # Sort by count (descending) and take the top result
 word, times = word_counts.sortBy(lambda x: x[1], ascending=False).first()
