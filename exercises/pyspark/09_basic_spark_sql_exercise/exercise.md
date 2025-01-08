@@ -74,7 +74,7 @@ spark.sql(query1).show()
 ```python
 # Calculate average salary by department
 query2 = """
-SELECT 
+SELECT
     department,
     COUNT(*) as emp_count,
     ROUND(AVG(salary), 2) as avg_salary,
@@ -90,15 +90,15 @@ spark.sql(query2).show()
 ## Practice Exercises
 
 1. Find the total number of employees in each department
-2. List all projects and their lead's name (requires a JOIN)
-3. Calculate the minimum and maximum salary in the company
+1. List all projects and their lead's name (requires a JOIN)
+1. Calculate the minimum and maximum salary in the company
 
 ## Solutions
 
 ### Exercise 1
 ```python
 query3 = """
-SELECT 
+SELECT
     department,
     COUNT(*) as employee_count
 FROM employees
@@ -110,7 +110,7 @@ ORDER BY employee_count DESC
 ### Exercise 2
 ```python
 query4 = """
-SELECT 
+SELECT
     p.project_name,
     e.name as lead_name
 FROM projects p
@@ -121,7 +121,7 @@ JOIN employees e ON p.lead_id = e.id
 ### Exercise 3
 ```python
 query5 = """
-SELECT 
+SELECT
     MIN(salary) as min_salary,
     MAX(salary) as max_salary
 FROM employees
@@ -137,6 +137,6 @@ spark.stop()
 ## Tips for Working with Spark SQL
 
 1. Always register temporary views using meaningful names
-2. Use descriptive column names
-3. Clean up resources when done
-4. Start with simple queries and build up complexity gradually
+1. Use descriptive column names
+1. Clean up resources when done
+1. Start with simple queries and build up complexity gradually
