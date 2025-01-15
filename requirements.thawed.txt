@@ -1,5 +1,7 @@
 # THIS IS AN AUTO-GENERATED FILE. DO NOT EDIT!
 pyspark
+pandas
+numpy
 pymakehelper
 pydmt
 faker
