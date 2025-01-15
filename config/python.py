@@ -5,6 +5,8 @@ config_requires: List[str] = []
 dev_requires: List[str] = []
 install_requires: List[str] = [
     "pyspark",
+    "pandas",
+    "numpy",
 ]
 build_requires: List[str] = [
     "pymakehelper",

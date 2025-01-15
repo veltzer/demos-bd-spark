@@ -2,7 +2,7 @@
 
 from pyspark.sql import SparkSession
 from pyspark.sql.window import Window
-from pyspark.sql.functions import sum, rank, avg, lag, col, date_format, round
+from pyspark.sql.functions import sum as sql_sum
 
 def main():
     # Create Spark session
@@ -15,12 +15,12 @@ def main():
     # Task 1: Running Totals (SQL)
     print("Task 1: Running Totals")
     query1 = """
-    SELECT 
+    SELECT
         store_id,
         date,
         amount,
         SUM(amount) OVER (
-            PARTITION BY store_id 
+            PARTITION BY store_id
             ORDER BY date
             ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
         ) as running_total
@@ -33,9 +33,9 @@ def main():
     window_spec1 = Window.partitionBy("store_id") \
                         .orderBy("date") \
                         .rowsBetween(Window.unboundedPreceding, Window.currentRow)
-    
-    df1 = sales_df.withColumn("running_total", 
-                             sum("amount").over(window_spec1)) \
+
+    df1 = sales_df.withColumn("running_total",
+                             sql_sum("amount").over(window_spec1)) \
                   .orderBy("store_id", "date")
     print("\nTask 1 (DataFrame API):")
     df1.show()
@@ -44,19 +44,19 @@ def main():
     print("\nTask 2: Sales Rankings")
     query2 = """
     WITH monthly_sales AS (
-        SELECT 
+        SELECT
             store_id,
             date_format(date, 'MM') as month,
             SUM(amount) as total_sales
         FROM sales
         GROUP BY store_id, date_format(date, 'MM')
     )
-    SELECT 
+    SELECT
         month,
         store_id,
         total_sales,
         RANK() OVER (
-            PARTITION BY month 
+            PARTITION BY month
             ORDER BY total_sales DESC
         ) as rank
     FROM monthly_sales
@@ -67,14 +67,14 @@ def main():
     # Task 3: Moving Average (SQL)
     print("\nTask 3: Moving Average")
     query3 = """
-    SELECT 
+    SELECT
         store_id,
         date,
         amount,
         ROUND(
             AVG(amount) OVER (
-                PARTITION BY store_id 
-                ORDER BY date 
+                PARTITION BY store_id
+                ORDER BY date
                 ROWS BETWEEN 2 PRECEDING AND CURRENT ROW
             ), 2
         ) as moving_avg_3day
@@ -87,23 +87,23 @@ def main():
     print("\nTask 4: Previous Day Comparison")
     query4 = """
     WITH daily_diff AS (
-        SELECT 
+        SELECT
             store_id,
             date,
             amount,
             LAG(amount) OVER (
-                PARTITION BY store_id 
+                PARTITION BY store_id
                 ORDER BY date
             ) as prev_day_amount
         FROM sales
     )
-    SELECT 
+    SELECT
         store_id,
         date,
         amount,
         prev_day_amount,
         ROUND(
-            ((amount - prev_day_amount) / prev_day_amount) * 100, 
+            ((amount - prev_day_amount) / prev_day_amount) * 100,
             2
         ) as pct_change
     FROM daily_diff
@@ -115,7 +115,7 @@ def main():
     print("\nTask 5: Store Performance")
     query5 = """
     WITH store_stats AS (
-        SELECT 
+        SELECT
             store_id,
             date,
             amount,
@@ -124,7 +124,7 @@ def main():
             ) as store_avg
         FROM sales
     )
-    SELECT 
+    SELECT
         store_id,
         date,
         amount as daily_sales,
