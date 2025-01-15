@@ -4,20 +4,17 @@ spark = SparkSession.builder.appName("SimpleOptimization").getOrCreate()
 sc = spark.sparkContext
 
 # Create sample data
-numbers = range(1, 100000000)
+numbers = range(1, 100000)
 rdd = sc.parallelize(numbers)
 
 # Inefficient way: Multiple separate operations
 def inefficient_way():
     # Step 1: Filter even numbers
     evens = rdd.filter(lambda x: x % 2 == 0)
-    
     # Step 2: Square them
     squares = evens.map(lambda x: x * x)
-    
     # Step 3: Sum them
     total = squares.reduce(lambda x, y: x + y)
-    
     return total
 
 # Optimized way: Chain operations together
