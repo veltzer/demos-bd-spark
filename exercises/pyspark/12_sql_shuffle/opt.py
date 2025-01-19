@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-from pyspark.sql import SparkSession
 import time
+from pyspark.sql import SparkSession
 
 # Create Spark session
 spark = SparkSession.builder.appName("ShuffleOptimization").getOrCreate()
@@ -18,17 +18,17 @@ customers_df = spark.createDataFrame(customers_data, ["customer_id", "customer_n
 # Non-optimized way: Multiple shuffles due to separate operations
 def non_optimized_way():
     start_time = time.time()
-    
+
     # First join operations (causes shuffle)
     joined = orders_df.join(customers_df, "customer_id")
-    
+
     # Group by customer and calculate average (causes another shuffle)
     result = joined.groupBy("customer_name").avg("amount")
-    
+
     # Force execution and measure time
     result.collect()
     end_time = time.time()
-    
+
     print("\nNon-optimized execution plan:")
     result.explain()
     return end_time - start_time
@@ -36,18 +36,18 @@ def non_optimized_way():
 # Optimized way: Reduce shuffles by pre-aggregating before join
 def optimized_way():
     start_time = time.time()
-    
+
     # Pre-aggregate orders before joining (reduces data to be shuffled)
     pre_aggregated = orders_df.groupBy("customer_id").avg("amount")
-    
+
     # Then join with the smaller result
     result = pre_aggregated.join(customers_df, "customer_id") \
                           .select("customer_name", "avg(amount)")
-    
+
     # Force execution and measure time
     result.collect()
     end_time = time.time()
-    
+
     print("\nOptimized execution plan:")
     result.explain()
     return end_time - start_time

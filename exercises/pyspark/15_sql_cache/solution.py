@@ -1,5 +1,7 @@
-from pyspark.sql import SparkSession
+#!/usr/bin/env python
+
 import time
+from pyspark.sql import SparkSession
 
 # Create Spark session
 spark = SparkSession.builder.appName("SQLCachingDemo").getOrCreate()
@@ -11,42 +13,42 @@ df = spark.createDataFrame(data, ["id", "product", "price"])
 
 def run_queries_without_cache():
     start_time = time.time()
-    
+
     # Query 1: Average price by product
     print("Running first query without cache...")
     avg_price = df.groupBy("product").avg("price").collect()
- 
+
     # Query 2: Count products above average
     print("Running second query without cache...")
     product_counts = df.groupBy("product").count().collect()
-    
+
     end_time = time.time()
-    return end_time - start_time
+    return end_time - start_time, avg_price, product_counts
 
 def run_queries_with_cache():
     start_time = time.time()
-    
+
     # Cache the DataFrame
     print("Caching DataFrame...")
     df.cache()
-    
+
     # Force cache materialization with an action
     df.count()
-    
+
     # Query 1: Average price by product
     print("Running first query with cache...")
     avg_price = df.groupBy("product").avg("price").collect()
-    
+
     # Query 2: Count products above average
     print("Running second query with cache...")
     product_counts = df.groupBy("product").count().collect()
-    
+
     end_time = time.time()
-    
+
     # Check cache status
     print(f"Is cached? {df.is_cached}")
-    
-    return end_time - start_time
+
+    return end_time - start_time, avg_price, product_counts
 
 # Run without cache
 print("\nExecuting queries without cache...")

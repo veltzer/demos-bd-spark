@@ -22,7 +22,6 @@ def optimized_way():
     total = rdd.filter(lambda x: x % 2 == 0) \
               .map(lambda x: x * x) \
               .reduce(lambda x, y: x + y)
-    
     return total
 
 # Execute both versions

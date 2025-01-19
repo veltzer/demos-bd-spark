@@ -1,6 +1,8 @@
+#!/usr/bin/env python
+
+import time
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import broadcast
-import time
 
 # Create Spark session
 spark = SparkSession.builder.appName("BroadcastJoinDemo").getOrCreate()
@@ -15,36 +17,36 @@ small_df = spark.createDataFrame(small_data, ["product_id", "product_name"])
 
 def regular_join():
     start_time = time.time()
-    
+
     # Regular join
-    result = large_df.join(small_df, "product_id")
-    
+    res = large_df.join(small_df, "product_id")
+
     # Force execution and count results
-    count = result.count()
-    
+    count = res.count()
+
     end_time = time.time()
-    
+
     # Show the physical plan
     print("\nRegular Join Plan:")
-    result.explain()
-    
+    res.explain()
+
     return end_time - start_time, count
 
 def broadcast_join():
     start_time = time.time()
-    
+
     # Broadcast join
-    result = large_df.join(broadcast(small_df), "product_id")
-    
+    res = large_df.join(broadcast(small_df), "product_id")
+
     # Force execution and count results
-    count = result.count()
-    
+    count = res.count()
+
     end_time = time.time()
-    
+
     # Show the physical plan
     print("\nBroadcast Join Plan:")
-    result.explain()
-    
+    res.explain()
+
     return end_time - start_time, count
 
 # Run both joins and compare
