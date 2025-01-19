@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-from pyspark.sql import SparkSession
 import time
+from pyspark.sql import SparkSession
 
 spark = SparkSession.builder.appName("SimpleOptimization").getOrCreate()
 sc = spark.sparkContext
@@ -27,6 +27,7 @@ def optimized_way():
               .reduce(lambda x, y: x + y)
     return total
 
+# pylint: disable=using-constant-test
 if True:
     start_time = time.time()
     print("Inefficient way result:", inefficient_way())
@@ -34,6 +35,7 @@ if True:
     elapsed_time = end_time - start_time
     print(f"elaspsed time: {elapsed_time}")
 
+# pylint: disable=using-constant-test
 if False:
     start_time = time.time()
     print("Optimized way result:", optimized_way())

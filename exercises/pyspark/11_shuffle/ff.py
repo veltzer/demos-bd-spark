@@ -1,5 +1,4 @@
 from pyspark.sql import SparkSession
-from pyspark.accumulators import AccumulatorParam
 
 spark = SparkSession.builder.appName("OperationCounter").getOrCreate()
 sc = spark.sparkContext
@@ -18,19 +17,16 @@ def inefficient_way():
         filter_ops.add(1),  # Count filter operation
         x.value % 2 == 0 and x.value or None
     )[1]).filter(lambda x: x is not None)
-    
     # Step 2: Square them
     squares = evens.map(lambda x: (
         map_ops.add(1),    # Count map operation
         x * x
     )[1])
-    
     # Step 3: Sum them
     total = squares.reduce(lambda x, y: (
         reduce_ops.add(1), # Count reduce operation
         x + y
     )[1])
-    
     return total
 
 # Reset accumulators

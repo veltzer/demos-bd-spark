@@ -7,20 +7,20 @@ A broadcast join (also known as a map-side join) is an optimization technique wh
 ## How It Works
 
 1. **Broadcasting Phase**
-   - Spark identifies the smaller dataset
-   - This dataset is collected at the driver
-   - The driver broadcasts the dataset to all executor nodes
-   - Each executor stores a complete copy in memory
-
-2. **Join Phase**
-   - The larger dataset is processed in partitions
-   - Each partition performs the join with the local copy of the broadcast dataset
-   - No shuffling of the large dataset is required
+    - Spark identifies the smaller dataset
+    - This dataset is collected at the driver
+    - The driver broadcasts the dataset to all executor nodes
+    - Each executor stores a complete copy in memory
+1. **Join Phase**
+    - The larger dataset is processed in partitions
+    - Each partition performs the join with the local copy of the broadcast dataset
+    - No shuffling of the large dataset is required
 
 ## Regular Join vs. Broadcast Join
 
 ### Regular Join
-```
+
+```text
                  Executor 1     Executor 2     Executor 3
 Large Data    |  Partition 1   Partition 2    Partition 3  |  → Shuffle
 Small Data    |  Partition A   Partition B    Partition C  |  → Shuffle
@@ -29,7 +29,8 @@ Small Data    |  Partition A   Partition B    Partition C  |  → Shuffle
 ```
 
 ### Broadcast Join
-```
+
+```text
                  Executor 1     Executor 2     Executor 3
 Large Data    |  Partition 1   Partition 2    Partition 3  |  → No Shuffle
 Small Data    |  Complete      Complete       Complete     |  → Broadcast
@@ -84,7 +85,7 @@ result = large_df.join(broadcast(small_df), "key")
 ## Best Practices
 
 1. Monitor broadcast size
-2. Consider cluster memory capacity
-3. Use broadcast hint only when necessary
-4. Keep broadcast tables small and frequently used
-5. Monitor network utilization during broadcasts
+1. Consider cluster memory capacity
+1. Use broadcast hint only when necessary
+1. Keep broadcast tables small and frequently used
+1. Monitor network utilization during broadcasts
