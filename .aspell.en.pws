@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1137 
+personal_ws-1.1 en 1139 
 AARRR
 ACLs
 ADPlus
@@ -437,6 +437,7 @@ ODP
 OFDM
 OLAP
 OO
+OOM
 OOP
 OOPs
 ORM
@@ -750,6 +751,7 @@ buildstats
 busses
 callgrind
 canonicalization
+cardinality
 cd
 cgroups
 chatbot
