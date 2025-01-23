@@ -2,6 +2,8 @@ from datetime import datetime, timedelta
 import pandas as pd
 import numpy as np
 
+#%$&#%$^&%^$*&$^%*
+
 def generate_sales_data(num_stores=5, days=30, seed=42):
     """Generate sample sales data for the window functions exercise."""
 
