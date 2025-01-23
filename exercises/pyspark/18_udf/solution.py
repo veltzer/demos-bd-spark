@@ -37,7 +37,7 @@ get_third_octet = udf(extract_third_octet, IntegerType())
 
 # Use UDF in DataFrame
 print("Method 1: Using DataFrame API")
-df.select("server_name", "ip_address", 
+df.select("server_name", "ip_address",
           get_third_octet("ip_address").alias("third_octet")) \
   .show()
 
@@ -57,14 +57,3 @@ spark.sql("""
         get_third_octet(ip_address) as third_octet
     FROM server_ips
 """).show()
-
-# Sample output will look like:
-# +-----------+---------------+-----------+
-# |server_name|     ip_address|third_octet|
-# +-----------+---------------+-----------+
-# |    server1|   192.168.80.1|        80|
-# |    server2|    10.0.81.34|        81|
-# |    server3|  172.16.82.100|        82|
-# |    server4|  192.168.83.55|        83|
-# |    server5|    10.0.84.89|        84|
-# +-----------+---------------+-----------+
