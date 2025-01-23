@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1139 
+personal_ws-1.1 en 1142 
 AARRR
 ACLs
 ADPlus
@@ -654,6 +654,7 @@ Twistlock
 UART
 UBI
 UBIFS
+UDF
 UDP
 UEFI
 UI
@@ -877,6 +878,7 @@ ioprio
 iostat
 iotop
 ip
+ips
 irqbalance
 ish
 isinstance
@@ -1049,6 +1051,7 @@ spidering
 spinlock
 spinlocks
 splunk
+sql
 sqlite
 sqlmap
 stateful
