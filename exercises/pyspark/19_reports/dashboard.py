@@ -1,7 +1,7 @@
 import os
 import streamlit as st
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, date_format, to_date, round, sum, desc
+from pyspark.sql.functions import col, date_format, to_date, round as my_round, sum as my_sum, desc
 import plotly.express as px
 
 # Initialize Spark
@@ -26,7 +26,7 @@ def generate_spark_data():
         .withColumn('month', date_format(col('date'), 'yyyy-MM')) \
         .withColumn('revenue', col('quantity') * col('unit_price')) \
         .groupBy('month') \
-        .agg(round(sum('revenue'), 2).alias('total_revenue')) \
+        .agg(my_round(my_sum('revenue'), 2).alias('total_revenue')) \
         .orderBy('month')
 
     # Calculate top products
@@ -34,7 +34,7 @@ def generate_spark_data():
         .join(products_df, 'product_id') \
         .withColumn('revenue', col('quantity') * col('unit_price')) \
         .groupBy('product_id', 'product_name', 'category') \
-        .agg(round(sum('revenue'), 2).alias('total_revenue')) \
+        .agg(my_round(my_sum('revenue'), 2).alias('total_revenue')) \
         .orderBy(desc('total_revenue')) \
         .limit(10)
 
@@ -50,6 +50,7 @@ def load_spark_data():
     try:
         sales_df = spark.read.parquet("reports/monthly_revenue.parquet")
         products_df = spark.read.parquet("reports/top_products.parquet")
+    # pylint: disable=broad-exception-caught
     except Exception as _:
         st.error("Data not found. Generating new data...")
         generate_spark_data()
