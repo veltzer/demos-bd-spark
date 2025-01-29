@@ -7,6 +7,8 @@ install_requires: List[str] = [
     "pyspark",
     "pandas",
     "numpy",
+    "streamlit",
+    "plotly",
 ]
 build_requires: List[str] = [
     "pymakehelper",
