@@ -12,11 +12,11 @@ spark = SparkSession.builder \
 text_rdd = spark.sparkContext.parallelize(["Hello, World!"])
 
 # Print the text
-print("\nFrom the cluster:")
+print("From the cluster:")
 print(text_rdd.collect()[0])
 
 # Keep application running so you can see it in Spark UI
-input("\nCheck http://localhost:8080 to see your app, then press Enter to finish...")
+input("Check http://localhost:8080 to see your app, then press Enter to finish...")
 
 # Clean up
 spark.stop()
