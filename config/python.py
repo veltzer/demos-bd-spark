@@ -9,6 +9,7 @@ install_requires: List[str] = [
     "numpy",
     "streamlit",
     "plotly",
+    "setuptools",
 ]
 build_requires: List[str] = [
     "pymakehelper",
