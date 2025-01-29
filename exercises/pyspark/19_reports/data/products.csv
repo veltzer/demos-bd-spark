@@ -1,0 +1,101 @@
+product_id,product_name,category,supplier_id
+1,Product_1,Food & Beverages,12
+2,Product_2,Home & Garden,2
+3,Product_3,Beauty,1
+4,Product_4,Sports,16
+5,Product_5,Food & Beverages,5
+6,Product_6,Health,3
+7,Product_7,Books,12
+8,Product_8,Food & Beverages,8
+9,Product_9,Beauty,3
+10,Product_10,Sports,1
+11,Product_11,Home & Garden,3
+12,Product_12,Beauty,5
+13,Product_13,Beauty,15
+14,Product_14,Books,14
+15,Product_15,Toys,3
+16,Product_16,Sports,1
+17,Product_17,Clothing,5
+18,Product_18,Beauty,14
+19,Product_19,Toys,7
+20,Product_20,Clothing,9
+21,Product_21,Sports,15
+22,Product_22,Electronics,15
+23,Product_23,Health,10
+24,Product_24,Toys,13
+25,Product_25,Automotive,19
+26,Product_26,Electronics,7
+27,Product_27,Health,17
+28,Product_28,Books,20
+29,Product_29,Food & Beverages,4
+30,Product_30,Home & Garden,5
+31,Product_31,Automotive,7
+32,Product_32,Books,13
+33,Product_33,Sports,15
+34,Product_34,Books,11
+35,Product_35,Food & Beverages,4
+36,Product_36,Sports,13
+37,Product_37,Automotive,7
+38,Product_38,Food & Beverages,19
+39,Product_39,Clothing,2
+40,Product_40,Home & Garden,10
+41,Product_41,Automotive,13
+42,Product_42,Clothing,6
+43,Product_43,Health,12
+44,Product_44,Automotive,12
+45,Product_45,Health,20
+46,Product_46,Sports,11
+47,Product_47,Clothing,7
+48,Product_48,Home & Garden,1
+49,Product_49,Food & Beverages,1
+50,Product_50,Beauty,20
+51,Product_51,Books,13
+52,Product_52,Electronics,9
+53,Product_53,Home & Garden,3
+54,Product_54,Clothing,7
+55,Product_55,Beauty,6
+56,Product_56,Home & Garden,8
+57,Product_57,Clothing,9
+58,Product_58,Toys,5
+59,Product_59,Toys,1
+60,Product_60,Health,19
+61,Product_61,Home & Garden,10
+62,Product_62,Toys,12
+63,Product_63,Clothing,15
+64,Product_64,Health,9
+65,Product_65,Clothing,20
+66,Product_66,Health,17
+67,Product_67,Home & Garden,17
+68,Product_68,Beauty,20
+69,Product_69,Food & Beverages,12
+70,Product_70,Automotive,7
+71,Product_71,Beauty,2
+72,Product_72,Sports,3
+73,Product_73,Clothing,17
+74,Product_74,Sports,5
+75,Product_75,Beauty,17
+76,Product_76,Health,17
+77,Product_77,Automotive,17
+78,Product_78,Automotive,2
+79,Product_79,Electronics,2
+80,Product_80,Automotive,5
+81,Product_81,Food & Beverages,1
+82,Product_82,Automotive,1
+83,Product_83,Beauty,19
+84,Product_84,Electronics,2
+85,Product_85,Beauty,12
+86,Product_86,Beauty,6
+87,Product_87,Books,4
+88,Product_88,Electronics,11
+89,Product_89,Beauty,17
+90,Product_90,Books,6
+91,Product_91,Books,5
+92,Product_92,Electronics,20
+93,Product_93,Sports,2
+94,Product_94,Health,6
+95,Product_95,Food & Beverages,11
+96,Product_96,Health,16
+97,Product_97,Automotive,16
+98,Product_98,Food & Beverages,1
+99,Product_99,Automotive,9
+100,Product_100,Beauty,6
