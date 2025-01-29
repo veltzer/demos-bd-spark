@@ -112,7 +112,7 @@ class SalesAnalysisReport:
             ) \
             .withColumn(
                 'retention_rate',
-                round(col('retained_customers') / col('total_customers') * 100, 2)
+                my_round(col('retained_customers') / col('total_customers') * 100, 2)
             )
 
         return retention_rate
