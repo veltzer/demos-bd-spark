@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1143 
+personal_ws-1.1 en 1145 
 AARRR
 ACLs
 ADPlus
@@ -1055,6 +1055,7 @@ splunk
 sql
 sqlite
 sqlmap
+standlone
 stateful
 staticcast
 stderr
@@ -1104,6 +1105,7 @@ typedef
 uboot
 udev
 ueventd
+ui
 unicast
 uniq
 unittest
