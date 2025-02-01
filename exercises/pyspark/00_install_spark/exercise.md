@@ -1,4 +1,4 @@
-# Install a local spark
+# Install Spark
 
 * These instructions are for Linux, if you have another operating system, please switch.
 

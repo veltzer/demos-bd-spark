@@ -1,4 +1,4 @@
-# Process a single file
+# Processing text files
 
 You are given a simple file, `numbers.txt` and you need to find the sum of all the odd numbers in the file.
 

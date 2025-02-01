@@ -1,4 +1,4 @@
-# Processing Multiple Files with PySpark RDD API
+# Many Files
 
 ## Exercise Overview
 Learn how to process multiple text files using PySpark's RDD API. This exercise focuses on pure RDD operations without using DataFrames or SQL, demonstrating basic to advanced text processing techniques.
