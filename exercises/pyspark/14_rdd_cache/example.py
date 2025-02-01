@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 
+import os
 import time
 from pyspark.sql import SparkSession
 
 # Create Spark session
-spark = SparkSession.builder.appName("CachingDemo").getOrCreate()
+cdir = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
+spark = SparkSession.builder.appName(cdir).getOrCreate()
 sc = spark.sparkContext
 
 # Create a large RDD
