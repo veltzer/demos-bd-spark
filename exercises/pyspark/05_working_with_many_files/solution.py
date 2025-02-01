@@ -13,24 +13,24 @@ def analyze_files(sc, input_dir):
     # Read all text files
     files_rdd = sc.wholeTextFiles(os.path.join(input_dir, "*.txt"))
 
-    print(f"\n=== Found {files_rdd.count()} files ===")
+    print(f"=== Found {files_rdd.count()} files ===")
 
     # Show files and sizes
-    print("\n=== File Sizes ===")
+    print("=== File Sizes ===")
     file_sizes = files_rdd.mapValues(len).collect()
     for file_path, size in file_sizes:
         filename = os.path.basename(file_path)
         print(f"{filename}: {size} characters")
 
     # Count lines per file
-    print("\n=== Lines per File ===")
+    print("=== Lines per File ===")
     lines_per_file = files_rdd.mapValues(lambda content: len(content.splitlines())).collect()
     for file_path, count in lines_per_file:
         filename = os.path.basename(file_path)
         print(f"{filename}: {count} lines")
 
     # Extract titles (assuming first line contains "Title:")
-    print("\n=== Document Titles ===")
+    print("=== Document Titles ===")
     titles = files_rdd.map(lambda x: (
         os.path.basename(x[0]),
         next(line for line in x[1].splitlines() if "Title:" in line).replace("Title:", "").strip()
@@ -51,12 +51,12 @@ def analyze_files(sc, input_dir):
     # Count word frequencies
     word_counts = valid_words.map(lambda word: (word, 1)).reduceByKey(lambda a, b: a + b)
 
-    print("\n=== Most Common Words ===")
+    print("=== Most Common Words ===")
     for word, count in word_counts.top(10, key=lambda x: x[1]):
         print(f"{word}: {count} occurrences")
 
     # Additional analysis: sentences containing "AI" or "artificial intelligence"
-    print("\n=== AI-related Sentences ===")
+    print("=== AI-related Sentences ===")
     ai_sentences = files_rdd.flatMap(
         lambda x: [s.strip() for s in x[1].split('.') if 'AI' in s or 'artificial intelligence' in s.lower()]
     ).collect()
@@ -76,7 +76,7 @@ def main():
         analyze_files(sc, current_dir)
 
         # Keep the application running to check Spark UI
-        input("\nCheck Spark UI at http://localhost:8080, then press Enter to finish...")
+        input("Check Spark UI at http://localhost:8080, then press Enter to finish...")
 
     finally:
         sc.stop()

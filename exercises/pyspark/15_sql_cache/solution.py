@@ -51,22 +51,22 @@ def run_queries_with_cache():
     return end_time - start_time, avg_price, product_counts
 
 # Run without cache
-print("\nExecuting queries without cache...")
+print("Executing queries without cache...")
 time_no_cache = run_queries_without_cache()
 print(f"Time without cache: {time_no_cache:.2f} seconds")
 
 # Run with cache
-print("\nExecuting queries with cache...")
+print("Executing queries with cache...")
 time_with_cache = run_queries_with_cache()
 print(f"Time with cache: {time_with_cache:.2f} seconds")
 
-print(f"\nSpeedup: {(time_no_cache - time_with_cache) / time_no_cache * 100:.2f}%")
+print(f"Speedup: {(time_no_cache - time_with_cache) / time_no_cache * 100:.2f}%")
 
 # See execution plans
-print("\nExecution plan without cache:")
+print("Execution plan without cache:")
 df.groupBy("product").avg("price").explain()
 
-print("\nExecution plan with cache:")
+print("Execution plan with cache:")
 df.cache()
 df.groupBy("product").avg("price").explain()
 

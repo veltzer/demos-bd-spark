@@ -64,7 +64,7 @@ def optimized_way():
                   x + y
               )[1])
 
-print("\nExecuting optimized way...")
+print("Executing optimized way...")
 result2 = optimized_way()
 print(f"""
 Optimized way operations:
@@ -74,4 +74,4 @@ Reduce operations: {reduce_ops.value}
 Total operations: {filter_ops.value + map_ops.value + reduce_ops.value}
 """)
 
-print("\nResults match:", result1 == result2)
+print("Results match:", result1 == result2)

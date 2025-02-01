@@ -99,23 +99,23 @@ def main():
     customers_df.to_csv('data/customers.csv', index=False)
     sales_df.to_csv('data/sales_transactions.csv', index=False)
 
-    print("\nData generation complete. Files saved in 'data' directory:")
+    print("Data generation complete. Files saved in 'data' directory:")
     print("- products.csv")
     print("- customers.csv")
     print("- sales_transactions.csv")
 
     # Print some basic statistics
-    print("\nDataset Statistics:")
+    print("Dataset Statistics:")
     print(f"Number of products: {len(products_df)}")
     print(f"Number of customers: {len(customers_df)}")
     print(f"Number of transactions: {len(sales_df)}")
 
     # Sample of each dataset
-    print("\nProducts Sample:")
+    print("Products Sample:")
     print(products_df.head(3))
-    print("\nCustomers Sample:")
+    print("Customers Sample:")
     print(customers_df.head(3))
-    print("\nSales Transactions Sample:")
+    print("Sales Transactions Sample:")
     print(sales_df.head(3))
 
 if __name__ == "__main__":

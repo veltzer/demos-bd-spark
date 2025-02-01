@@ -29,7 +29,7 @@ def non_optimized_way():
     result.collect()
     end_time = time.time()
 
-    print("\nNon-optimized execution plan:")
+    print("Non-optimized execution plan:")
     result.explain()
     return end_time - start_time
 
@@ -48,7 +48,7 @@ def optimized_way():
     result.collect()
     end_time = time.time()
 
-    print("\nOptimized execution plan:")
+    print("Optimized execution plan:")
     result.explain()
     return end_time - start_time
 
@@ -57,11 +57,11 @@ print("Running non-optimized way...")
 non_opt_time = non_optimized_way()
 print(f"Non-optimized execution time: {non_opt_time:.2f} seconds")
 
-print("\nRunning optimized way...")
+print("Running optimized way...")
 opt_time = optimized_way()
 print(f"Optimized execution time: {opt_time:.2f} seconds")
 
-print(f"\nImprovement: {((non_opt_time - opt_time) / non_opt_time) * 100:.2f}%")
+print(f"Improvement: {((non_opt_time - opt_time) / non_opt_time) * 100:.2f}%")
 
 # Cache the DataFrames if you want to run multiple times for comparison
 # orders_df.cache()
