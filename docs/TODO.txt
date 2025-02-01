@@ -1,6 +1,8 @@
-- switch mdl from ruby with pymarkdownint from the pymarkdownlnt python.
+Change session creating of each context or session to work with the SPARK_MASTER
+environment variable and if it is not there work with the local[*] and print
+what it is working with.
 
-Hands-On Practice:
+Ideas for Hands-On Practice:
 
 1. Reading a CSV file, performing transformations (like joins , agg , datatype changes), and saving it to another CSV file or table.
 
