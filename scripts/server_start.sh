@@ -8,6 +8,8 @@ export SPARK_MASTER_WEBUI_HOST="localhost"
 export SPARK_WORKER_WEBUI_HOST="localhost"
 export SPARK_WORKER_UI_ADDRESS="localhost"
 # This is the listening address, in this case we allow connections from anywhere
+# export SPARK_LOCAL_IP="127.0.0.1"
+# export SPARK_LOCAL_IP="localhost"
 export SPARK_LOCAL_IP="0.0.0.0"
 export SPARK_PUBLIC_DNS="localhost"
 
