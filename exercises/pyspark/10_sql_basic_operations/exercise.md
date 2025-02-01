@@ -1,4 +1,4 @@
-# Spark SQL Tutorial Exercise
+# SQL basic operations
 
 ## Overview
 This tutorial will guide you through basic operations using Spark SQL. We'll create sample datasets and perform various analytical queries to understand Spark SQL's capabilities.

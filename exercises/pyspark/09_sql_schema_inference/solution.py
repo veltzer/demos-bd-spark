@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 
+import os
 from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType
 
 # Initialize Spark Session
-spark = SparkSession.builder \
-    .appName("Passwd File Analysis") \
-    .getOrCreate()
+cdir = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
+spark = SparkSession.builder.appName(cdir).getOrCreate()
 
 # Define the schema for the passwd file
 passwd_schema = StructType([
@@ -20,10 +20,7 @@ passwd_schema = StructType([
 ])
 
 # Read and parse the passwd file
-passwd_df = spark.read \
-    .option("delimiter", ":") \
-    .schema(passwd_schema) \
-    .csv("/etc/passwd")
+passwd_df = spark.read.option("delimiter", ":").schema(passwd_schema).csv("passwd")
 
 # Register the DataFrame as a temporary view
 passwd_df.createOrReplaceTempView("passwd_table")
