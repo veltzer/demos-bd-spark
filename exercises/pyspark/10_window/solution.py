@@ -37,11 +37,11 @@ def main():
     df1 = sales_df.withColumn("running_total",
                              sql_sum("amount").over(window_spec1)) \
                   .orderBy("store_id", "date")
-    print("\nTask 1 (DataFrame API):")
+    print("Task 1 (DataFrame API):")
     df1.show()
 
     # Task 2: Sales Rankings (SQL)
-    print("\nTask 2: Sales Rankings")
+    print("Task 2: Sales Rankings")
     query2 = """
     WITH monthly_sales AS (
         SELECT
@@ -65,7 +65,7 @@ def main():
     spark.sql(query2).show()
 
     # Task 3: Moving Average (SQL)
-    print("\nTask 3: Moving Average")
+    print("Task 3: Moving Average")
     query3 = """
     SELECT
         store_id,
@@ -84,7 +84,7 @@ def main():
     spark.sql(query3).show()
 
     # Task 4: Previous Day Comparison (SQL)
-    print("\nTask 4: Previous Day Comparison")
+    print("Task 4: Previous Day Comparison")
     query4 = """
     WITH daily_diff AS (
         SELECT
@@ -112,7 +112,7 @@ def main():
     spark.sql(query4).show()
 
     # Task 5: Store Performance (SQL)
-    print("\nTask 5: Store Performance")
+    print("Task 5: Store Performance")
     query5 = """
     WITH store_stats AS (
         SELECT

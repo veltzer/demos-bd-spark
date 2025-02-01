@@ -27,5 +27,5 @@ def optimized_way():
 print("Inefficient way plan:")
 inefficient_result = inefficient_way()
 
-print("\nOptimized way plan:")
+print("Optimized way plan:")
 optimized_result = optimized_way()

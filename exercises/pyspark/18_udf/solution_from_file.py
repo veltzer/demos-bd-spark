@@ -52,7 +52,7 @@ def analyze_with_dataframe(spark, input_path):
     result_df.show()
 
     # Additional analysis: Group by third octet
-    print("\nCount of records by third octet:")
+    print("Count of records by third octet:")
     result_df.groupBy("third_octet") \
         .count() \
         .orderBy("third_octet") \
@@ -87,7 +87,7 @@ def analyze_with_sql(spark, input_path):
     """).show()
 
     # Additional analysis using SQL
-    print("\nCount of records by third octet (SQL):")
+    print("Count of records by third octet (SQL):")
     spark.sql("""
         SELECT
             get_third_octet(ip_address) as third_octet,

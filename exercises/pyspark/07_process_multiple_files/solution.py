@@ -41,10 +41,10 @@ word_counts = lines_rdd \
 # Sort by count (descending) and take the top result
 word, times = word_counts.sortBy(lambda x: x[1], ascending=False).first()
 
-print(f"\nMost common word: '{word}' (appears {times} times)")
+print(f"Most common word: '{word}' (appears {times} times)")
 
 # Optional: show top 10 words
-print("\nTop 10 most common words:")
+print("Top 10 most common words:")
 for word, count in word_counts.sortBy(lambda x: x[1], ascending=False).take(10):
     print(f"'{word}': {count} times")
 

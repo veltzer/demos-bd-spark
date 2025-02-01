@@ -38,9 +38,9 @@ def main():
     # Save to CSV
     df.to_csv('sales_data.csv', index=False)
     print("Sample data has been generated and saved to 'sales_data.csv'")
-    print("\nFirst few rows of the generated data:")
+    print("First few rows of the generated data:")
     print(df.head())
-    print("\nData summary:")
+    print("Data summary:")
     print(df.describe())
 
 if __name__ == "__main__":

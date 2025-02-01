@@ -49,7 +49,7 @@ df.createOrReplaceTempView("server_ips")
 spark.udf.register("get_third_octet", extract_third_octet, IntegerType())
 
 # Use UDF in SQL query
-print("\nMethod 2: Using Spark SQL")
+print("Method 2: Using Spark SQL")
 spark.sql("""
     SELECT 
         server_name,
