@@ -5,12 +5,11 @@ from contextlib import redirect_stdout, redirect_stderr
 from pyspark import SparkContext, SparkConf
 from wurlitzer import pipes
 
-os.environ["SPARK_LOCAL_IP"] = "localhost"
 with open(os.devnull, "w") as devnull:
     with pipes(stdout=devnull, stderr=devnull), \
          redirect_stdout(devnull), \
          redirect_stderr(devnull):
-        conf = SparkConf().setAppName("VersionCheck").setMaster("spark://localhost:7077")
+        conf = SparkConf().setAppName("VersionCheck")
         sc = SparkContext(conf=conf)
 # with open(os.devnull, "w") as devnull:
 #    with redirect_stdout(devnull), redirect_stderr(devnull):
