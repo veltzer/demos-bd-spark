@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1145 
+personal_ws-1.1 en 1149 
 AARRR
 ACLs
 ADPlus
@@ -276,6 +276,7 @@ HashMaps
 Hashmap
 Heisenbugs
 Hiera
+HiveContext
 HiveQL
 Hopfield
 HorizontalPodAutoscaler
@@ -571,6 +572,7 @@ SOSEX
 SP's
 SPI
 SQL's
+SQLContext
 SQLi
 SQS
 SREs
@@ -603,6 +605,8 @@ SourceTree
 SpacialMultiplexing
 SparkContext
 SparkContexts
+SparkSession
+SparkSessions
 Spectre
 Splunk
 SpringBoot

@@ -8,6 +8,7 @@ SparkSession was introduced in Spark 2.0 as a unified entry point and offers the
 - Can create multiple SparkSessions within same SparkContext
 
 Example SparkSession usage:
+
 ```python
 from pyspark.sql import SparkSession
 
@@ -32,6 +33,7 @@ SparkContext is the original entry point for Spark functionality and has these c
 - Focused on core Spark operations
 
 Example SparkContext usage:
+
 ```python
 from pyspark import SparkContext
 
