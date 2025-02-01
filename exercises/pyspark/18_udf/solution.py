@@ -1,14 +1,13 @@
 #!/usr/bin/env python
 
-# First, let's create some sample data
+import os
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import udf
 from pyspark.sql.types import IntegerType
 
 # Initialize Spark session
-spark = SparkSession.builder \
-    .appName("IP Address Analysis") \
-    .getOrCreate()
+cdir = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
+spark = SparkSession.builder.appName(cdir).getOrCreate()
 
 # Create sample data
 sample_data = [

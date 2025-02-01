@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import os
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, explode, split, count, sum as my_sum, avg, desc, round as my_round, rand
 
@@ -19,10 +20,8 @@ def create_sample_data(spark, num_rows=100000):
 
 def generate_complex_dag():
     # Create Spark session
-    spark = SparkSession.builder \
-        .appName("Complex DAG Demo") \
-        .master("spark://localhost:7077") \
-        .getOrCreate()
+    cdir = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
+    spark = SparkSession.builder.appName(cdir).getOrCreate()
 
     print("Creating sample data...")
     df = create_sample_data(spark)
