@@ -1,1 +1,1 @@
-unset SPARK_MASTER_HOST
+unset SPARK_MASTER
