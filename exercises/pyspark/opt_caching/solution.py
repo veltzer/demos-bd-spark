@@ -8,7 +8,7 @@ def create_spark_session():
         .appName("RDD Caching Exercise") \
         .getOrCreate()
 
-def generate_large_dataset(spark, size=1000000):
+def generate_large_dataset(spark, size=10000):
     """Generate a large dataset with repeated values"""
     return spark.sparkContext.parallelize(range(size), 100)
 
@@ -22,12 +22,12 @@ def optimized_analysis():
     spark = create_spark_session()
 
     print("Starting optimized analysis...")
-    start_time = time.time()
 
     # Create initial RDD
     base_rdd = generate_large_dataset(spark)
 
     # Perform expensive transformation and cache the result
+    start_time = time.time()
     processed_rdd = base_rdd.map(expensive_computation).cache()
 
     # Force caching by running a small action
