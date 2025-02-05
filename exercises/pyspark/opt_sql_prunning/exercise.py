@@ -81,6 +81,25 @@ def query_with_partition_pruning(spark, path, start_date, end_date):
     print("\nExecution plan:")
     result.explain()
 
+def show_partition_info(spark, path):
+    """Show information about partitions"""
+    print("\nPartition information:")
+    
+    # Read the parquet file and show partitions
+    df = spark.read.parquet(path)
+    
+    # Show distinct partition values
+    print("\nUnique partition values (sale_date):")
+    df.select("sale_date").distinct().orderBy("sale_date").show(10)
+    
+    # Show partition column statistics
+    print("\nPartition column statistics:")
+    df.select(
+        F.min("sale_date").alias("min_date"),
+        F.max("sale_date").alias("max_date"),
+        F.count_distinct("sale_date").alias("num_partitions")
+    ).show()
+
 def main():
     spark = create_spark_session()
     
@@ -106,8 +125,7 @@ def main():
     query_with_partition_pruning(spark, data_path, query_date_start, end_date)
     
     # Show partition information
-    print("\nPartition information:")
-    spark.sql(f"DESCRIBE DETAIL parquet.`{data_path}`").show()
+    show_partition_info(spark, data_path)
     
     spark.stop()
 
