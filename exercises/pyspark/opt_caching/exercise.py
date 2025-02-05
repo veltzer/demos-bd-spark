@@ -14,7 +14,7 @@ def create_spark_session():
         .appName("RDD Caching Exercise") \
         .getOrCreate()
 
-def generate_large_dataset(spark, size=1000000):
+def generate_large_dataset(spark, size=10000):
     """Generate a large dataset with repeated values"""
     return spark.sparkContext.parallelize(range(size), 100)
 
@@ -28,10 +28,11 @@ def unoptimized_analysis():
     spark = create_spark_session()
 
     print("Starting unoptimized analysis...")
-    start_time = time.time()
 
     # Create initial RDD
     base_rdd = generate_large_dataset(spark)
+ 
+    start_time = time.time()
 
     # Perform expensive transformation
     processed_rdd = base_rdd.map(expensive_computation)
@@ -42,10 +43,12 @@ def unoptimized_analysis():
     # Analysis 1: Count frequency of each key
     result1 = processed_rdd.countByKey()
     print(f"Analysis 1 found {len(result1)} unique keys")
+    processed_rdd.unpersist(blocking=True)
 
     # Analysis 2: Find maximum value for each key
     result2 = processed_rdd.reduceByKey(max)
     print(f"Analysis 2 processed {result2.count()} keys")
+    processed_rdd.unpersist(blocking=True)
 
     # Analysis 3: Calculate average value for each key
     result3 = processed_rdd.mapValues(lambda x: (x, 1)) \
