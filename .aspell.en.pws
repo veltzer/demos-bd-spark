@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1152 
+personal_ws-1.1 en 1154 
 AARRR
 ACLs
 ADPlus
@@ -477,6 +477,7 @@ Parallelizing
 Parametrizing
 Params
 Parsers
+PartitionFilters
 Pathname
 Pavlik
 Pelix
@@ -499,6 +500,7 @@ PromQL
 Provisioner
 Provisioners
 Pulseaudio
+PushedFilters
 PyCharm
 PyQt
 PySpark

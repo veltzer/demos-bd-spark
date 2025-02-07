@@ -5,10 +5,10 @@
 # This exercise demonstrates the performance difference between regular
 # count distinct and a two-phase approach with partition-level aggregation.
 
-from pyspark.sql import SparkSession
-import pyspark.sql.functions as F
 import time
 import random
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as F
 
 def create_spark_session():
     return SparkSession.builder \
@@ -26,25 +26,25 @@ def generate_skewed_data(spark, size=100000):
         # Random timestamp
         timestamp = random.randint(1000000, 9999999)
         data.append((user_id, event_type, timestamp))
-    
+
     return spark.createDataFrame(data, ['user_id', 'event_type', 'timestamp'])
 
 def unoptimized_analysis(df):
     """Unoptimized version using straightforward countDistinct"""
     print("Starting unoptimized analysis...")
     start_time = time.time()
-    
+
     # Count distinct users per event type
     result = df.groupBy('event_type').agg(
         F.countDistinct('user_id').alias('unique_users')
     )
-    
+
     # Force computation and show results
     result.show()
-    
+
     end_time = time.time()
     print(f"Unoptimized execution time: {end_time - start_time:.2f} seconds")
-    
+
     # Show the execution plan
     print("\nUnoptimized query plan:")
     result.explain()

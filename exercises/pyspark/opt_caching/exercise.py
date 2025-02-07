@@ -31,7 +31,7 @@ def unoptimized_analysis():
 
     # Create initial RDD
     base_rdd = generate_large_dataset(spark)
- 
+
     start_time = time.time()
 
     # Perform expensive transformation
