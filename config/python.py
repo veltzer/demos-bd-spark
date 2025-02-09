@@ -10,6 +10,7 @@ install_requires: List[str] = [
     "streamlit",
     "plotly",
     "setuptools",
+    "wurlitzer",
 ]
 build_requires: List[str] = [
     "pymakehelper",
