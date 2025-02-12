@@ -61,8 +61,15 @@ INSERT INTO customers VALUES
     (4, 'Alice Brown', 'UK', 'Business'),
     (5, 'Charlie Wilson', 'Canada', 'Consumer');
 
--- Insert sample data into sales
-INSERT INTO sales VALUES
+-- Insert sample data into sales using TO_DATE
+INSERT INTO sales
+SELECT 
+    id,
+    customer_id,
+    product_id,
+    quantity,
+    TO_DATE(sale_date) as sale_date
+FROM VALUES
     (1, 1, 1, 1, '2024-01-15'),
     (2, 2, 1, 2, '2024-01-16'),
     (3, 3, 2, 1, '2024-01-16'),
@@ -72,7 +79,19 @@ INSERT INTO sales VALUES
     (7, 2, 2, 1, '2024-01-18'),
     (8, 3, 3, 2, '2024-01-19'),
     (9, 4, 4, 1, '2024-01-19'),
-    (10, 5, 5, 3, '2024-01-20');
+    (10, 5, 5, 3, '2024-01-20') AS t(id, customer_id, product_id, quantity, sale_date);
+```
+
+Also create a cleanup script named `delete_tables.sql`:
+
+```sql
+-- Drop all tables created in the exercise
+DROP TABLE IF EXISTS sales;
+DROP TABLE IF EXISTS products;
+DROP TABLE IF EXISTS customers;
+
+-- Verify tables are dropped
+SHOW TABLES;
 ```
 ---
 ## Exercise Steps
@@ -162,9 +181,12 @@ ORDER BY total_revenue DESC;
 1. Use semicolons to end SQL statements
 1. Use arrow keys to navigate command history
 1. Type `help;` for available commands
+1. Remember to use TO_DATE when inserting dates
+1. Clean up using `delete_tables.sql` when done
 ---
 ## Next Steps
 1. Try modifying the queries to answer different business questions
 1. Experiment with different JOIN types
 1. Add more complex window functions
 1. Practice writing subqueries and CTEs
+1. Try adding more data with different date ranges
