@@ -64,7 +64,7 @@ SELECT * FROM orders WHERE amount > 500;
 1. Broadcast Join Example
 ```sql
 -- Small table broadcast
-EXPLAIN ANALYZED
+EXPLAIN
 SELECT c.segment, COUNT(*) as order_count
 FROM orders o
 JOIN customers c ON o.customer_id = c.customer_id
@@ -74,7 +74,7 @@ GROUP BY c.segment;
 2. Sort-Merge Join Example
 ```sql
 -- Larger tables merge
-EXPLAIN ANALYZED
+EXPLAIN
 SELECT p.category, SUM(o.amount) as total_sales
 FROM orders o
 JOIN products p ON o.product_id = p.product_id
