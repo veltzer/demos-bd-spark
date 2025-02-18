@@ -1,5 +1,5 @@
-from pyspark.sql import SparkSession
 import time
+from pyspark.sql import SparkSession
 
 # Initialize Spark Session with Hive support
 spark = SparkSession.builder \
@@ -10,10 +10,10 @@ spark = SparkSession.builder \
 def run_sales_analysis():
     print("Running unoptimized query...")
     start_time = time.time()
-    
+
     # Complex query without statistics
     result = spark.sql("""
-        SELECT 
+        SELECT
             p.category,
             COUNT(DISTINCT s.id) as num_sales,
             SUM(s.quantity * p.price) as total_revenue,
@@ -23,18 +23,18 @@ def run_sales_analysis():
         GROUP BY p.category
         ORDER BY total_revenue DESC
     """)
-    
+
     # Force execution and show results
     result.show()
-    
+
     end_time = time.time()
     print(f"\nQuery execution time: {end_time - start_time:.2f} seconds")
-    
+
     # Show the query plan
     print("\nLogical Plan:")
     spark.sql("""
         EXPLAIN
-        SELECT 
+        SELECT
             p.category,
             COUNT(DISTINCT s.id) as num_sales,
             SUM(s.quantity * p.price) as total_revenue,
@@ -44,12 +44,12 @@ def run_sales_analysis():
         GROUP BY p.category
         ORDER BY total_revenue DESC
     """).show(truncate=False)
-    
+
     # Show extended plan
     print("\nExtended Plan (including physical plan):")
     spark.sql("""
         EXPLAIN EXTENDED
-        SELECT 
+        SELECT
             p.category,
             COUNT(DISTINCT s.id) as num_sales,
             SUM(s.quantity * p.price) as total_revenue,
@@ -63,8 +63,8 @@ def run_sales_analysis():
 if __name__ == "__main__":
     # Clear any existing cache
     spark.catalog.clearCache()
-    
+
     # Run the analysis
     run_sales_analysis()
-    
+
     spark.stop()

@@ -63,7 +63,7 @@ INSERT INTO customers VALUES
 
 -- Insert sample data into sales using TO_DATE
 INSERT INTO sales
-SELECT 
+SELECT
     id,
     customer_id,
     product_id,
@@ -119,7 +119,7 @@ SHOW TABLES;
    DESCRIBE products;
    DESCRIBE customers;
    DESCRIBE sales;
-   
+
    -- View sample data from each table
    SELECT * FROM products LIMIT 3;
    SELECT * FROM customers LIMIT 3;
@@ -139,7 +139,7 @@ SHOW TABLES;
    FROM sales s
    JOIN products p ON s.product_id = p.id
    GROUP BY p.category;
-   
+
    -- Use EXPLAIN COST to see cost estimates
    EXPLAIN COST
    SELECT p.category, SUM(p.price * s.quantity) as revenue
@@ -160,7 +160,7 @@ SHOW TABLES;
 Here's the solution for the first challenge task:
 ```sql
 WITH customer_revenue AS (
-    SELECT 
+    SELECT
         c.country,
         c.name as customer_name,
         SUM(p.price * s.quantity) as total_revenue,

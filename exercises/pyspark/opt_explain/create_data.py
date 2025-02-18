@@ -14,7 +14,7 @@ spark = SparkSession.builder \
 def create_orders_data(num_records):
     data = []
     start_date = datetime(2024, 1, 1)
-    
+
     for i in range(num_records):
         order_id = i
         customer_id = random.randint(1, 1000)
@@ -23,9 +23,9 @@ def create_orders_data(num_records):
         amount = round(random.uniform(10.0, 1000.0), 2)
         days_offset = random.randint(0, 365)
         order_date = start_date + timedelta(days=days_offset)
-        
+
         data.append((order_id, customer_id, product_id, quantity, amount, order_date))
-    
+
     return spark.createDataFrame(
         data,
         ["order_id", "customer_id", "product_id", "quantity", "amount", "order_date"]
@@ -36,16 +36,16 @@ def create_customers_data():
     data = []
     segments = ['Retail', 'Wholesale', 'Enterprise']
     countries = ['USA', 'UK', 'Canada', 'France', 'Germany']
-    
+
     for i in range(1000):
         customer_id = i + 1
         name = f"Customer_{customer_id}"
         segment = random.choice(segments)
         country = random.choice(countries)
         credit_limit = random.randint(1000, 100000)
-        
+
         data.append((customer_id, name, segment, country, credit_limit))
-    
+
     return spark.createDataFrame(
         data,
         ["customer_id", "name", "segment", "country", "credit_limit"]
@@ -54,16 +54,16 @@ def create_customers_data():
 def create_products_data():
     data = []
     categories = ['Electronics', 'Clothing', 'Food', 'Books', 'Home']
-    
+
     for i in range(100):
         product_id = i + 1
         name = f"Product_{product_id}"
         category = random.choice(categories)
         price = round(random.uniform(10.0, 1000.0), 2)
         stock = random.randint(0, 1000)
-        
+
         data.append((product_id, name, category, price, stock))
-    
+
     return spark.createDataFrame(
         data,
         ["product_id", "name", "category", "price", "stock"]

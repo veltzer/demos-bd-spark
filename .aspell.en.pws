@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1154 
+personal_ws-1.1 en 1157 
 AARRR
 ACLs
 ADPlus
@@ -76,6 +76,7 @@ CLR
 CMake
 CNCF
 CNNs
+CODEGEN
 CORS
 CPUs
 CPack
@@ -83,6 +84,7 @@ CRLF
 CSP
 CSRF
 CSV
+CTEs
 CTF
 CTFlearn
 CTOR
@@ -1003,6 +1005,7 @@ ptr
 ptrace
 ptxdist
 pushd
+pushdown
 py
 pydoc
 pylint

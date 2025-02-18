@@ -1,5 +1,4 @@
 from pyspark.sql import SparkSession
-import time
 
 # Initialize Spark Session with Hive support
 spark = SparkSession.builder \
