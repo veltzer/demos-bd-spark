@@ -31,28 +31,28 @@ EXPLAIN
 SELECT * FROM orders WHERE amount > 500;
 ```
 
-2. EXPLAIN EXTENDED
+1. EXPLAIN EXTENDED
 ```sql
 -- Shows additional information including logical and physical plans
 EXPLAIN EXTENDED
 SELECT * FROM orders WHERE amount > 500;
 ```
 
-3. EXPLAIN CODEGEN
+1. EXPLAIN CODEGEN
 ```sql
 -- Shows the generated Java code
 EXPLAIN CODEGEN
 SELECT * FROM orders WHERE amount > 500;
 ```
 
-4. EXPLAIN COST
+1. EXPLAIN COST
 ```sql
 -- Shows cost-based optimization details
 EXPLAIN COST
 SELECT * FROM orders WHERE amount > 500;
 ```
 
-5. EXPLAIN FORMATTED
+1. EXPLAIN FORMATTED
 ```sql
 -- Shows formatted output with more details
 EXPLAIN FORMATTED
@@ -71,7 +71,7 @@ JOIN customers c ON o.customer_id = c.customer_id
 GROUP BY c.segment;
 ```
 
-2. Sort-Merge Join Example
+1. Sort-Merge Join Example
 ```sql
 -- Larger tables merge
 EXPLAIN
@@ -81,10 +81,10 @@ JOIN products p ON o.product_id = p.product_id
 GROUP BY p.category;
 ```
 
-3. Multiple Joins
+1. Multiple Joins
 ```sql
 EXPLAIN COST
-SELECT 
+SELECT
     c.country,
     p.category,
     SUM(o.amount) as total_sales,
@@ -100,24 +100,24 @@ GROUP BY c.country, p.category;
 1. Window Functions
 ```sql
 EXPLAIN FORMATTED
-SELECT 
+SELECT
     customer_id,
     order_date,
     amount,
     SUM(amount) OVER (
-        PARTITION BY customer_id 
+        PARTITION BY customer_id
         ORDER BY order_date
         ROWS BETWEEN 2 PRECEDING AND CURRENT ROW
     ) as rolling_sum
 FROM orders;
 ```
 
-2. Subqueries
+1. Subqueries
 ```sql
 EXPLAIN EXTENDED
 SELECT *
 FROM (
-    SELECT 
+    SELECT
         customer_id,
         SUM(amount) as total_spent
     FROM orders
@@ -128,10 +128,10 @@ WHERE total_spent > (
 );
 ```
 
-3. Complex Aggregations
+1. Complex Aggregations
 ```sql
 EXPLAIN COST
-SELECT 
+SELECT
     c.segment,
     p.category,
     COUNT(*) as order_count,
@@ -154,7 +154,7 @@ HAVING COUNT(*) > 100;
    - Exchange operations (shuffles)
    - Statistics and cost estimates
 
-2. Common Optimization Patterns:
+1. Common Optimization Patterns:
    - Predicate pushdown
    - Column pruning
    - Partition pruning
@@ -167,12 +167,12 @@ HAVING COUNT(*) > 100;
    - Note the different information provided
    - Understand when to use each type
 
-2. Analyze Join Strategies
+1. Analyze Join Strategies
    - Try different join conditions
    - Compare broadcast vs. sort-merge joins
    - Observe how table sizes affect join selection
 
-3. Optimization Investigation
+1. Optimization Investigation
    - Identify bottlenecks in complex queries
    - Find opportunities for optimization
    - Test different query formulations
@@ -186,7 +186,7 @@ HAVING COUNT(*) > 100;
    - Has subqueries
    - Compare its performance with a simpler version
 
-2. Experiment with hints:
+1. Experiment with hints:
 ```sql
 EXPLAIN COST
 SELECT /*+ BROADCAST(customers) */
@@ -196,7 +196,7 @@ JOIN customers c ON o.customer_id = c.customer_id
 GROUP BY c.segment;
 ```
 
-3. Compare different join orders:
+1. Compare different join orders:
 ```sql
 EXPLAIN COST
 SELECT /*+ LEADING(orders, customers, products) */
@@ -209,12 +209,13 @@ GROUP BY c.country, p.category;
 ---
 ## Tips
 1. Use `EXPLAIN FORMATTED` for most detailed output
-2. Compare `COST` vs actual performance
-3. Look for shuffle operations in complex queries
-4. Watch for skewed data handling
-5. Consider partition and predicate pushdown opportunities
+1. Compare `COST` vs actual performance
+1. Look for shuffle operations in complex queries
+1. Watch for skewed data handling
+1. Consider partition and predicate pushdown opportunities
 ---
 ## Cleanup
+
 ```python
 spark.sql("DROP TABLE IF EXISTS orders")
 spark.sql("DROP TABLE IF EXISTS customers")

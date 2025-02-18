@@ -5,6 +5,7 @@ In this exercise, you'll learn how table statistics affect query performance in 
 ---
 ## Setup
 First, let's create our test tables with sample data:
+
 ```python
 # Create large tables for testing
 spark.sql("""
@@ -28,7 +29,7 @@ spark.sql("""
 # Insert sample data
 spark.sql("""
     INSERT INTO products
-    SELECT 
+    SELECT
         id,
         concat('Product_', cast(id as string)) as name,
         concat('Category_', cast(id % 10 as string)) as category,
@@ -38,7 +39,7 @@ spark.sql("""
 
 spark.sql("""
     INSERT INTO sales
-    SELECT 
+    SELECT
         id,
         CAST(RAND() * 1000000 as INT) as product_id,
         CAST(RAND() * 100 as INT) as quantity,
@@ -49,13 +50,14 @@ spark.sql("""
 ---
 ## Problem Statement
 You have inherited a query that performs poorly. The query calculates total sales by category:
+
 ```python
 # Initial slow query
 def run_sales_analysis():
     start_time = time.time()
-    
+
     result = spark.sql("""
-        SELECT 
+        SELECT
             p.category,
             COUNT(DISTINCT s.id) as num_sales,
             SUM(s.quantity * p.price) as total_revenue
@@ -64,9 +66,9 @@ def run_sales_analysis():
         GROUP BY p.category
         ORDER BY total_revenue DESC
     """)
-    
+
     result.show()
-    
+
     end_time = time.time()
     print(f"Query execution time: {end_time - start_time:.2f} seconds")
 
@@ -80,7 +82,7 @@ run_sales_analysis()
 ```python
 spark.sql("""
     EXPLAIN ANALYZED
-    SELECT 
+    SELECT
         p.category,
         COUNT(DISTINCT s.id) as num_sales,
         SUM(s.quantity * p.price) as total_revenue
@@ -90,6 +92,7 @@ spark.sql("""
     ORDER BY total_revenue DESC
 """).show(truncate=False)
 ```
+
 ---
 ## Task 2: Identify Issues
 Look at the query plan output and identify:
@@ -109,15 +112,16 @@ Add the appropriate statistics computation commands:
 1. Run the query again with statistics
 1. Compare the execution times
 1. Examine the new query plan
+
 ```python
 # Modified version with statistics
 def run_optimized_sales_analysis():
     # Add statistics computation here
-    
+
     start_time = time.time()
-    
+
     result = spark.sql("""
-        SELECT 
+        SELECT
             p.category,
             COUNT(DISTINCT s.id) as num_sales,
             SUM(s.quantity * p.price) as total_revenue
@@ -126,35 +130,36 @@ def run_optimized_sales_analysis():
         GROUP BY p.category
         ORDER BY total_revenue DESC
     """)
-    
+
     result.show()
-    
+
     end_time = time.time()
     print(f"Query execution time: {end_time - start_time:.2f} seconds")
 ```
 ---
 ## Solution
 Here's the optimized version:
+
 ```python
 def run_optimized_sales_analysis():
     # Compute table statistics
     spark.sql("ANALYZE TABLE products COMPUTE STATISTICS")
     spark.sql("ANALYZE TABLE sales COMPUTE STATISTICS")
-    
+
     # Compute column statistics
     spark.sql("""
-        ANALYZE TABLE products COMPUTE STATISTICS 
+        ANALYZE TABLE products COMPUTE STATISTICS
         FOR COLUMNS id, category, price
     """)
     spark.sql("""
-        ANALYZE TABLE sales COMPUTE STATISTICS 
+        ANALYZE TABLE sales COMPUTE STATISTICS
         FOR COLUMNS product_id, quantity
     """)
-    
+
     start_time = time.time()
-    
+
     result = spark.sql("""
-        SELECT 
+        SELECT
             p.category,
             COUNT(DISTINCT s.id) as num_sales,
             SUM(s.quantity * p.price) as total_revenue
@@ -163,9 +168,9 @@ def run_optimized_sales_analysis():
         GROUP BY p.category
         ORDER BY total_revenue DESC
     """)
-    
+
     result.show()
-    
+
     end_time = time.time()
     print(f"Query execution time: {end_time - start_time:.2f} seconds")
 
