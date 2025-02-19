@@ -8,7 +8,7 @@ This exercise demonstrates how collecting and utilizing statistics with `ANALYZE
 
 When Spark executes SQL queries, it needs to make decisions about:
 - Join strategies (broadcast vs. shuffle)
-- Join order 
+- Join order
 - Predicate pushdown optimization
 - Partition pruning
 
@@ -18,8 +18,8 @@ Without statistics, Spark makes these decisions based on heuristics and estimate
 
 This exercise includes:
 1. A data generation script to create realistic test data
-2. A query script that runs slow without statistics
-3. The same query script with `ANALYZE TABLE` added, showing improved performance
+1. A query script that runs slow without statistics
+1. The same query script with `ANALYZE TABLE` added, showing improved performance
 
 ## Expected Outcomes
 
@@ -31,9 +31,9 @@ You should observe:
 ## Instructions
 
 1. Run the data generation script first
-2. Execute the slow query without statistics and note the execution time
-3. Execute the optimized query with statistics and compare the execution time
-4. Use the Spark UI to examine the execution plans of both queries
+1. Execute the slow query without statistics and note the execution time
+1. Execute the optimized query with statistics and compare the execution time
+1. Use the Spark UI to examine the execution plans of both queries
 
 ## Understanding the Results
 

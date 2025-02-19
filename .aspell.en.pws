@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1157 
+personal_ws-1.1 en 1164 
 AARRR
 ACLs
 ADPlus
@@ -212,6 +212,7 @@ Employability
 EnableAutoConfiguration
 Endedness
 Extjs
+FFFFFF
 FFI
 FFT
 FS
@@ -545,6 +546,7 @@ RecoverySystem
 RedHat
 Rekognition
 Remoting
+Repartitioning
 ReplicaSet
 ReplicaSets
 Repo
@@ -565,6 +567,7 @@ SHA
 SIGPIPE
 SIMD
 SL
+SLA
 SLIs
 SLOs
 SMIs
@@ -738,6 +741,7 @@ async
 atomics
 autotools
 awk
+backgroundColor
 balancers
 bashrc
 bbclass
@@ -937,6 +941,7 @@ makefile
 makefiles
 malloc
 mapOf
+marp
 mcheck
 mediaserver
 medoids
@@ -1020,6 +1025,7 @@ readv
 realtime
 rebase
 reinterpretcast
+repartitioning
 repo
 repos
 resolvers
@@ -1075,6 +1081,7 @@ structs
 stylesheets
 subnets
 subobjects
+suboptimal
 subprocess
 subqueries
 substitutability
