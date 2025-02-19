@@ -1,13 +1,3 @@
----
-marp: true
-theme: default
-paginate: true
-backgroundColor: #FFFFFF
-color: #333333
-header: "**Sort-Merge Performance Exercise**"
-footer: "© 2025"
----
-
 # Sort-Merge Performance Exercise
 Understanding the performance impact of pre-sorted data
 
@@ -47,7 +37,7 @@ You need to join these datasets by product_id to analyze purchasing patterns.
 
 We'll compare two approaches:
 
-**Approach 1 (Naive)**: 
+**Approach 1 (Naive)**:
 - Load unsorted data
 - Perform sort-merge join (PySpark handles sorting automatically)
 
@@ -62,7 +52,7 @@ We'll compare two approaches:
 The exercise includes a script to generate:
 
 1. Unsorted datasets with random distribution
-2. Sorted datasets (same data, pre-sorted by join key)
+1. Sorted datasets (same data, pre-sorted by join key)
 
 Both maintain identical data distributions to ensure fair comparison.
 
@@ -75,14 +65,14 @@ def naive_solution():
     # Load unsorted data
     transactions = spark.read.parquet("data/unsorted_transactions")
     products = spark.read.parquet("data/unsorted_products")
-    
+
     # Let Spark handle sorting during join
     result = transactions.join(
-        products, 
-        on="product_id", 
+        products,
+        on="product_id",
         how="inner"
     )
-    
+
     return result
 ```
 
@@ -95,14 +85,14 @@ def optimized_solution():
     # Load pre-sorted data
     transactions = spark.read.parquet("data/sorted_transactions")
     products = spark.read.parquet("data/sorted_products")
-    
+
     # Join pre-sorted data
     result = transactions.join(
-        products, 
-        on="product_id", 
+        products,
+        on="product_id",
         how="inner"
     )
-    
+
     return result
 ```
 
@@ -113,10 +103,10 @@ def optimized_solution():
 The exercise compares:
 
 1. **Total execution time**
-2. **Shuffle read/write** volumes
-3. **CPU utilization patterns**
-4. **Memory pressure**
-5. **Stage completion times**
+1. **Shuffle read/write** volumes
+1. **CPU utilization patterns**
+1. **Memory pressure**
+1. **Stage completion times**
 
 All metrics are collected from the Spark UI.
 
@@ -140,7 +130,7 @@ The magnitude of improvement depends on data size and cluster resources.
 
 Sort-merge join consists of two phases:
 1. **Sort phase**: Each dataset is sorted by join key
-2. **Merge phase**: Sorted datasets are merged in a single pass
+1. **Merge phase**: Sorted datasets are merged in a single pass
 
 **Key insight**: When data is pre-sorted, we eliminate the expensive sort phase.
 
@@ -160,20 +150,20 @@ For large datasets, the difference between O(n log n) and O(n) becomes significa
 In production environments, maintaining sorted datasets can provide:
 
 1. Faster ad-hoc queries
-2. More efficient batch processing
-3. Reduced cluster resource requirements
-4. Lower cloud computing costs
-5. Better SLA compliance
+1. More efficient batch processing
+1. Reduced cluster resource requirements
+1. Lower cloud computing costs
+1. Better SLA compliance
 
 ---
 
 ## Discussion Questions
 
 1. At what data volume does pre-sorting become worthwhile?
-2. How does data skew affect the performance difference?
-3. What are the trade-offs of maintaining sorted datasets?
-4. How would partitioning affect these results?
-5. In what scenarios might pre-sorting not help?
+1. How does data skew affect the performance difference?
+1. What are the trade-offs of maintaining sorted datasets?
+1. How would partitioning affect these results?
+1. In what scenarios might pre-sorting not help?
 
 ---
 
@@ -194,16 +184,16 @@ Try modifying the exercise to explore:
 This exercise demonstrates that:
 
 1. Data organization significantly impacts join performance
-2. Pre-sorting can eliminate expensive operations
-3. Understanding algorithm complexity helps predict performance
-4. Sometimes ETL optimizations provide better returns than query optimizations
+1. Pre-sorting can eliminate expensive operations
+1. Understanding algorithm complexity helps predict performance
+1. Sometimes ETL optimizations provide better returns than query optimizations
 
 ---
 
 ## Next Steps
 
 1. Run the exercise on your own cluster
-2. Examine the Spark UI to understand execution details
-3. Try with different dataset sizes
-4. Explore how caching affects performance
-5. Experiment with different cluster configurations
+1. Examine the Spark UI to understand execution details
+1. Try with different dataset sizes
+1. Explore how caching affects performance
+1. Experiment with different cluster configurations

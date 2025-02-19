@@ -6,9 +6,9 @@ This script generates a highly skewed dataset to demonstrate the impact
 of repartitioning in PySpark.
 """
 
-from pyspark.sql import SparkSession
-from pyspark.sql.functions import expr, col, when, rand, lit
 import random
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import expr, when, rand, lit
 
 # Initialize Spark Session with Hive support
 spark = SparkSession.builder \
@@ -30,23 +30,23 @@ NUM_REGIONS = 10            # 10 geographical regions
 def generate_transactions():
     """Generate transaction data with deliberate skew"""
     print("Generating transaction data...")
-    
+
     # Create skewed configuration
     # 70% of transactions come from 2 regions (dense population areas)
     # 60% of transactions involve 10% of products (popular items)
     popular_products = random.sample(range(NUM_PRODUCTS), int(NUM_PRODUCTS * 0.1))
     dense_regions = random.sample(range(NUM_REGIONS), 2)
-    
+
     # Create base dataframe with transaction IDs
     df = spark.range(0, NUM_TRANSACTIONS).withColumnRenamed("id", "transaction_id")
-    
+
     # Add timestamp with recency skew (more recent transactions)
-    df = df.withColumn("transaction_date", 
+    df = df.withColumn("transaction_date",
                       expr("date_sub(current_date(), cast(rand() * 180 as int))"))
-    
+
     # Add customer ID
     df = df.withColumn("customer_id", expr(f"cast(rand()*{NUM_CUSTOMERS} as int)"))
-    
+
     # Add skewed product distribution
     df = df.withColumn(
         "product_id",
@@ -54,7 +54,7 @@ def generate_transactions():
              expr(f"array({','.join(map(str, popular_products))})[cast(rand()*{len(popular_products)} as int)]"))
         .otherwise(expr(f"cast(rand()*{NUM_PRODUCTS} as int)"))
     )
-    
+
     # Add skewed region distribution
     df = df.withColumn(
         "region_id",
@@ -62,10 +62,10 @@ def generate_transactions():
              expr(f"array({','.join(map(str, dense_regions))})[cast(rand()*{len(dense_regions)} as int)]"))
         .otherwise(expr(f"cast(rand()*{NUM_REGIONS} as int)"))
     )
-    
+
     # Add transaction amount
     df = df.withColumn("amount", rand() * 500)
-    
+
     # Add product category (10 categories, skewed distribution)
     df = df.withColumn(
         "product_category",
@@ -75,7 +75,7 @@ def generate_transactions():
         .when(rand() < 0.95, lit("home"))
         .otherwise(lit("other"))
     )
-    
+
     return df
 
 # Generate data
@@ -87,7 +87,7 @@ transactions_df.createOrReplaceTempView("transactions_temp")
 # Save as a table (with partitioning based on region)
 print("Saving transaction data...")
 spark.sql("""
-    CREATE TABLE IF NOT EXISTS transactions 
+    CREATE TABLE IF NOT EXISTS transactions
     USING parquet
     PARTITIONED BY (region_id)
     AS SELECT * FROM transactions_temp
@@ -95,7 +95,7 @@ spark.sql("""
 
 # Show distribution statistics
 region_distribution = spark.sql("""
-    SELECT 
+    SELECT
         region_id,
         COUNT(*) as transaction_count,
         ROUND(COUNT(*) * 100.0 / (SELECT COUNT(*) FROM transactions_temp), 2) as percentage
@@ -109,7 +109,7 @@ for row in region_distribution:
     print(f"Region {row.region_id}: {row.transaction_count:,} transactions ({row.percentage}%)")
 
 category_distribution = spark.sql("""
-    SELECT 
+    SELECT
         product_category,
         COUNT(*) as transaction_count,
         ROUND(COUNT(*) * 100.0 / (SELECT COUNT(*) FROM transactions_temp), 2) as percentage

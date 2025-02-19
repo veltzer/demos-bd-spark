@@ -7,7 +7,7 @@ This simplified exercise demonstrates how proper repartitioning can significantl
 ## Learning Objectives
 
 - Understand how data skew impacts Spark performance
-- See the direct performance benefit of repartitioning 
+- See the direct performance benefit of repartitioning
 - Learn a practical repartitioning strategy
 
 ## The Problem: Data Skew
@@ -20,14 +20,14 @@ In distributed computing, data skew occurs when data is unevenly distributed acr
 ## Exercise Components
 
 1. **Data Generation Script**: Creates a deliberately skewed customer transaction dataset
-2. **Naive Query Script**: Runs an aggregation query without repartitioning
-3. **Optimized Query Script**: Runs the identical query with strategic repartitioning
+1. **Naive Query Script**: Runs an aggregation query without repartitioning
+1. **Optimized Query Script**: Runs the identical query with strategic repartitioning
 
 ## Instructions
 
 1. Run the data generation script first
-2. Execute the naive query script and note its execution time
-3. Execute the optimized query script and compare the execution time
+1. Execute the naive query script and note its execution time
+1. Execute the optimized query script and compare the execution time
 
 ## Expected Results
 
@@ -41,8 +41,8 @@ You should observe:
 The key improvement in the optimized query comes from:
 
 1. **Recognizing the skew**: Some regions and product categories have disproportionate numbers of transactions
-2. **Strategic repartitioning**: Redistributing data evenly before the aggregation operation
-3. **Proper partition sizing**: Using an appropriate number of partitions for the cluster
+1. **Strategic repartitioning**: Redistributing data evenly before the aggregation operation
+1. **Proper partition sizing**: Using an appropriate number of partitions for the cluster
 
 This pattern applies to many real-world scenarios including:
 - Customer analytics with varying purchase frequencies
