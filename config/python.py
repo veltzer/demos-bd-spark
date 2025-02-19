@@ -11,6 +11,7 @@ install_requires: List[str] = [
     "plotly",
     "setuptools",
     "wurlitzer",
+    "matplotlib",
 ]
 build_requires: List[str] = [
     "pymakehelper",

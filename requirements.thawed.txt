@@ -6,6 +6,7 @@ streamlit
 plotly
 setuptools
 wurlitzer
+matplotlib
 pymakehelper
 pydmt
 faker
