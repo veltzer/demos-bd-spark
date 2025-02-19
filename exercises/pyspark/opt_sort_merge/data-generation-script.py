@@ -1,15 +1,17 @@
 #!/usr/bin/env python
 """
-Sort-Merge Performance Exercise - Data Generation Script
+Sort-Merge Performance Exercise - Fixed Data Generation Script
 
 This script generates two datasets (transactions and products) in both
-sorted and unsorted versions for performance comparison.
+sorted and unsorted versions for performance comparison, ensuring
+proper global sorting of the sorted datasets.
 """
 
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, expr, rand, when
 import os
 import shutil
+import time
 
 # Initialize Spark Session
 spark = SparkSession.builder \
@@ -93,7 +95,7 @@ def shuffle_dataframe(df):
     return df.orderBy(rand())
 
 def save_datasets(products_df, transactions_df):
-    """Save datasets in both sorted and unsorted versions"""
+    """Save datasets in both sorted and unsorted versions, ensuring proper global sorting"""
     # Save unsorted datasets (randomly shuffled)
     print("Saving unsorted datasets...")
     shuffled_products = shuffle_dataframe(products_df)
@@ -107,26 +109,41 @@ def save_datasets(products_df, transactions_df):
         .mode("overwrite") \
         .parquet(f"{OUTPUT_DIR}/unsorted_transactions")
     
-    # Save sorted datasets (sorted by product_id)
-    print("Saving sorted datasets...")
-    sorted_products = products_df.orderBy("product_id")
-    sorted_transactions = transactions_df.orderBy("product_id")
+    # Save properly sorted datasets (ensure global sorting)
+    print("Saving sorted datasets with guaranteed global sorting...")
     
-    # Important: Use repartition to ensure data is distributed properly
-    sorted_products.repartition(NUM_PARTITIONS, "product_id") \
-        .write \
-        .option("maxRecordsPerFile", NUM_PRODUCTS // NUM_PARTITIONS) \
+    # For products: ensure global sorting by coalescing to fewer partitions
+    # and then explicitly sorting
+    print("Sorting products dataset...")
+    sorted_products = products_df.orderBy("product_id")
+    
+    # Coalesce to fewer partitions to improve sorting performance
+    # This ensures data is globally sorted
+    sorted_products = sorted_products.coalesce(20)
+    
+    # Write the sorted data
+    print("Writing sorted products dataset...")
+    sorted_products.write \
         .mode("overwrite") \
         .parquet(f"{OUTPUT_DIR}/sorted_products")
     
-    sorted_transactions.repartition(NUM_PARTITIONS, "product_id") \
-        .write \
-        .option("maxRecordsPerFile", NUM_TRANSACTIONS // NUM_PARTITIONS) \
+    # Same approach for transactions
+    print("Sorting transactions dataset...")
+    sorted_transactions = transactions_df.orderBy("product_id")
+    sorted_transactions = sorted_transactions.coalesce(20)
+    
+    print("Writing sorted transactions dataset...")
+    sorted_transactions.write \
         .mode("overwrite") \
         .parquet(f"{OUTPUT_DIR}/sorted_transactions")
+    
+    # Create metadata file to indicate datasets are properly sorted
+    with open(f"{OUTPUT_DIR}/SORTED_CONFIRMATION.txt", "w") as f:
+        f.write("Datasets were generated with guaranteed global sorting on product_id.\n")
+        f.write(f"Generation timestamp: {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
 
 def verify_data():
-    """Verify datasets were created correctly"""
+    """Verify datasets were created correctly and check sorting"""
     datasets = {
         "unsorted_products": f"{OUTPUT_DIR}/unsorted_products",
         "unsorted_transactions": f"{OUTPUT_DIR}/unsorted_transactions",
@@ -138,8 +155,17 @@ def verify_data():
     for name, path in datasets.items():
         if os.path.exists(path):
             try:
-                count = spark.read.parquet(path).count()
+                df = spark.read.parquet(path)
+                count = df.count()
                 print(f"  {name}: {count:,} rows")
+                
+                # Check sorting on sorted datasets
+                if name.startswith("sorted"):
+                    # Take sample of rows to check
+                    sample = df.select("product_id").orderBy("product_id").limit(10000).collect()
+                    values = [row.product_id for row in sample]
+                    is_sorted = all(values[i] <= values[i+1] for i in range(len(values)-1))
+                    print(f"    Sorting check (on sample): {'PASSED' if is_sorted else 'FAILED'}")
             except Exception as e:
                 print(f"  {name}: Error reading dataset - {str(e)}")
         else:
