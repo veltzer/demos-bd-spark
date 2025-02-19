@@ -1,197 +1,46 @@
-# Table Statistics Exercise
----
-## Introduction
-In this exercise, you'll learn how table statistics affect query performance in Spark SQL
----
-## Setup
-First, let's create our test tables with sample data:
+# Exercise: The Power of ANALYZE TABLE in PySpark
 
-```python
-# Create large tables for testing
-spark.sql("""
-    CREATE TABLE products (
-        id INT,
-        name STRING,
-        category STRING,
-        price DOUBLE
-    ) USING PARQUET
-""")
+## Overview
 
-spark.sql("""
-    CREATE TABLE sales (
-        id INT,
-        product_id INT,
-        quantity INT,
-        sale_date DATE
-    ) USING PARQUET
-""")
+This exercise demonstrates how collecting and utilizing statistics with `ANALYZE TABLE` can significantly improve query performance in Spark SQL. You'll see firsthand how the Spark optimizer makes better decisions when it has accurate statistics about your data.
 
-# Insert sample data
-spark.sql("""
-    INSERT INTO products
-    SELECT
-        id,
-        concat('Product_', cast(id as string)) as name,
-        concat('Category_', cast(id % 10 as string)) as category,
-        RAND() * 1000 as price
-    FROM range(1000000)
-""")
+## Background
 
-spark.sql("""
-    INSERT INTO sales
-    SELECT
-        id,
-        CAST(RAND() * 1000000 as INT) as product_id,
-        CAST(RAND() * 100 as INT) as quantity,
-        current_date() - CAST(RAND() * 365 as INT) as sale_date
-    FROM range(5000000)
-""")
-```
----
-## Problem Statement
-You have inherited a query that performs poorly. The query calculates total sales by category:
+When Spark executes SQL queries, it needs to make decisions about:
+- Join strategies (broadcast vs. shuffle)
+- Join order 
+- Predicate pushdown optimization
+- Partition pruning
 
-```python
-# Initial slow query
-def run_sales_analysis():
-    start_time = time.time()
+Without statistics, Spark makes these decisions based on heuristics and estimates, which can lead to suboptimal execution plans. The `ANALYZE TABLE` command collects statistics about table size, column cardinality, and data distribution that the optimizer can use to create more efficient plans.
 
-    result = spark.sql("""
-        SELECT
-            p.category,
-            COUNT(DISTINCT s.id) as num_sales,
-            SUM(s.quantity * p.price) as total_revenue
-        FROM sales s
-        JOIN products p ON s.product_id = p.id
-        GROUP BY p.category
-        ORDER BY total_revenue DESC
-    """)
+## Exercise Components
 
-    result.show()
+This exercise includes:
+1. A data generation script to create realistic test data
+2. A query script that runs slow without statistics
+3. The same query script with `ANALYZE TABLE` added, showing improved performance
 
-    end_time = time.time()
-    print(f"Query execution time: {end_time - start_time:.2f} seconds")
+## Expected Outcomes
 
-# Run the slow query
-run_sales_analysis()
-```
----
-## Task 1: Analyze Current Performance
-1. Run the query and note the execution time
-1. Examine the query plan:
-```python
-spark.sql("""
-    EXPLAIN ANALYZED
-    SELECT
-        p.category,
-        COUNT(DISTINCT s.id) as num_sales,
-        SUM(s.quantity * p.price) as total_revenue
-    FROM sales s
-    JOIN products p ON s.product_id = p.id
-    GROUP BY p.category
-    ORDER BY total_revenue DESC
-""").show(truncate=False)
-```
+You should observe:
+- Faster query execution time with statistics
+- Different execution plans (visible in the Spark UI)
+- Better resource utilization
 
----
-## Task 2: Identify Issues
-Look at the query plan output and identify:
-1. Are statistics being used for join optimization?
-1. What join strategy is being chosen?
-1. Are there any shuffle operations that could be optimized?
----
-## Task 3: Apply Statistics
-Add the appropriate statistics computation commands:
-```python
-# Add your statistics commands here
-# Hint: You need to compute statistics for both tables
-# Hint: Consider both table-level and column-level statistics
-```
----
-## Task 4: Verify Improvement
-1. Run the query again with statistics
-1. Compare the execution times
-1. Examine the new query plan
+## Instructions
 
-```python
-# Modified version with statistics
-def run_optimized_sales_analysis():
-    # Add statistics computation here
+1. Run the data generation script first
+2. Execute the slow query without statistics and note the execution time
+3. Execute the optimized query with statistics and compare the execution time
+4. Use the Spark UI to examine the execution plans of both queries
 
-    start_time = time.time()
+## Understanding the Results
 
-    result = spark.sql("""
-        SELECT
-            p.category,
-            COUNT(DISTINCT s.id) as num_sales,
-            SUM(s.quantity * p.price) as total_revenue
-        FROM sales s
-        JOIN products p ON s.product_id = p.id
-        GROUP BY p.category
-        ORDER BY total_revenue DESC
-    """)
+The performance difference illustrates how important accurate statistics are for the Spark optimizer, especially when working with:
+- Skewed data
+- Complex join conditions
+- Filtering operations on large datasets
+- Tables with many partitions
 
-    result.show()
-
-    end_time = time.time()
-    print(f"Query execution time: {end_time - start_time:.2f} seconds")
-```
----
-## Solution
-Here's the optimized version:
-
-```python
-def run_optimized_sales_analysis():
-    # Compute table statistics
-    spark.sql("ANALYZE TABLE products COMPUTE STATISTICS")
-    spark.sql("ANALYZE TABLE sales COMPUTE STATISTICS")
-
-    # Compute column statistics
-    spark.sql("""
-        ANALYZE TABLE products COMPUTE STATISTICS
-        FOR COLUMNS id, category, price
-    """)
-    spark.sql("""
-        ANALYZE TABLE sales COMPUTE STATISTICS
-        FOR COLUMNS product_id, quantity
-    """)
-
-    start_time = time.time()
-
-    result = spark.sql("""
-        SELECT
-            p.category,
-            COUNT(DISTINCT s.id) as num_sales,
-            SUM(s.quantity * p.price) as total_revenue
-        FROM sales s
-        JOIN products p ON s.product_id = p.id
-        GROUP BY p.category
-        ORDER BY total_revenue DESC
-    """)
-
-    result.show()
-
-    end_time = time.time()
-    print(f"Query execution time: {end_time - start_time:.2f} seconds")
-
-# Run optimized query
-run_optimized_sales_analysis()
-```
----
-## Expected Improvements
-1. Better join strategy selection due to size statistics
-1. Improved predicate pushdown
-1. More accurate resource allocation
-1. Potential reduction in shuffle operations
----
-## Discussion Questions
-1. Why did computing statistics improve the performance?
-1. What specific changes do you see in the query plan?
-1. When should statistics be recomputed?
-1. What are the trade-offs of computing detailed statistics?
----
-## Additional Challenges
-1. Try different join conditions and observe the impact
-1. Add more columns and analyze the statistics impact
-1. Experiment with different data distributions
-1. Compare performance with and without column statistics
+This is particularly important in production environments where performance and resource utilization matter.
