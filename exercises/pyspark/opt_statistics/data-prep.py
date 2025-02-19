@@ -7,9 +7,9 @@ This script creates two tables with skewed data distribution:
 2. customers - A dimension table with customer details
 """
 
-from pyspark.sql import SparkSession
-from pyspark.sql.functions import expr, rand, col, when, lit
 import random
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import expr, when, lit
 
 # Initialize Spark Session with Hive support to ensure tables are properly registered
 spark = SparkSession.builder \
@@ -34,7 +34,7 @@ NUM_PARTITIONS = 100     # Number of partitions to write
 # Most customers will be in region_id=1, fewer in other regions
 def generate_customers():
     print("Generating customer data...")
-    
+
     # Create basic customer dataframe
     df = spark.range(0, NUM_CUSTOMERS) \
         .withColumnRenamed("id", "customer_id") \
@@ -42,14 +42,14 @@ def generate_customers():
         .withColumn("email", expr("concat('customer_', cast(customer_id as string), '@example.com')")) \
         .withColumn("account_balance", expr("round(rand() * 10000, 2)")) \
         .withColumn("active", expr("rand() > 0.2"))
-    
+
     # Create skewed region_id distribution (region_id=1 will have ~70% of customers)
     df = df.withColumn("region_id", when(expr("rand() < 0.7"), 1)
                       .when(expr("rand() < 0.5"), 2)
                       .when(expr("rand() < 0.5"), 3)
                       .when(expr("rand() < 0.5"), 4)
                       .otherwise(5))
-    
+
     return df
 
 # Create orders with skewed distribution
@@ -57,43 +57,43 @@ def generate_customers():
 # - Product distribution will be skewed (some products ordered frequently)
 def generate_orders():
     print("Generating order data...")
-    
+
     # Create a dataframe with order IDs
     df = spark.range(0, NUM_ORDERS).withColumnRenamed("id", "order_id")
-    
+
     # Generate skewed customer IDs (some customers order much more frequently)
     # About 10% of customers generate 80% of orders
     frequent_customers = random.sample(range(NUM_CUSTOMERS), int(NUM_CUSTOMERS * 0.1))
-    
+
     df = df.withColumn(
-        "customer_id", 
-        when(expr("rand() < 0.8"), 
+        "customer_id",
+        when(expr("rand() < 0.8"),
              expr(f"array({','.join(map(str, frequent_customers))})[cast(rand()*{len(frequent_customers)} as int)]"))
         .otherwise(expr(f"cast(rand()*{NUM_CUSTOMERS} as int)"))
     )
-    
+
     # Add order date (last 2 years, skewed towards recent)
     df = df.withColumn(
-        "order_date", 
+        "order_date",
         expr("date_sub(current_date(), cast(rand() * rand() * 730 as int))")
     )
-    
+
     # Add order amount (skewed towards smaller amounts)
     df = df.withColumn(
-        "order_total", 
+        "order_total",
         expr("case when rand() < 0.7 then rand() * 100 else rand() * 1000 end")
     )
-    
+
     # Add product_id with skewed distribution
     popular_products = random.sample(range(NUM_PRODUCTS), int(NUM_PRODUCTS * 0.05))
-    
+
     df = df.withColumn(
         "product_id",
         when(expr("rand() < 0.6"),
             expr(f"array({','.join(map(str, popular_products))})[cast(rand()*{len(popular_products)} as int)]"))
         .otherwise(expr(f"cast(rand()*{NUM_PRODUCTS} as int)"))
     )
-    
+
     # Add status with distribution
     df = df.withColumn(
         "status",
@@ -102,7 +102,7 @@ def generate_orders():
         .when(expr("rand() < 0.5"), lit("PROCESSING"))
         .otherwise(lit("CANCELLED"))
     )
-    
+
     return df
 
 # Main execution
@@ -124,7 +124,7 @@ spark.sql("""
 
 print("Saving order data...")
 spark.sql("""
-    CREATE TABLE IF NOT EXISTS orders 
+    CREATE TABLE IF NOT EXISTS orders
     USING parquet
     PARTITIONED BY (status)
     AS SELECT * FROM orders_temp
