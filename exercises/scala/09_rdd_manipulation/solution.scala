@@ -27,6 +27,15 @@ val (initialRDD, creationTime) = time {
 
 printRDDInfo(initialRDD, "Initial RDD")
 println(s"Creation time: $creationTime ms (This time is for parallelizing, not for generating all elements)")
+println("\nCounting elements in the sampled RDD...")
+/*
+val (count, countTime) = time {
+  initialRDD.count()
+}
+println(s"count: $count")
+println(s"Count operation time: $countTime ms")
+System.exit(0)
+*/
 
 // Filter operation 1: keep only even numbers
 println("\nApplying filter for even numbers...")
