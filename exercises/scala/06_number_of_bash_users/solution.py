@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 with open("passwd", "r") as stream:
+    # if I break here, the "passwd" file has already been opened
     counter = 0
     for line in stream:
         line = line.rstrip()
