@@ -13,3 +13,7 @@ Show that these operations do not take any time (rememember that RDDs are lazy..
 What is the type of each RDD that you create?
 
 Now count the number of rows in the RDD and show that this operation does take time.
+
+Notes:
+* You run your code line this `spark-shell -i [your_file.scala]`
+* End you script with `System.exit(0)`
