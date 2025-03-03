@@ -32,4 +32,6 @@ passwdDF.show(5, false)
 val bashUserCount = spark.sql("SELECT COUNT(*) AS bash_users_count FROM passwd WHERE shell = '/bin/bash'")
 bashUserCount.show()
 
+bashUserCount.explain("formatted")
+
 System.exit(0)
