@@ -8,7 +8,7 @@ Manipulate that RDD in several ways:
 * filter it in various ways.
 * sample from it.
 
-Show that these operations do not take any time (rememember that RDDs are lazy...).
+Show that these operations do not take any time (remember that RDDs are lazy...).
 
 What is the type of each RDD that you create?
 
