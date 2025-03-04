@@ -1,5 +1,6 @@
 #!/bin/bash -e
 
+unset SPARK_MASTER
 source scripts/share.sh
 
 export SPARK_MASTER_HOST="localhost"
