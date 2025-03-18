@@ -1,5 +1,6 @@
 # the next will connect you to an ALREADY running spark cluster on localhost:7077
 export SPARK_MASTER="spark://localhost:7077"
+# spark shell uses the following variable
 export MASTER="spark://localhost:7077"
 # if you have a remote spark and you know it's IP then you use with
 # export SPARK_MASTER="spark://[your ip]:7077"

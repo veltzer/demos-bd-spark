@@ -18,4 +18,6 @@ if ! check_spark_master
 then
 	"${SPARK_HOME}/sbin/start-master.sh"
 	"${SPARK_HOME}/sbin/start-worker.sh" "spark://localhost:7077"
+	# If you want a second worker, just uncommment the next line
+	# "${SPARK_HOME}/sbin/start-worker.sh" "spark://localhost:7077"
 fi
