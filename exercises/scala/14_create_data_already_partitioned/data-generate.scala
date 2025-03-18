@@ -96,10 +96,6 @@ val salesData = (1 to numRecords).map(_ => {
 // Register as a temporary view/table to make it accessible for SQL queries
 salesData.createOrReplaceTempView("sales")
 
-// Show sample data
-println("Sample data:")
-salesData.show(10)
-
 // Save the data
 println(s"Saving data to $outputPath in $format format...")
 
