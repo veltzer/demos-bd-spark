@@ -1,7 +1,7 @@
 // Run with: spark-shell -i data-view.scala
 
-val rdd = spark.read.option("header", "true").csv("/tmp/shared/sales_data-csv").rdd
-// val rdd = spark.read.parquet("/tmp/shared/sales_data").rdd
+// val rdd = spark.read.option("header", "true").csv("/tmp/shared/sales_data-csv").rdd
+val rdd = spark.read.parquet("/tmp/shared/sales_data").rdd
 val numPartitions = rdd.getNumPartitions
 println(s"Number of partitions: $numPartitions")
 val partitionSizes = rdd.glom().map(_.length).collect()
