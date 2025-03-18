@@ -1,5 +1,4 @@
-// Save as view_sales.scala
-// Run with: spark-shell -i view_sales.scala
+// Run with: spark-shell -i data-view.scala
 
 // Option 1: Load from the local file path
 val salesFromFiles = spark.read.parquet("/tmp/shared/sales_data")

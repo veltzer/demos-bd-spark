@@ -1,5 +1,4 @@
-// Save this as sales_generator.scala
-// Run it with: spark-shell -i sales_generator.scala
+// Run it with: spark-shell -i data-generate.scala
 
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types._
@@ -122,6 +121,7 @@ salesData.write
 
 println(s"Sales data also saved as CSV to $outputPath-csv")
 
+/*
 // Calculate some statistics
 println("Data statistics:")
 
@@ -163,4 +163,6 @@ println("Data is now available to all users as 'shared_data.sales_records'")
 println("\nThe data is now available as 'salesData' DataFrame and 'sales' SQL table in this session")
 println("Try running: salesData.groupBy('product').count().show()")
 println("Or SQL: spark.sql('SELECT product, AVG(total) as avg_sale FROM sales GROUP BY product ORDER BY avg_sale DESC').show()")
+*/
+
 System.exit(0)
