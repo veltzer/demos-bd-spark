@@ -1,4 +1,4 @@
-// Run it with: spark-shell -i data-generate.scala
+// Run it with: spark-shell -i solution.scala
 
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types._
@@ -93,24 +93,54 @@ val salesData = (1 to numRecords).map(_ => {
   "tax_rate", "tax_amount", "subtotal", "total", "payment_method"
 )
 
+// Add year, month, day columns for partitioning
+val salesDataWithPartitions = salesData
+  .withColumn("year", year(col("date")))
+  .withColumn("month", month(col("date")))
+  .withColumn("day", dayofmonth(col("date")))
+
 // Register as a temporary view/table to make it accessible for SQL queries
-salesData.createOrReplaceTempView("sales")
+salesDataWithPartitions.createOrReplaceTempView("sales")
 
 // Show sample data
-println("Sample data:")
-salesData.show(10)
+println("Sample data with partition columns:")
+salesDataWithPartitions.show(10)
 
-// Save the data
-println(s"Saving data to $outputPath in $format format...")
+// Print partition info
+println(s"Number of partitions before repartitioning: ${salesDataWithPartitions.rdd.getNumPartitions}")
+
+// Save the data with partitioning
+println(s"Saving data to $outputPath in $format format with partitioning...")
 
 // Ensure the directory exists
 new java.io.File(outputPath).mkdirs()
 
-salesData.write
+// Write with partitioning by year, month, day
+// This creates a directory structure like: /path/year=2023/month=12/day=25/
+salesDataWithPartitions.write
+  .partitionBy("year", "month", "day")
   .mode("overwrite")
   .format(format)
   .save(outputPath)
   
-println(s"Sales data saved to $outputPath in $format format")
+println(s"Sales data saved to $outputPath in $format format, partitioned by year/month/day")
+
+// Show how to read the partitioned data efficiently
+println("Example of reading data efficiently with partition pruning:")
+println("""
+  // Read only data from January 2023
+  val jan2023Sales = spark.read.format("parquet").load(outputPath)
+    .filter("year = 2023 AND month = 1")
+  
+  // Spark will only read the relevant partitions
+  jan2023Sales.explain()
+""")
+
+val rdd = salesDataWithParitions.rdd
+val numPartitions = rdd.getNumPartitions
+println(s"Number of partitions: $numPartitions")
+val partitionSizes = rdd.glom().map(_.length).collect()
+partitionSizes.zipWithIndex.foreach { case (size, index) =>
+  println(s"Partition $index: $size elements")
 
 System.exit(0)

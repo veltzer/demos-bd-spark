@@ -7,8 +7,8 @@ import java.util.Calendar
 import scala.util.Random
 
 // Parameters - modify as needed
-val numRecords = 10000
-val outputPath = "/tmp/shared/sales_data"  // Local path instead of HDFS
+val numRecords = 10000000
+val outputPath = "/tmp/shared/large_sales_data"  // Local path instead of HDFS
 val format = "parquet"
 
 // Create a random generator
@@ -94,11 +94,7 @@ val salesData = (1 to numRecords).map(_ => {
 )
 
 // Register as a temporary view/table to make it accessible for SQL queries
-salesData.createOrReplaceTempView("sales")
-
-// Show sample data
-println("Sample data:")
-salesData.show(10)
+salesData.createOrReplaceTempView("large_sales")
 
 // Save the data
 println(s"Saving data to $outputPath in $format format...")
