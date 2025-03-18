@@ -102,13 +102,6 @@ val salesDataWithPartitions = salesData
 // Register as a temporary view/table to make it accessible for SQL queries
 salesDataWithPartitions.createOrReplaceTempView("sales")
 
-// Show sample data
-println("Sample data with partition columns:")
-salesDataWithPartitions.show(10)
-
-// Print partition info
-println(s"Number of partitions before repartitioning: ${salesDataWithPartitions.rdd.getNumPartitions}")
-
 // Save the data with partitioning
 println(s"Saving data to $outputPath in $format format with partitioning...")
 
