@@ -155,6 +155,11 @@ build.properties
 # spark
 spark-warehouse/
 
+# terraform
+.terraform*
+terraform.tfstate
+terraform.tfstate.backup
+
 # scala
 target/
 project/
