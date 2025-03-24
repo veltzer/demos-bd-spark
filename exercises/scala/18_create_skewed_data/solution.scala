@@ -199,6 +199,7 @@ partitionCounts.show(5)
 println("Smallest 5 partitions:")
 partitionCounts.orderBy("count").show(5)
 
+/*
 // Additional verification using RDD partitioning
 println("\nRDD partition information (this shows the physical partitioning, not the logical partitioning):")
 val rdd = salesData.rdd
@@ -209,6 +210,7 @@ val partitionSizes = rdd.glom().map(_.length).collect()
 partitionSizes.zipWithIndex.foreach { case (size, index) =>
   println(s"RDD Partition $index: $size elements")
 }
+*/
 
 // Print instructions for analyzing the data
 println("""
