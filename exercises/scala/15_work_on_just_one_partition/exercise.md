@@ -16,16 +16,16 @@ This exercise demonstrates the potential discrepancies that can arise when analy
 In this exercise, we'll:
 
 1. Generate a synthetic sales dataset with a non-uniform distribution of product sales
-2. Partition the data based on a key
-3. Analyze the "top three products sold" across the entire dataset
-4. Analyze the "top three products sold" on just one partition
-5. Compare the results and understand the discrepancies
+1. Partition the data based on a key
+1. Analyze the "top three products sold" across the entire dataset
+1. Analyze the "top three products sold" on just one partition
+1. Compare the results and understand the discrepancies
 
 ## Files Included
 
 1. `data_generator.scala` - Script to generate partitioned sales data with a non-uniform distribution
-2. `full_analysis.scala` - Script to analyze the entire dataset
-3. `single_partition_analysis.scala` - Script to analyze only one partition
+1. `full_analysis.scala` - Script to analyze the entire dataset
+1. `single_partition_analysis.scala` - Script to analyze only one partition
 
 ## Running the Exercise
 
@@ -34,12 +34,12 @@ In this exercise, we'll:
    spark-shell -i data_generator.scala
    ```
 
-2. Run the full analysis:
+1. Run the full analysis:
    ```
    spark-shell -i full_analysis.scala
    ```
 
-3. Run the single partition analysis:
+1. Run the single partition analysis:
    ```
    spark-shell -i single_partition_analysis.scala
    ```
@@ -51,6 +51,6 @@ You should observe that the top three products from a single partition differ fr
 ## Discussion Questions
 
 1. Why do we see different results between the single partition and the full dataset?
-2. In what scenarios might analyzing a single partition be misleading?
-3. What strategies could we employ to ensure representative sampling across partitions?
-4. How does the non-uniform distribution of product sales impact our observations?
+1. In what scenarios might analyzing a single partition be misleading?
+1. What strategies could we employ to ensure representative sampling across partitions?
+1. How does the non-uniform distribution of product sales impact our observations?
