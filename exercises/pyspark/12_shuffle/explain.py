@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+
+"""
+Explain
+"""
+
 from pyspark.sql import SparkSession
 
 spark = SparkSession.builder.appName("SimpleOptimization").getOrCreate()

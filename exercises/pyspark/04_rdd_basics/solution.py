@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 
-# import sys
-# import time
+"""
+Solution
+"""
+
 from pyspark import SparkContext, SparkConf
 
 # Initialize Spark

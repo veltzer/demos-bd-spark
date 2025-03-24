@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+"""
+Solution
+"""
+
 import os
 from contextlib import redirect_stdout, redirect_stderr
 from pyspark import SparkContext, SparkConf

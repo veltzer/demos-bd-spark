@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 
+"""
+Data setup
+"""
+
 from pyspark.sql import SparkSession
 
 # Initialize Spark Session with Hive support
-spark = SparkSession.builder \
-    .appName("Statistics Exercise - Data Setup") \
-    .enableHiveSupport() \
-    .getOrCreate()
+spark = SparkSession.builder.appName("app").enableHiveSupport().getOrCreate()
 
 # Create test tables
 print("Creating tables...")

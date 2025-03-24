@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+"""
+Generate data
+"""
+
 import os
 from datetime import datetime, timedelta
 import pandas as pd

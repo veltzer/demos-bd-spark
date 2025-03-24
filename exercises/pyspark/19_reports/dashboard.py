@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+
+"""
+Dashboard
+"""
+
 import os
 import streamlit as st
 from pyspark.sql import SparkSession

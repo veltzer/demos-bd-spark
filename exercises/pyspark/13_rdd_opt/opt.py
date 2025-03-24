@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+"""
+optimized version
+"""
+
 import time
 from pyspark.sql import SparkSession
 

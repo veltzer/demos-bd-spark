@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 
-# Exercise 1: RDD Caching and Persistence
-#
-# This script performs multiple operations on the same RDD without caching,
-# causing repeated computations. Your task is to optimize it using appropriate
-# caching/persistence strategies.
+"""
+Exercise 1: RDD Caching and Persistence
+
+This script performs multiple operations on the same RDD without caching,
+causing repeated computations. Your task is to optimize it using appropriate
+caching/persistence strategies.
+"""
 
 import time
 from pyspark.sql import SparkSession

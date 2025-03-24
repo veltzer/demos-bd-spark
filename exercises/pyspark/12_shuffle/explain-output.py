@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+"""
+Explain output
+"""
+
 from pyspark.sql import SparkSession
 import pyspark.sql.functions as F
 

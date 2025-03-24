@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+"""
+solution
+"""
+
 import os
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, explode, split, count, sum as my_sum, avg, desc, round as my_round, rand

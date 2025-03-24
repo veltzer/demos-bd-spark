@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+"""
+Generate CSV
+"""
+
 import csv
 import random
 from faker import Faker

@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 
-# Exercise 2: Optimizing Count Distinct with Two-Phase Aggregation
-#
-# This exercise demonstrates the performance difference between regular
-# count distinct and a two-phase approach with partition-level aggregation.
+"""
+Exercise 2: Optimizing Count Distinct with Two-Phase Aggregation
+
+This exercise demonstrates the performance difference between regular
+count distinct and a two-phase approach with partition-level aggregation.
+"""
 
 import time
 import random
