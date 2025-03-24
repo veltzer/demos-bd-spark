@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+"""
+Solution
+"""
+
 from pyspark import SparkContext, SparkConf
 
 conf = SparkConf().setAppName("Sum Odd Numbers").setMaster("spark://localhost:7077")

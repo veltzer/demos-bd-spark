@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+
+"""
+Solution
+"""
+
 import time
 import random
 import hashlib

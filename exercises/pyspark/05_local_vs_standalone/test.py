@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 
+"""
+Test
+"""
+
 from pyspark.sql import SparkSession
 
 # Create Spark session connected to your local cluster
-spark = SparkSession.builder \
-    .appName("Hello World") \
-    .master("spark://localhost:7077") \
-    .getOrCreate()
+spark = SparkSession.builder.appName("Hello World").master("spark://localhost:7077").getOrCreate()
 
 # Create simple RDD with text
 text_rdd = spark.sparkContext.parallelize(["Hello, World!"])

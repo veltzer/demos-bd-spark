@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+
+"""
+Exercise
+"""
+
 from datetime import datetime, timedelta
 import random
 from pyspark.sql import SparkSession

@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 
+"""
+Solution
+"""
+
 from pyspark.sql import SparkSession
 
 # Create Spark session
-spark = SparkSession.builder \
-    .appName("MinimalRDD") \
-    .getOrCreate()
+spark = SparkSession.builder.appName("MinimalRDD").getOrCreate()
 
 # Create RDD from a list of numbers
 numbers = [1, 2, 3, 4, 5]

@@ -1,4 +1,8 @@
-#!/usr/bin/python
+#!/usr/bin/env python
+
+"""
+Solution
+"""
 
 with open("passwd", "r") as stream:
     # if I break here, the "passwd" file has already been opened
