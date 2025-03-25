@@ -1,3 +1,7 @@
+"""
+os level dependencies for this project
+"""
+
 packages=[
     # spell check md files
     "aspell",
