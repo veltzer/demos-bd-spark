@@ -35,10 +35,10 @@ def ensure_output_dir():
 
 def load_results():
     """Load performance results from both solutions"""
-    with open(NAIVE_RESULTS, 'r') as f:
+    with open(NAIVE_RESULTS) as f:
         naive = json.load(f)
 
-    with open(OPTIMIZED_RESULTS, 'r') as f:
+    with open(OPTIMIZED_RESULTS) as f:
         optimized = json.load(f)
 
     return naive, optimized

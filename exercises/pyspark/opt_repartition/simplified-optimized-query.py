@@ -38,7 +38,7 @@ def check_previous_metrics():
         return {}
 
     metrics = {}
-    with open("naive_query_metrics.txt", "r") as f:
+    with open("naive_query_metrics.txt") as f:
         for line in f:
             key, value = line.strip().split("=")
             metrics[key] = float(value)
