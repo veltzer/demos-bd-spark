@@ -1,13 +1,13 @@
 # THIS IS AN AUTO-GENERATED FILE. DO NOT EDIT!
-pyspark
-pandas
-numpy
-streamlit
-plotly
-setuptools
-wurlitzer
-matplotlib
-pymakehelper
-pydmt
 faker
+matplotlib
+numpy
+pandas
+plotly
+pydmt
 pylint
+pymakehelper
+pyspark
+setuptools
+streamlit
+wurlitzer

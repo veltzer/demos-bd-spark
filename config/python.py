@@ -1,4 +1,4 @@
-""" python dependencies for this project """
+""" python deps for this project """
 
 install_requires: list[str] = [
     "pyspark",
