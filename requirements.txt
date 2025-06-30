@@ -48,7 +48,7 @@ py4j==0.10.9.9
 pyarrow==20.0.0
 pycmdtools==0.0.85
 pydeck==0.9.1
-pydmt==0.3.23
+pydmt==0.3.24
 pyfakeuse==0.0.9
 Pygments==2.19.2
 pylint==3.3.7
