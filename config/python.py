@@ -1,5 +1,8 @@
 """ python deps for this project """
 
+import config.shared
+
+
 install_requires: list[str] = [
     "pyspark",
     "pandas",
@@ -9,11 +12,8 @@ install_requires: list[str] = [
     "setuptools",
     "wurlitzer",
     "matplotlib",
-]
-build_requires: list[str] = [
-    "pymakehelper",
-    "pydmt",
     "faker",
-    "pylint",
 ]
-requires = install_requires + build_requires
+build_requires: list[str] = config.shared.BUILD
+test_requires: list[str] = config.shared.TEST
+requires = install_requires + build_requires + test_requires

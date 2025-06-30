@@ -1,13 +1,17 @@
 # THIS IS AN AUTO-GENERATED FILE. DO NOT EDIT!
 faker
 matplotlib
+mypy
 numpy
 pandas
 plotly
+pycmdtools
 pydmt
 pylint
 pymakehelper
 pyspark
+pytest
+ruff
 setuptools
 streamlit
 wurlitzer
