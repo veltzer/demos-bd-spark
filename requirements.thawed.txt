@@ -5,6 +5,7 @@ mypy
 numpy
 pandas
 plotly
+pyclassifiers
 pycmdtools
 pydmt
 pylint
