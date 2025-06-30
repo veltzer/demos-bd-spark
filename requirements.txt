@@ -46,9 +46,10 @@ pluggy==1.6.0
 protobuf==6.31.1
 py4j==0.10.9.9
 pyarrow==20.0.0
+pyclassifiers==0.0.20
 pycmdtools==0.0.85
 pydeck==0.9.1
-pydmt==0.3.24
+pydmt==0.3.25
 pyfakeuse==0.0.9
 Pygments==2.19.2
 pylint==3.3.7
