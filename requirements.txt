@@ -14,7 +14,7 @@ cycler==0.12.1
 dill==0.4.0
 docutils==0.21.2
 faker==37.4.0
-fonttools==4.58.4
+fonttools==4.58.5
 gitdb==4.0.12
 gitpython==3.1.44
 html5lib==1.1
@@ -67,7 +67,7 @@ referencing==0.36.2
 requests==2.32.4
 roman-numerals-py==3.1.0
 rpds-py==0.26.0
-ruff==0.12.1
+ruff==0.12.2
 setuptools==80.9.0
 six==1.17.0
 smmap==5.0.2
@@ -88,7 +88,7 @@ tomlkit==0.13.3
 tornado==6.5.1
 tqdm==4.67.1
 types-requests==2.32.4.20250611
-typing-extensions==4.14.0
+typing-extensions==4.14.1
 tzdata==2025.2
 unidecode==1.4.0
 urllib3==2.5.0
