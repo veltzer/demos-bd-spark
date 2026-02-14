@@ -43,7 +43,7 @@ pillow==11.3.0
 platformdirs==4.3.8
 plotly==6.2.0
 pluggy==1.6.0
-protobuf==5.29.5
+protobuf==6.32.0rc2
 py4j==0.10.9.9
 pyarrow==21.0.0
 pyclassifiers==0.0.20
@@ -54,15 +54,15 @@ pyfakeuse==0.0.9
 pygments==2.19.2
 pylint==3.3.8
 pylogconf==0.0.38
-pymakehelper==0.0.38
+pymakehelper==0.0.37
 pyparsing==3.2.3
 pyspark==4.1.0.dev1
-pytconf==0.1.21
+pytconf==0.1.19
 pytest==8.4.1
 python-dateutil==2.9.0.post0
 pytidylib==0.3.2
 pytz==2025.2
-pyyaml==6.0.3
+pyyaml==6.0.2
 referencing==0.36.2
 requests==2.32.5
 roman-numerals-py==3.1.0
@@ -82,7 +82,7 @@ sphinxcontrib-qthelp==2.0.0
 sphinxcontrib-serializinghtml==2.0.0
 streamlit==1.48.0
 tenacity==8.5.0
-termcolor==3.2.0
+termcolor==3.1.0
 toml==0.10.2
 tomlkit==0.13.3
 tornado==6.5.2
