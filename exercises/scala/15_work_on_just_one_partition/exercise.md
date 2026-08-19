@@ -30,17 +30,17 @@ In this exercise, we'll:
 ## Running the Exercise
 
 1. Start a Spark shell:
-   ```
+   ```text
    spark-shell -i data_generator.scala
    ```
 
 1. Run the full analysis:
-   ```
+   ```text
    spark-shell -i full_analysis.scala
    ```
 
 1. Run the single partition analysis:
-   ```
+   ```text
    spark-shell -i single_partition_analysis.scala
    ```
 

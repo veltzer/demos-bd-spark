@@ -1,7 +1,7 @@
 # UDF exercise
 
 * get some data with ips in it.
-    (I'll post some example data in the exercise folder).
+  (I'll post some example data in the exercise folder).
 
 * write a user defined function to extract the third number from an ip address.
 

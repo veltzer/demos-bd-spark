@@ -198,6 +198,6 @@ python process_files.py
     - Validate calculations
     - Compare with expected results
 1. Monitor Performance:
-    - Check Spark UI [here](http://localhost:8080)
+    - Check the [Spark UI](http://localhost:8080)
     - Monitor resource usage
     - Measure execution time
