@@ -1,7 +1,7 @@
 # Table Statistics Exercise
 ---
 ## Introduction
-In this exercise, you'll learn how table statistics affect query performance in Spark SQL
+## In this exercise, you'll learn how table statistics affect query performance in Spark SQL
 ---
 ## Setup
 First, let's create our test tables with sample data:
@@ -94,6 +94,7 @@ spark.sql("""
 ```
 
 ---
+
 ## Task 2: Identify Issues
 Look at the query plan output and identify:
 1. Are statistics being used for join optimization?

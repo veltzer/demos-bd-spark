@@ -3,12 +3,12 @@
 In this exercise you will bring up a standalone spark server and run a job on it.
 
 Use the script:
-    [link](https://github.com/veltzer/demos-spark/blob/master/scripts/server_start.sh)
+    [the server_start.sh script](https://github.com/veltzer/demos-spark/blob/master/scripts/server_start.sh)
 
 To run your server.
 
 Use ideas from this script:
-    [link](https://github.com/veltzer/demos-spark/blob/master/scripts/server_status.sh)
+    [the server_status.sh script](https://github.com/veltzer/demos-spark/blob/master/scripts/server_status.sh)
 
 To show that your server it alive.
 

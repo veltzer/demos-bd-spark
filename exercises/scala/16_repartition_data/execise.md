@@ -6,4 +6,4 @@
 * Show how long it takes to do statistics on one product on:
     * the original data
     * the new data
-    hint: it should be a lot faster on the new data (sort of).
+  hint: it should be a lot faster on the new data (sort of).
