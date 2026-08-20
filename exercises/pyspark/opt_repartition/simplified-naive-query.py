@@ -6,11 +6,13 @@ This script performs a category/region aggregation on the skewed transactions da
 WITHOUT proper repartitioning, demonstrating performance challenges with skewed data.
 """
 
-import time
-import sys
 import os
+import sys
+import time
+
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import count, sum as sql_sum, avg, desc
+from pyspark.sql.functions import avg, count, desc
+from pyspark.sql.functions import sum as sql_sum
 
 # Initialize Spark Session with Hive support
 spark = SparkSession.builder \

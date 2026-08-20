@@ -8,8 +8,9 @@ This script creates two tables with skewed data distribution:
 """
 
 import random
+
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import expr, when, lit
+from pyspark.sql.functions import expr, lit, when
 
 # Initialize Spark Session with Hive support to ensure tables are properly registered
 spark = SparkSession.builder \

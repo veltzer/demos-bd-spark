@@ -4,7 +4,7 @@
 Solution
 """
 
-from pyspark import SparkContext, SparkConf
+from pyspark import SparkConf, SparkContext
 
 conf = SparkConf().setAppName("Sum Odd Numbers").setMaster("spark://localhost:7077")
 sc = SparkContext(conf=conf)

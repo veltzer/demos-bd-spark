@@ -10,6 +10,7 @@ import json
 import os
 import sys
 from datetime import datetime
+
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -155,7 +156,7 @@ def create_summary_report(naive, optimized):
         "SORT-MERGE PERFORMANCE COMPARISON SUMMARY",
         "=" * 80,
         "",
-        f"Report generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
+        f"Report generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",  # noqa: DTZ005
         "",
         "DATASET INFORMATION:",
         f"  Transactions: {naive['transactions_count']:,} records",

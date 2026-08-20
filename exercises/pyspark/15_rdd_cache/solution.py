@@ -5,6 +5,7 @@ Solution
 """
 
 import time
+
 from pyspark.sql import SparkSession
 
 # Create Spark session

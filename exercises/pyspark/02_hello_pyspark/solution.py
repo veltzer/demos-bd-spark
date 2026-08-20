@@ -5,14 +5,15 @@ Solution
 """
 
 import os
-from contextlib import redirect_stdout, redirect_stderr
-from pyspark import SparkContext, SparkConf
+from contextlib import redirect_stderr, redirect_stdout
+
+from pyspark import SparkConf, SparkContext
 from pyspark.sql import SparkSession
 from wurlitzer import pipes
 
 HIDE=True
 if HIDE:
-    with open(os.devnull, "w") as devnull:
+    with open(os.devnull, "w") as devnull:  # noqa: SIM117
         with pipes(stdout=devnull, stderr=devnull), \
              redirect_stdout(devnull), \
              redirect_stderr(devnull):

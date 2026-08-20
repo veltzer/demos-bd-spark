@@ -6,10 +6,11 @@ This script demonstrates joining unsorted datasets, requiring Spark
 to perform sorting during the join operation.
 """
 
+import json
+import os
 import sys
 import time
-import os
-import json
+
 from pyspark.sql import SparkSession
 
 # Initialize Spark Session

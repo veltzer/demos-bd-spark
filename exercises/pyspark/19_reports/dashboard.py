@@ -5,10 +5,13 @@ Dashboard
 """
 
 import os
+
+import plotly.express as px
 import streamlit as st
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, date_format, to_date, round as my_round, sum as my_sum, desc
-import plotly.express as px
+from pyspark.sql.functions import col, date_format, desc, to_date
+from pyspark.sql.functions import round as my_round
+from pyspark.sql.functions import sum as my_sum
 
 # Initialize Spark
 spark = SparkSession.builder \
@@ -57,7 +60,7 @@ def load_spark_data():
         sales_df = spark.read.parquet("reports/monthly_revenue.parquet")
         products_df = spark.read.parquet("reports/top_products.parquet")
     # pylint: disable=broad-exception-caught
-    except Exception as _:
+    except Exception as _:  # noqa: BLE001
         st.error("Data not found. Generating new data...")
         generate_spark_data()
         sales_df = spark.read.parquet("reports/monthly_revenue.parquet")

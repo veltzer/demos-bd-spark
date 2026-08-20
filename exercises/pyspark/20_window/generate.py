@@ -5,8 +5,10 @@ Generate data
 """
 
 from datetime import datetime, timedelta
-import pandas as pd
+
 import numpy as np
+import pandas as pd
+
 
 def generate_sales_data(num_stores=5, days=30, seed=42):
     """Generate sample sales data for the window functions exercise."""
@@ -14,7 +16,7 @@ def generate_sales_data(num_stores=5, days=30, seed=42):
     np.random.seed(seed)
 
     # Generate dates
-    start_date = datetime(2024, 1, 1)
+    start_date = datetime(2024, 1, 1)  # noqa: DTZ001
     dates = [start_date + timedelta(days=x) for x in range(days)]
 
     # Generate data for each store

@@ -5,8 +5,12 @@ solution
 """
 
 import os
+
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, explode, split, count, sum as my_sum, avg, desc, round as my_round, rand
+from pyspark.sql.functions import avg, col, count, desc, explode, rand, split
+from pyspark.sql.functions import round as my_round
+from pyspark.sql.functions import sum as my_sum
+
 
 def create_sample_data(spark, num_rows=100000):
     """Create a large enough dataset to make the DAG interesting"""

@@ -8,6 +8,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import udf
 from pyspark.sql.types import IntegerType
 
+
 def create_spark_session():
     """Create and return a Spark session"""
     return SparkSession.builder \

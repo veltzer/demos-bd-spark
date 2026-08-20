@@ -5,6 +5,7 @@ optimized version
 """
 
 import time
+
 from pyspark.sql import SparkSession
 
 spark = SparkSession.builder.appName("SimpleOptimization").getOrCreate()

@@ -6,6 +6,7 @@ Solution
 
 from pyspark.sql import SparkSession
 
+
 def main():
     # Create Spark session
     spark = SparkSession.builder.appName("SparkSQLTutorial").getOrCreate()

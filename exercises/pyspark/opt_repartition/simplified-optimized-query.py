@@ -6,11 +6,13 @@ This script performs aggregation with repartitioning but properly
 handles partition information collection to avoid errors.
 """
 
+import os
 import sys
 import time
-import os
+
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import count, sum as my_sum, avg, desc
+from pyspark.sql.functions import avg, count, desc
+from pyspark.sql.functions import sum as my_sum
 
 # Initialize Spark Session with Hive support
 spark = SparkSession.builder \
