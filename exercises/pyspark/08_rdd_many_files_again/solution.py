@@ -6,7 +6,8 @@ Solution to exercise of word counting of linux documentation
 
 import os
 from operator import add
-from pyspark import SparkContext, SparkConf
+
+from pyspark import SparkConf, SparkContext
 
 # Initialize Spark
 

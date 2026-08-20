@@ -6,10 +6,11 @@ This script demonstrates joining pre-sorted datasets, allowing Spark
 to skip the sorting step during the join operation.
 """
 
+import json
+import os
 import sys
 import time
-import os
-import json
+
 from pyspark.sql import SparkSession
 
 # Initialize Spark Session

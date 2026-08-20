@@ -6,11 +6,23 @@ Solution
 
 import logging
 from datetime import datetime
+
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import (
-    col, date_format, to_date, round as my_round, sum as my_sum, avg, desc,
-    countDistinct, min as my_min, max as my_max, months_between, when, count
+    avg,
+    col,
+    count,
+    countDistinct,
+    date_format,
+    desc,
+    months_between,
+    to_date,
+    when,
 )
+from pyspark.sql.functions import max as my_max
+from pyspark.sql.functions import min as my_min
+from pyspark.sql.functions import round as my_round
+from pyspark.sql.functions import sum as my_sum
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -146,7 +158,7 @@ class SalesAnalysisReport:
         category_analysis = self.analyze_product_categories()
 
         # Save reports in both CSV and Parquet formats
-        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')  # noqa: DTZ005
 
         monthly_revenue.write.csv(f"{output_path}/monthly_revenue_{timestamp}.csv")
         monthly_revenue.write.parquet(f"{output_path}/monthly_revenue_{timestamp}.parquet")

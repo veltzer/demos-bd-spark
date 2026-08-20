@@ -10,6 +10,7 @@ better decisions about join strategies, predicate pushdown, and partition prunin
 
 import sys
 import time
+
 from pyspark.sql import SparkSession
 
 # Initialize Spark Session with Hive support to access the saved tables

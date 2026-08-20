@@ -4,10 +4,12 @@
 Example
 """
 
-import time
 import random
+import time
+
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import sum as sql_sum, count
+from pyspark.sql.functions import count
+from pyspark.sql.functions import sum as sql_sum
 
 
 def create_skewed_data(num_rows, num_keys, skew_factor):

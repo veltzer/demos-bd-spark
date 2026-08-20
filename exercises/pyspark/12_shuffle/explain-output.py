@@ -4,8 +4,9 @@
 Explain output
 """
 
-from pyspark.sql import SparkSession
 import pyspark.sql.functions as F
+from pyspark.sql import SparkSession
+
 
 def show_plan(df, title):
     """ Function to capture and print explain plan """

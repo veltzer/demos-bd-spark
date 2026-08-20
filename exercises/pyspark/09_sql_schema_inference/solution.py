@@ -5,8 +5,9 @@ Solution
 """
 
 import os
+
 from pyspark.sql import SparkSession
-from pyspark.sql.types import StructType, StructField, StringType, IntegerType
+from pyspark.sql.types import IntegerType, StringType, StructField, StructType
 
 # Initialize Spark Session
 cdir = os.path.basename(os.path.dirname(os.path.abspath(__file__)))

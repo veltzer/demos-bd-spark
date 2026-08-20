@@ -4,7 +4,7 @@
 Solution
 """
 
-from pyspark import SparkContext, SparkConf
+from pyspark import SparkConf, SparkContext
 
 # Initialize Spark
 conf = SparkConf().setAppName("Simple RDD Example").setMaster("local[*]")
@@ -23,7 +23,7 @@ def create_some_numbers():
         yield x
 
 # numbers = [1, 2, 3, 4, 5]
-numbers = range(0, 1000000)
+numbers = range(1000000)
 numbersRDD = sc.parallelize(numbers)
 
 # Let's see what's in it

@@ -4,12 +4,14 @@
 Solution
 """
 
-import time
-import random
 import hashlib
-from pyspark.sql import SparkSession
+import random
+import time
+
 import pyspark.sql.functions as F
+from pyspark.sql import SparkSession
 from pyspark.sql.types import StringType
+
 
 def create_spark_session():
     return SparkSession.builder \

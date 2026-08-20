@@ -5,7 +5,9 @@ Solution
 """
 
 import os
-from pyspark import SparkContext, SparkConf
+
+from pyspark import SparkConf, SparkContext
+
 
 def create_spark():
     """Create and configure SparkContext"""

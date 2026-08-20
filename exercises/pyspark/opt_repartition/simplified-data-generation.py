@@ -7,8 +7,9 @@ of repartitioning in PySpark.
 """
 
 import random
+
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import expr, when, rand, lit
+from pyspark.sql.functions import expr, lit, rand, when
 
 # Initialize Spark Session with Hive support
 spark = SparkSession.builder \

@@ -7,10 +7,12 @@ This exercise demonstrates the performance difference between regular
 count distinct and a two-phase approach with partition-level aggregation.
 """
 
-import time
 import random
-from pyspark.sql import SparkSession
+import time
+
 import pyspark.sql.functions as F
+from pyspark.sql import SparkSession
+
 
 def create_spark_session():
     return SparkSession.builder \

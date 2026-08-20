@@ -5,6 +5,7 @@ Exercise
 """
 
 import time
+
 from pyspark.sql import SparkSession
 
 # Initialize Spark Session with Hive support
