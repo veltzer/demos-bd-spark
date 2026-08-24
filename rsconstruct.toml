@@ -51,11 +51,6 @@ batch = false
 # shared incremental state.
 args = ["--no-incremental", "--cache-dir=/dev/null"]
 
-[processor.requirements]
-src_dirs = ["scripts", "config"]
-
-# ─── shell ───────────────────────────────────────────────────────────────────
-
 [processor.shellcheck]
 src_dirs = ["scripts", "exercises", "docs", "config"]
 args = ["--severity=error", "--shell=bash"]
@@ -69,12 +64,6 @@ src_dirs = ["config"]
 
 [processor.taplo]
 src_dirs = ["."]
-
-[processor.eslint]
-src_dirs = ["config"]
-args = ["-c", "config/eslint.config.js"]
-
-# ─── merged from rsconstruct.local.toml ─────────────────────────────────────
 
 # Runtime deps so CI installs what the code imports (pylint/mypy resolve
 # them) -- the demos-cloud-aws pattern.
