@@ -64,19 +64,3 @@ src_dirs = ["config"]
 
 [processor.taplo]
 src_dirs = ["."]
-
-# Runtime deps so CI installs what the code imports (pylint/mypy resolve
-# them) -- the demos-cloud-aws pattern.
-[dependencies]
-pip = [
-    "faker",
-    "matplotlib",
-    "numpy",
-    "pandas",
-    "pandas-stubs",
-    "plotly",
-    "pyspark",
-    "streamlit",
-    "types-wurlitzer",
-    "wurlitzer",
-]
