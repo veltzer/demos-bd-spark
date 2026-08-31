@@ -301,20 +301,20 @@ dependencies = [
     { name = "matplotlib" },
     { name = "numpy" },
     { name = "pandas" },
-    { name = "pandas-stubs" },
     { name = "plotly" },
     { name = "pyspark" },
     { name = "streamlit" },
-    { name = "types-wurlitzer" },
     { name = "wurlitzer" },
 ]
 
 [package.dev-dependencies]
 dev = [
     { name = "mypy" },
+    { name = "pandas-stubs" },
     { name = "pylint" },
     { name = "pytest" },
     { name = "ruff" },
+    { name = "types-wurlitzer" },
 ]
 
 [package.metadata]
@@ -323,20 +323,20 @@ requires-dist = [
     { name = "matplotlib" },
     { name = "numpy" },
     { name = "pandas" },
-    { name = "pandas-stubs" },
     { name = "plotly" },
     { name = "pyspark" },
     { name = "streamlit" },
-    { name = "types-wurlitzer" },
     { name = "wurlitzer" },
 ]
 
 [package.metadata.requires-dev]
 dev = [
     { name = "mypy" },
+    { name = "pandas-stubs" },
     { name = "pylint" },
     { name = "pytest" },
     { name = "ruff" },
+    { name = "types-wurlitzer" },
 ]
 
 [[package]]
