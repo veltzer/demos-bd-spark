@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # the next will connect you to an ALREADY running spark cluster on localhost:7077
 export SPARK_MASTER="spark://localhost:7077"
 # spark shell uses the following variable

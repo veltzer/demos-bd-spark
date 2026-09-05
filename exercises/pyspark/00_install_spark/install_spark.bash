@@ -6,15 +6,15 @@ function get_latest_spark_version() {
 		grep -o 'Spark [0-9]\.[0-9]\.[0-9]' |
 		head -n 1 |
 		grep -o '[0-9]\.[0-9]\.[0-9]')
-	echo "$latest_version"
+	echo "${latest_version}"
 }
 
 function cleanup_spark_dirs() {
 	echo "Checking for existing Spark installations..."
-	if ls ${HOME}/install/spark-* 1> /dev/null 2>&1
+	if ls "${HOME}"/install/spark-* 1> /dev/null 2>&1
 	then
 		echo "Found existing Spark directories. Removing them..."
-		rm -rf ${HOME}/install/spark-*
+		rm -rf "${HOME}"/install/spark-*
 		echo "Cleanup completed."
 	else
 		echo "No existing Spark directories found."

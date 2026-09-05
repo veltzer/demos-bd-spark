@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # Method 1: Check for Spark master process
 function check_spark_master() {
     if pgrep -f "org.apache.spark.deploy.master.Master" > /dev/null

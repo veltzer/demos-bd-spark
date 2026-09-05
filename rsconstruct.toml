@@ -26,6 +26,7 @@ src_dirs = ["tera.templates"]
 
 [processor.rumdl]
 src_dirs = ["docs", "exercises"]
+src_files = ["README.md"]
 
 [processor.zspell]
 src_dirs = ["docs", "exercises"]
@@ -50,7 +51,7 @@ args = ["--no-incremental", "--cache-dir=/dev/null"]
 
 [processor.shellcheck]
 src_dirs = ["scripts", "exercises", "docs", "config"]
-args = ["--severity=error", "--shell=bash"]
+src_files = [".auto.enter.sh", ".auto.exit.sh"]
 
 # ─── lua ─────────────────────────────────────────────────────────────────────
 
@@ -65,3 +66,14 @@ src_dirs = ["."]
 # lint the GitHub Actions workflow files with actionlint
 [processor.actionlint]
 src_dirs = [".github/workflows"]
+
+# ─── xml / svg ───────────────────────────────────────────────────────────────
+
+[processor.xmllint]
+src_dirs = ["exercises/scala/03_manipulate_csv_interactively/spark_job"]
+
+# ─── javascript ──────────────────────────────────────────────────────────────
+
+[processor.eslint]
+src_dirs = ["exercises/pyspark/06_processing_text_files"]
+args = ["-c", ".eslint.config.js"]
