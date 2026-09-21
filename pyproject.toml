@@ -19,7 +19,6 @@ dependencies = [
 dev = [
     "mypy",
     "pandas-stubs",
-    "pylint",
     "pytest",
     "ruff",
     "types-wurlitzer",
