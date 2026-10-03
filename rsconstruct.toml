@@ -76,6 +76,6 @@ src_dirs = ["exercises/scala/03_manipulate_csv_interactively/spark_job"]
 
 # ─── javascript ──────────────────────────────────────────────────────────────
 
-[processor.eslint]
+[processor.oxlint]
 src_dirs = ["exercises/pyspark/06_processing_text_files"]
-args = ["-c", ".eslint.config.js"]
+args = ["-c", ".oxlintrc.json"]
