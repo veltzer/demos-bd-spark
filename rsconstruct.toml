@@ -18,7 +18,7 @@ reject_dot_src_dirs = true
 # listed here must exist: rsconstruct rejects a missing one at config load.
 # Repos still on config/*.py keep a dep_inputs override in their local
 # overlay until converted.
-[processor.tera]
+[processor.generator.tera]
 dep_auto = [
 	"config/project.lua",
 	"config/personal.lua",
@@ -28,20 +28,20 @@ src_dirs = ["tera.templates"]
 
 # ─── markdown ────────────────────────────────────────────────────────────────
 
-[processor.rumdl]
+[processor.checker.rumdl]
 src_dirs = ["docs", "exercises"]
 src_files = ["README.md"]
 
-[processor.zspell]
+[processor.checker.zspell]
 src_dirs = ["docs", "exercises"]
 
 # ─── python ──────────────────────────────────────────────────────────────────
 
-[processor.ruff]
+[processor.checker.ruff]
 src_dirs = ["scripts", "config", "exercises"]
 
 
-[processor.mypy]
+[processor.checker.mypy]
 src_dirs = ["scripts", "config", "exercises"]
 batch = false
 # With batch = false many mypy processes run concurrently and share
@@ -51,31 +51,31 @@ batch = false
 # shared incremental state.
 args = ["--no-incremental", "--cache-dir=/dev/null"]
 
-[processor.shellcheck]
+[processor.checker.shellcheck]
 src_dirs = ["scripts", "exercises", "docs", "config"]
 src_files = [".auto.enter.sh", ".auto.exit.sh"]
 
 # ─── lua ─────────────────────────────────────────────────────────────────────
 
-[processor.luacheck]
+[processor.checker.luacheck]
 src_dirs = ["config"]
 
 # ─── toml / yaml / json ──────────────────────────────────────────────────────
 
-[processor.taplo]
+[processor.checker.taplo]
 src_files = [".rumdl.toml", "pyproject.toml", "rsconstruct.toml"]
 
 # lint the GitHub Actions workflow files with actionlint
-[processor.actionlint]
+[processor.checker.actionlint]
 src_dirs = [".github/workflows"]
 
 # ─── xml / svg ───────────────────────────────────────────────────────────────
 
-[processor.xmllint]
+[processor.checker.xmllint]
 src_dirs = ["exercises/scala/03_manipulate_csv_interactively/spark_job"]
 
 # ─── javascript ──────────────────────────────────────────────────────────────
 
-[processor.oxlint]
+[processor.checker.oxlint]
 src_dirs = ["exercises/pyspark/06_processing_text_files"]
 args = ["-c", ".oxlintrc.json"]
