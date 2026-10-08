@@ -71,7 +71,7 @@ src_dirs = [".github/workflows"]
 
 # ─── xml / svg ───────────────────────────────────────────────────────────────
 
-[processor.checker.xmllint]
+[processor.checker.ixmllint]
 src_dirs = ["exercises/scala/03_manipulate_csv_interactively/spark_job"]
 
 # ─── javascript ──────────────────────────────────────────────────────────────
