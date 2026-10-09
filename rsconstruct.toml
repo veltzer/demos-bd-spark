@@ -57,7 +57,7 @@ src_files = [".auto.enter.sh", ".auto.exit.sh"]
 
 # ─── lua ─────────────────────────────────────────────────────────────────────
 
-[processor.checker.luacheck]
+[processor.checker.iluacheck]
 src_dirs = ["config"]
 
 # ─── toml / yaml / json ──────────────────────────────────────────────────────
