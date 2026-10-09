@@ -41,15 +41,8 @@ src_dirs = ["docs", "exercises"]
 src_dirs = ["scripts", "config", "exercises"]
 
 
-[processor.checker.mypy]
+[processor.checker.pyrefly]
 src_dirs = ["scripts", "config", "exercises"]
-batch = false
-# With batch = false many mypy processes run concurrently and share
-# .mypy_cache; pyspark drags in google-namespace packages whose cache entries
-# mypy mishandles under that race ("AssertionError: Cannot find module for
-# google"). No cache: every file is still fully checked, just without the
-# shared incremental state.
-args = ["--no-incremental", "--cache-dir=/dev/null"]
 
 [processor.checker.shellcheck]
 src_dirs = ["scripts", "exercises", "docs", "config"]
