@@ -44,9 +44,12 @@ src_dirs = ["scripts", "config", "exercises"]
 [processor.checker.pyrefly]
 src_dirs = ["scripts", "config", "exercises"]
 
-[processor.checker.shellcheck]
+# the scripts source each other: shellcheck, given all of them at once,
+# followed those; ishellcheck checks each file alone, so it needs -x
+[processor.checker.ishellcheck]
 src_dirs = ["scripts", "exercises", "docs", "config"]
 src_files = [".auto.enter.sh", ".auto.exit.sh"]
+external_sources = true
 
 # ─── lua ─────────────────────────────────────────────────────────────────────
 
