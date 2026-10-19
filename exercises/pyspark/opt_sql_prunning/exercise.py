@@ -58,7 +58,7 @@ def write_partitioned_data(df, path):
 def query_without_partition_pruning(spark, path):
     """Query that doesn't benefit from partition pruning"""
     print("\nQuery WITHOUT partition pruning benefit:")
-    start_time = datetime.now()  # noqa: DTZ005
+    start_time = datetime.now()
 
     result = spark.read.parquet(path) \
         .groupBy("product", "region") \
@@ -66,14 +66,14 @@ def query_without_partition_pruning(spark, path):
         .orderBy("total_sales", ascending=False)
 
     result.show(5)
-    print(f"Execution time: {(datetime.now() - start_time).total_seconds():.2f} seconds")  # noqa: DTZ005
+    print(f"Execution time: {(datetime.now() - start_time).total_seconds():.2f} seconds")
     print("\nExecution plan:")
     result.explain()
 
 def query_with_partition_pruning(spark, path, start_date, end_date):
     """Query that benefits from partition pruning"""
     print("\nQuery WITH partition pruning benefit:")
-    start_time = datetime.now()  # noqa: DTZ005
+    start_time = datetime.now()
 
     result = spark.read.parquet(path) \
         .where(F.col("sale_date").between(
@@ -85,7 +85,7 @@ def query_with_partition_pruning(spark, path, start_date, end_date):
         .orderBy("total_sales", ascending=False)
 
     result.show(5)
-    print(f"Execution time: {(datetime.now() - start_time).total_seconds():.2f} seconds")  # noqa: DTZ005
+    print(f"Execution time: {(datetime.now() - start_time).total_seconds():.2f} seconds")
     print("\nExecution plan:")
     result.explain()
 
@@ -112,7 +112,7 @@ def main():
     spark = create_spark_session()
 
     # Generate data for a 90-day period
-    end_date = datetime(2024, 2, 1)  # noqa: DTZ001
+    end_date = datetime(2024, 2, 1)
     start_date = end_date - timedelta(days=90)
 
     print("Generating and writing partitioned data...")

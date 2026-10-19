@@ -158,7 +158,7 @@ class SalesAnalysisReport:
         category_analysis = self.analyze_product_categories()
 
         # Save reports in both CSV and Parquet formats
-        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')  # noqa: DTZ005
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
 
         monthly_revenue.write.csv(f"{output_path}/monthly_revenue_{timestamp}.csv")
         monthly_revenue.write.parquet(f"{output_path}/monthly_revenue_{timestamp}.parquet")

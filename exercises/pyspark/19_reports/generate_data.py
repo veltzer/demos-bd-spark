@@ -31,7 +31,7 @@ def generate_customers(num_customers=1000):
     countries = ['USA', 'UK', 'Canada', 'Australia', 'Germany', 'France', 'Japan', 'Spain']
 
     # Generate join dates over the last 3 years
-    end_date = datetime.now()  # noqa: DTZ005
+    end_date = datetime.now()
     start_date = end_date - timedelta(days=3*365)
     join_dates = [start_date + timedelta(days=np.random.randint(0, 3*365))
                  for _ in range(num_customers)]
@@ -49,7 +49,7 @@ def generate_customers(num_customers=1000):
 def generate_sales(products_df, customers_df, num_transactions=50000):
     """Generate sales transaction data."""
     # Date range for the last year
-    end_date = datetime.now()  # noqa: DTZ005
+    end_date = datetime.now()
     start_date = end_date - timedelta(days=365)
 
     # Generate more transactions in recent months

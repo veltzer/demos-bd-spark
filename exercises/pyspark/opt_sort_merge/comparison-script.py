@@ -156,7 +156,7 @@ def create_summary_report(naive, optimized):
         "SORT-MERGE PERFORMANCE COMPARISON SUMMARY",
         "=" * 80,
         "",
-        f"Report generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",  # noqa: DTZ005
+        f"Report generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
         "",
         "DATASET INFORMATION:",
         f"  Transactions: {naive['transactions_count']:,} records",

@@ -18,7 +18,7 @@ spark = SparkSession.builder \
 # Create large table for meaningful explain analysis
 def create_orders_data(num_records):
     data = []
-    start_date = datetime(2024, 1, 1)  # noqa: DTZ001
+    start_date = datetime(2024, 1, 1)
 
     for i in range(num_records):
         order_id = i
