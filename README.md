@@ -5,7 +5,7 @@
 
 description: Demos for the spark data processing tool
 
-project website: https://veltzer.github.io/demos-bd-spark
+project website: <https://veltzer.github.io/demos-bd-spark>
 
 author: Mark Veltzer
 
