@@ -1,4 +1,4 @@
-# Exercise Tasks:
+# Exercise Tasks
 
 1. Run the code and observe the execution plans and times for both queries.
     - Note the difference in execution time
