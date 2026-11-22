@@ -46,6 +46,7 @@ rdd.map(lambda x: x.split()).collect()
 
 ## Accessing SparkContext from SparkSession
 You can access SparkContext from SparkSession:
+
 ```python
 # Get SparkContext from SparkSession
 sc = spark.sparkContext

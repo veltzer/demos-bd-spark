@@ -47,7 +47,9 @@ spark.sql("""
     FROM range(5000000)
 """)
 ```
+
 ---
+
 ## Problem Statement
 You have inherited a query that performs poorly. The query calculates total sales by category:
 
@@ -75,10 +77,13 @@ def run_sales_analysis():
 # Run the slow query
 run_sales_analysis()
 ```
+
 ---
+
 ## Task 1: Analyze Current Performance
 1. Run the query and note the execution time
 1. Examine the query plan:
+
 ```python
 spark.sql("""
     EXPLAIN ANALYZED
@@ -103,12 +108,15 @@ Look at the query plan output and identify:
 ---
 ## Task 3: Apply Statistics
 Add the appropriate statistics computation commands:
+
 ```python
 # Add your statistics commands here
 # Hint: You need to compute statistics for both tables
 # Hint: Consider both table-level and column-level statistics
 ```
+
 ---
+
 ## Task 4: Verify Improvement
 1. Run the query again with statistics
 1. Compare the execution times
@@ -137,7 +145,9 @@ def run_optimized_sales_analysis():
     end_time = time.time()
     print(f"Query execution time: {end_time - start_time:.2f} seconds")
 ```
+
 ---
+
 ## Solution
 Here's the optimized version:
 
@@ -178,7 +188,9 @@ def run_optimized_sales_analysis():
 # Run optimized query
 run_optimized_sales_analysis()
 ```
+
 ---
+
 ## Expected Improvements
 1. Better join strategy selection due to size statistics
 1. Improved predicate pushdown

@@ -93,27 +93,35 @@ DROP TABLE IF EXISTS customers;
 -- Verify tables are dropped
 SHOW TABLES;
 ```
+
 ---
+
 ## Exercise Steps
 
 1. Start the Spark SQL shell:
+
 ```bash
 spark-sql
 ```
 
 1. Run the setup script:
+
 ```sql
 source create_tables.sql;
 ```
 
 1. Verify the tables were created:
+
 ```sql
 SHOW TABLES;
 ```
+
 ---
+
 ## Tasks
 
 1. Basic Queries
+
    ```sql
    -- Examine the schema of each table
    DESCRIBE products;
@@ -132,6 +140,7 @@ SHOW TABLES;
    - Group by category
 
 1. Examine query execution
+
    ```sql
    -- Use EXPLAIN to see the query plan
    EXPLAIN
@@ -147,7 +156,9 @@ SHOW TABLES;
    JOIN products p ON s.product_id = p.id
    GROUP BY p.category;
    ```
+
 ---
+
 ## Challenge Tasks
 
 1. Find the top customer by revenue in each country
@@ -158,6 +169,7 @@ SHOW TABLES;
 ## Solutions
 
 Here's the solution for the first challenge task:
+
 ```sql
 WITH customer_revenue AS (
     SELECT
@@ -175,7 +187,9 @@ FROM customer_revenue
 WHERE rnk = 1
 ORDER BY total_revenue DESC;
 ```
+
 ---
+
 ## Tips
 1. Use `Ctrl + D` or type `exit;` to exit the shell
 1. Use semicolons to end SQL statements

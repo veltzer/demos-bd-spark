@@ -43,6 +43,7 @@ For each store and date:
 Your queries should produce results in these formats:
 
 Task 1:
+
 ```text
 store_id | date       | amount | running_total
 ---------|------------|--------|---------------
@@ -51,6 +52,7 @@ store_id | date       | amount | running_total
 ```
 
 Task 2:
+
 ```text
 month | store_id | total_sales | rank
 ------|----------|-------------|------

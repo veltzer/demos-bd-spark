@@ -13,6 +13,7 @@
 ---
 ## Setup
 1. Run the data creation script:
+
 ```bash
 python create_data.py
 ```
@@ -25,6 +26,7 @@ This creates three tables:
 ## Basic EXPLAIN Types
 
 1. Simple EXPLAIN
+
 ```sql
 -- Shows basic logical plan
 EXPLAIN
@@ -32,6 +34,7 @@ SELECT * FROM orders WHERE amount > 500;
 ```
 
 1. EXPLAIN EXTENDED
+
 ```sql
 -- Shows additional information including logical and physical plans
 EXPLAIN EXTENDED
@@ -39,6 +42,7 @@ SELECT * FROM orders WHERE amount > 500;
 ```
 
 1. EXPLAIN CODEGEN
+
 ```sql
 -- Shows the generated Java code
 EXPLAIN CODEGEN
@@ -46,6 +50,7 @@ SELECT * FROM orders WHERE amount > 500;
 ```
 
 1. EXPLAIN COST
+
 ```sql
 -- Shows cost-based optimization details
 EXPLAIN COST
@@ -53,15 +58,19 @@ SELECT * FROM orders WHERE amount > 500;
 ```
 
 1. EXPLAIN FORMATTED
+
 ```sql
 -- Shows formatted output with more details
 EXPLAIN FORMATTED
 SELECT * FROM orders WHERE amount > 500;
 ```
+
 ---
+
 ## Exploring Join Operations
 
 1. Broadcast Join Example
+
 ```sql
 -- Small table broadcast
 EXPLAIN
@@ -72,6 +81,7 @@ GROUP BY c.segment;
 ```
 
 1. Sort-Merge Join Example
+
 ```sql
 -- Larger tables merge
 EXPLAIN
@@ -82,6 +92,7 @@ GROUP BY p.category;
 ```
 
 1. Multiple Joins
+
 ```sql
 EXPLAIN COST
 SELECT
@@ -94,10 +105,13 @@ JOIN customers c ON o.customer_id = c.customer_id
 JOIN products p ON o.product_id = p.product_id
 GROUP BY c.country, p.category;
 ```
+
 ---
+
 ## Analyzing Complex Queries
 
 1. Window Functions
+
 ```sql
 EXPLAIN FORMATTED
 SELECT
@@ -113,6 +127,7 @@ FROM orders;
 ```
 
 1. Subqueries
+
 ```sql
 EXPLAIN EXTENDED
 SELECT *
@@ -129,6 +144,7 @@ WHERE total_spent > (
 ```
 
 1. Complex Aggregations
+
 ```sql
 EXPLAIN COST
 SELECT
@@ -144,7 +160,9 @@ JOIN products p ON o.product_id = p.product_id
 GROUP BY c.segment, p.category
 HAVING COUNT(*) > 100;
 ```
+
 ---
+
 ## Understanding the Output
 
 1. Key Components to Look For:
@@ -187,6 +205,7 @@ HAVING COUNT(*) > 100;
    - Compare its performance with a simpler version
 
 1. Experiment with hints:
+
 ```sql
 EXPLAIN COST
 SELECT /*+ BROADCAST(customers) */
@@ -197,6 +216,7 @@ GROUP BY c.segment;
 ```
 
 1. Compare different join orders:
+
 ```sql
 EXPLAIN COST
 SELECT /*+ LEADING(orders, customers, products) */
@@ -206,7 +226,9 @@ JOIN customers c ON o.customer_id = c.customer_id
 JOIN products p ON o.product_id = p.product_id
 GROUP BY c.country, p.category;
 ```
+
 ---
+
 ## Tips
 1. Use `EXPLAIN FORMATTED` for most detailed output
 1. Compare `COST` vs actual performance

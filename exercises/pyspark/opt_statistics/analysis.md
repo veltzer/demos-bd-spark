@@ -34,6 +34,7 @@ Typically, you'll observe:
 When comparing the execution plans, focus on these differences:
 
 1. **Join Strategy**: Look for `BroadcastHashJoin` vs. `SortMergeJoin`
+
    ```text
    // Optimized plan might show:
    BroadcastHashJoin [customer_id] [customer_id]
@@ -43,12 +44,14 @@ When comparing the execution plans, focus on these differences:
    ```
 
 1. **Partition Filtering**: Notice the number of partitions read
+
    ```text
    // Optimized plan might show:
    Filter: (isnotnull(status) && (status = 'COMPLETED'))
    ```
 
 1. **Predicate Application**: Look where predicates are applied
+
    ```text
    // Optimized plan pushes predicates into file scan:
    FileScan parquet [customer_id,active,account_balance]

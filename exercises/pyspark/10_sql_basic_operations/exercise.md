@@ -23,6 +23,7 @@ spark = SparkSession.builder \
 ## Creating Sample Datasets
 
 ### 1. Employee Dataset
+
 ```python
 # Create employee data
 employee_data = [
@@ -41,6 +42,7 @@ employee_df.createOrReplaceTempView("employees")
 ```
 
 ### 2. Project Dataset
+
 ```python
 # Create project data
 project_data = [
@@ -59,6 +61,7 @@ project_df.createOrReplaceTempView("projects")
 ## Basic Queries
 
 ### 1. Simple SELECT and WHERE
+
 ```python
 # Find all employees in Engineering department
 query1 = """
@@ -71,6 +74,7 @@ spark.sql(query1).show()
 ```
 
 ### 2. Aggregation and GROUP BY
+
 ```python
 # Calculate average salary by department
 query2 = """
@@ -96,6 +100,7 @@ spark.sql(query2).show()
 ## Solutions
 
 ### Exercise 1
+
 ```python
 query3 = """
 SELECT
@@ -108,6 +113,7 @@ ORDER BY employee_count DESC
 ```
 
 ### Exercise 2
+
 ```python
 query4 = """
 SELECT
@@ -119,6 +125,7 @@ JOIN employees e ON p.lead_id = e.id
 ```
 
 ### Exercise 3
+
 ```python
 query5 = """
 SELECT
@@ -129,6 +136,7 @@ FROM employees
 ```
 
 ## Clean Up
+
 ```python
 # Don't forget to stop the Spark session when you're done
 spark.stop()
