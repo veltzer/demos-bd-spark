@@ -64,6 +64,8 @@ src_dirs = [".github/workflows"]
 # ─── xml / svg ───────────────────────────────────────────────────────────────
 
 [processor.checker.ixmllint]
+# warnings fail too, not only fatal errors
+strict = true
 src_dirs = ["exercises/scala/03_manipulate_csv_interactively/spark_job"]
 
 # ─── javascript ──────────────────────────────────────────────────────────────
