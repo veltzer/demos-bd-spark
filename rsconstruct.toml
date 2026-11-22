@@ -70,4 +70,5 @@ src_dirs = ["exercises/scala/03_manipulate_csv_interactively/spark_job"]
 
 [processor.checker.oxlint]
 src_dirs = ["exercises/pyspark/06_processing_text_files"]
-args = ["-c", ".oxlintrc.json"]
+args = ["-c", ".oxlintrc.repo.json"]
+dep_inputs = [".oxlintrc.repo.json"]
