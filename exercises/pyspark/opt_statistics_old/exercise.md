@@ -1,9 +1,15 @@
 # Table Statistics Exercise
+
 ---
+
 ## Introduction
+
 ## In this exercise, you'll learn how table statistics affect query performance in Spark SQL
+
 ---
+
 ## Setup
+
 First, let's create our test tables with sample data:
 
 ```python
@@ -51,6 +57,7 @@ spark.sql("""
 ---
 
 ## Problem Statement
+
 You have inherited a query that performs poorly. The query calculates total sales by category:
 
 ```python
@@ -101,12 +108,15 @@ spark.sql("""
 ---
 
 ## Task 2: Identify Issues
+
 Look at the query plan output and identify:
 1. Are statistics being used for join optimization?
 1. What join strategy is being chosen?
 1. Are there any shuffle operations that could be optimized?
 ---
+
 ## Task 3: Apply Statistics
+
 Add the appropriate statistics computation commands:
 
 ```python
@@ -149,6 +159,7 @@ def run_optimized_sales_analysis():
 ---
 
 ## Solution
+
 Here's the optimized version:
 
 ```python
@@ -197,12 +208,14 @@ run_optimized_sales_analysis()
 1. More accurate resource allocation
 1. Potential reduction in shuffle operations
 ---
+
 ## Discussion Questions
 1. Why did computing statistics improve the performance?
 1. What specific changes do you see in the query plan?
 1. When should statistics be recomputed?
 1. What are the trade-offs of computing detailed statistics?
 ---
+
 ## Additional Challenges
 1. Try different join conditions and observe the impact
 1. Add more columns and analyze the statistics impact

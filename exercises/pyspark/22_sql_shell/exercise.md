@@ -1,17 +1,22 @@
 # Spark SQL Shell Exercise
+
 ---
+
 ## Learning Objectives
 1. Learn to start and use the Spark SQL shell
 1. Create and populate tables
 1. Practice writing SQL queries
 1. Understand query execution plans
 ---
+
 ## Prerequisites
 - Apache Spark installed
 - Basic SQL knowledge
 - Terminal/Command line familiarity
 ---
+
 ## Exercise Setup
+
 First, create a file named `create_tables.sql` with the following content:
 
 ```sql
@@ -166,6 +171,7 @@ SHOW TABLES;
 1. Find products that have never been sold
 1. Identify the most common product pairs bought together
 ---
+
 ## Solutions
 
 Here's the solution for the first challenge task:
@@ -198,6 +204,7 @@ ORDER BY total_revenue DESC;
 1. Remember to use TO_DATE when inserting dates
 1. Clean up using `delete_tables.sql` when done
 ---
+
 ## Next Steps
 1. Try modifying the queries to answer different business questions
 1. Experiment with different JOIN types

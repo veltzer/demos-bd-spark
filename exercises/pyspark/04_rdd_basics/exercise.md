@@ -1,6 +1,7 @@
 # Creating Your First RDD in Apache Spark
 
 ## Exercise Overview
+
 Learn how to create and manipulate RDDs (Resilient Distributed Datasets) in Apache Spark using Python data structures. This exercise covers the fundamental concepts of RDD creation and basic operations.
 
 ## Prerequisites
@@ -17,6 +18,7 @@ Learn how to create and manipulate RDDs (Resilient Distributed Datasets) in Apac
 ## Exercise Steps
 
 ### 1. Creating a SparkContext
+
 First, you'll need to create a SparkContext, which is the entry point for Spark functionality:
 
 ```python
@@ -27,17 +29,20 @@ sc = SparkContext(conf=conf)
 ```
 
 ### 2. Creating RDDs from Python Lists
+
 Create two different types of RDDs:
 - A simple RDD from numbers
 - An RDD from key-value pairs
 
 ### 3. Basic Operations
+
 Practice these operations:
 - Creating RDDs using `parallelize()`
 - Viewing RDD contents using `collect()`
 - Transforming data using `map()`
 
 ## Sample Data
+
 Use these Python collections:
 
 ```python
@@ -54,6 +59,7 @@ pairs = [("a", 1), ("b", 2), ("c", 3)]
 1. Print the transformed results
 
 ## Expected Output
+
 The program should show:
 - The original numbers
 - The key-value pairs
@@ -65,12 +71,14 @@ The program should show:
 1. Don't create multiple SparkContexts
 
 ## Extensions
+
 Once you complete the basic exercise, try these extensions:
 1. Create an RDD from a larger dataset (100+ elements)
 1. Try different transformations (multiply by 2, add 5, etc.)
 1. Filter elements based on a condition
 
 ## Assessment Criteria
+
 You should be able to:
 - Successfully create RDDs from Python collections
 - Transform RDD data using simple operations

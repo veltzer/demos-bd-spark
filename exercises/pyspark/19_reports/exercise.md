@@ -1,6 +1,7 @@
 # Spark Sales Analysis Exercise
 
 ## Overview
+
 This exercise involves creating a comprehensive sales analysis system using Apache Spark. You'll work with e-commerce data to generate various analytical reports that provide insights into sales patterns, customer behavior, and product performance.
 
 ## Project Structure
@@ -53,6 +54,7 @@ spark-sales-analysis/
 - Implement proper error handling
 
 ### 2. Required Analysis
+
 Implement the following analyses:
 
 #### Sales Analysis

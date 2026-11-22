@@ -1,6 +1,7 @@
 # SparkSession vs SparkContext: Key Differences
 
 ## SparkSession
+
 SparkSession was introduced in Spark 2.0 as a unified entry point and offers these key features:
 - Includes support for DataFrame and SQL operations
 - Encapsulates SparkContext, SQLContext, and HiveContext
@@ -26,6 +27,7 @@ spark.sql("SELECT * FROM my_table")
 ```
 
 ## SparkContext
+
 SparkContext is the original entry point for Spark functionality and has these characteristics:
 - Works with lower level RDD API
 - Only one active SparkContext per JVM
@@ -45,6 +47,7 @@ rdd.map(lambda x: x.split()).collect()
 ```
 
 ## Accessing SparkContext from SparkSession
+
 You can access SparkContext from SparkSession:
 
 ```python

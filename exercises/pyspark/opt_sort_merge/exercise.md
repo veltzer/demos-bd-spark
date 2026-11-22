@@ -1,4 +1,5 @@
 # Sort-Merge Performance Exercise
+
 Understanding the performance impact of pre-sorted data
 
 ---
