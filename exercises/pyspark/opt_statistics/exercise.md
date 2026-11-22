@@ -7,6 +7,7 @@ This exercise demonstrates how collecting and utilizing statistics with `ANALYZE
 ## Background
 
 When Spark executes SQL queries, it needs to make decisions about:
+
 - Join strategies (broadcast vs. shuffle)
 - Join order
 - Predicate pushdown optimization
@@ -17,6 +18,7 @@ Without statistics, Spark makes these decisions based on heuristics and estimate
 ## Exercise Components
 
 This exercise includes:
+
 1. A data generation script to create realistic test data
 1. A query script that runs slow without statistics
 1. The same query script with `ANALYZE TABLE` added, showing improved performance
@@ -24,6 +26,7 @@ This exercise includes:
 ## Expected Outcomes
 
 You should observe:
+
 - Faster query execution time with statistics
 - Different execution plans (visible in the Spark UI)
 - Better resource utilization
@@ -38,6 +41,7 @@ You should observe:
 ## Understanding the Results
 
 The performance difference illustrates how important accurate statistics are for the Spark optimizer, especially when working with:
+
 - Skewed data
 - Complex join conditions
 - Filtering operations on large datasets

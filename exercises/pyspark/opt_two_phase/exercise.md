@@ -12,11 +12,13 @@
 1. Compare the performance and explain why it's faster
 
 Questions to consider:
+
 - How does data skew affect the performance?
 - What's happening during the shuffle phase?
 - How much memory is being used in each approach?
 
 Hints:
+
 - Use distinct() before groupBy
 - Consider the amount of data being shuffled
 - Think about partition-level operations

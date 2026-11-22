@@ -42,6 +42,7 @@ For each store, show the percentage difference in sales compared to the previous
 ### 5. Store Performance
 
 For each store and date:
+
 - Show daily sales
 - Show store's average daily sales
 - Show percentage difference from store's average
@@ -71,6 +72,7 @@ month | store_id | total_sales | rank
 Tasks 3-5: Similar clear formatting with relevant columns.
 
 ## Hints
+
 - Use `PARTITION BY` for store-specific calculations
 - Remember to handle NULL values appropriately
 - Consider using multiple window functions in a single query

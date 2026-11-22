@@ -3,19 +3,24 @@
 ---
 
 ## Learning Objectives
+
 1. Understand different EXPLAIN types in Spark SQL
 1. Learn to interpret query execution plans
 1. Analyze join strategies and their costs
 1. Identify optimization opportunities
+
 ---
 
 ## Prerequisites
+
 - Python and PySpark installed
 - Basic SQL knowledge
 - Understanding of join operations
+
 ---
 
 ## Setup
+
 1. Run the data creation script:
 
 ```bash
@@ -23,9 +28,11 @@ python create_data.py
 ```
 
 This creates three tables:
+
 - `orders` (1M rows)
 - `customers` (1K rows)
 - `products` (100 rows)
+
 ---
 
 ## Basic EXPLAIN Types
@@ -182,6 +189,7 @@ HAVING COUNT(*) > 100;
    - Column pruning
    - Partition pruning
    - Join reordering
+
 ---
 
 ## Exercise Tasks
@@ -200,6 +208,7 @@ HAVING COUNT(*) > 100;
    - Identify bottlenecks in complex queries
    - Find opportunities for optimization
    - Test different query formulations
+
 ---
 
 ## Advanced Challenges
@@ -237,11 +246,13 @@ GROUP BY c.country, p.category;
 ---
 
 ## Tips
+
 1. Use `EXPLAIN FORMATTED` for most detailed output
 1. Compare `COST` vs actual performance
 1. Look for shuffle operations in complex queries
 1. Watch for skewed data handling
 1. Consider partition and predicate pushdown opportunities
+
 ---
 
 ## Cleanup

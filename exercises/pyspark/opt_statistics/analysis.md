@@ -5,6 +5,7 @@ After running both scripts, you should see a significant performance difference.
 ## Expected Performance Difference
 
 Typically, you'll observe:
+
 - The query with `ANALYZE TABLE` runs **2-10x faster** depending on data size and skew
 - The optimized query execution plan shows different join strategies
 - The optimized query may process fewer partitions
@@ -68,6 +69,7 @@ When comparing the execution plans, focus on these differences:
 ## Performance Impact in Production
 
 In production environments, statistics can mean the difference between:
+
 - Jobs completing within SLA vs. timing out
 - Efficient resource usage vs. cluster overload
 - Cost-effective cloud processing vs. expensive overruns

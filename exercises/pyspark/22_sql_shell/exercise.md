@@ -3,16 +3,20 @@
 ---
 
 ## Learning Objectives
+
 1. Learn to start and use the Spark SQL shell
 1. Create and populate tables
 1. Practice writing SQL queries
 1. Understand query execution plans
+
 ---
 
 ## Prerequisites
+
 - Apache Spark installed
 - Basic SQL knowledge
 - Terminal/Command line familiarity
+
 ---
 
 ## Exercise Setup
@@ -170,6 +174,7 @@ SHOW TABLES;
 1. Calculate daily sales trends by product category
 1. Find products that have never been sold
 1. Identify the most common product pairs bought together
+
 ---
 
 ## Solutions
@@ -197,15 +202,18 @@ ORDER BY total_revenue DESC;
 ---
 
 ## Tips
+
 1. Use `Ctrl + D` or type `exit;` to exit the shell
 1. Use semicolons to end SQL statements
 1. Use arrow keys to navigate command history
 1. Type `help;` for available commands
 1. Remember to use TO_DATE when inserting dates
 1. Clean up using `delete_tables.sql` when done
+
 ---
 
 ## Next Steps
+
 1. Try modifying the queries to answer different business questions
 1. Experiment with different JOIN types
 1. Add more complex window functions

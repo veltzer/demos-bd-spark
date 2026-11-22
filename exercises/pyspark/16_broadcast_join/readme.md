@@ -41,6 +41,7 @@ Small Data    |  Complete      Complete       Complete     |  → Broadcast
 ## When to Use Broadcast Joins
 
 Best scenarios for broadcast joins:
+
 - One dataset is significantly smaller than the other
 - Small dataset fits in memory
 - Join operation is performed multiple times
@@ -58,6 +59,7 @@ spark.conf.set("spark.sql.autoBroadcastJoinThreshold", 10485760)  # 10MB
 ## Performance Impact
 
 Broadcast joins can significantly improve performance by:
+
 - Eliminating shuffle operations
 - Reducing network traffic
 - Minimizing disk I/O

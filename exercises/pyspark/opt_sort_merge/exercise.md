@@ -7,6 +7,7 @@ Understanding the performance impact of pre-sorted data
 ## Problem Statement
 
 In distributed data processing, the sort-merge join is a common operation:
+
 1. Sort both datasets on the join key
 2. Merge the sorted datasets
 
@@ -17,6 +18,7 @@ In distributed data processing, the sort-merge join is a common operation:
 ## Learning Objectives
 
 After completing this exercise, you'll understand:
+
 - The computational complexity of sorting and merging operations
 - How data organization affects join performance
 - Practical performance differences in PySpark
@@ -27,6 +29,7 @@ After completing this exercise, you'll understand:
 ## Scenario
 
 You're analyzing e-commerce data with two large datasets:
+
 1. **Customer Transactions** (10M records)
 2. **Product Catalog** (1M records)
 
@@ -39,10 +42,12 @@ You need to join these datasets by product_id to analyze purchasing patterns.
 We'll compare two approaches:
 
 **Approach 1 (Naive)**:
+
 - Load unsorted data
 - Perform sort-merge join (PySpark handles sorting automatically)
 
 **Approach 2 (Optimized)**:
+
 - Pre-sort data during ETL
 - Merge the pre-sorted datasets
 
@@ -130,6 +135,7 @@ The magnitude of improvement depends on data size and cluster resources.
 ## Understanding Sort-Merge Join
 
 Sort-merge join consists of two phases:
+
 1. **Sort phase**: Each dataset is sorted by join key
 1. **Merge phase**: Sorted datasets are merged in a single pass
 

@@ -56,6 +56,7 @@ spark-shell -i passwd_analysis.scala
 ## Expected Output
 
 The script will display:
+
 - The schema of the passwd file
 - A sample of the data (first 5 rows)
 - The count of users with `/bin/bash` as their shell

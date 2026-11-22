@@ -52,6 +52,7 @@ spark-shell -i passwd_analysis_rdd.scala
 ## Expected Output
 
 The script will display:
+
 - A sample of the data (first 5 rows)
 - The count of users with `/bin/bash` as their shell
 - A list of all users using `/bin/bash` with their usernames, UIDs, and home directories
@@ -65,6 +66,7 @@ The script will display:
 ## RDD vs DataFrame Approach
 
 This example demonstrates the RDD API, which is Spark's lower-level API:
+
 - More control over data processing
 - Requires manual parsing of data
 - Less optimized than DataFrame/SQL operations

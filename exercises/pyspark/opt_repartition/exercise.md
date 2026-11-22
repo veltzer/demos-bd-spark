@@ -13,6 +13,7 @@ This simplified exercise demonstrates how proper repartitioning can significantl
 ## The Problem: Data Skew
 
 In distributed computing, data skew occurs when data is unevenly distributed across partitions. This creates:
+
 - Overloaded executors while others sit idle
 - Resource inefficiency
 - Slower job completion (limited by the slowest task)
@@ -32,6 +33,7 @@ In distributed computing, data skew occurs when data is unevenly distributed acr
 ## Expected Results
 
 You should observe:
+
 - The optimized script running significantly faster (typically 2-5x)
 - More even distribution of work across executors
 - Better resource utilization
@@ -45,6 +47,7 @@ The key improvement in the optimized query comes from:
 1. **Proper partition sizing**: Using an appropriate number of partitions for the cluster
 
 This pattern applies to many real-world scenarios including:
+
 - Customer analytics with varying purchase frequencies
 - Geographic data with population-based clustering
 - Time-series data with activity spikes

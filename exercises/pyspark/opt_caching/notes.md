@@ -6,6 +6,7 @@
 * All subsequent operations now use cached data instead of recomputing
 
 Expected Results:
+
 * Unoptimized version: ~30-40 seconds
 * Optimized version: ~10-15 seconds (significant improvement)
 

@@ -3,6 +3,7 @@
 ## SparkSession
 
 SparkSession was introduced in Spark 2.0 as a unified entry point and offers these key features:
+
 - Includes support for DataFrame and SQL operations
 - Encapsulates SparkContext, SQLContext, and HiveContext
 - Recommended API for newer Spark applications
@@ -29,6 +30,7 @@ spark.sql("SELECT * FROM my_table")
 ## SparkContext
 
 SparkContext is the original entry point for Spark functionality and has these characteristics:
+
 - Works with lower level RDD API
 - Only one active SparkContext per JVM
 - Handles connection to Spark cluster

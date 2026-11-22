@@ -26,6 +26,7 @@ spark-sales-analysis/
 ## Data Description
 
 ### sales_transactions.csv
+
 - transaction_id: Unique identifier for each sale
 - date: Transaction date
 - product_id: Product identifier
@@ -34,12 +35,14 @@ spark-sales-analysis/
 - customer_id: Customer identifier
 
 ### products.csv
+
 - product_id: Unique identifier for each product
 - product_name: Name of the product
 - category: Product category
 - supplier_id: Supplier identifier
 
 ### customers.csv
+
 - customer_id: Unique identifier for each customer
 - customer_segment: Customer segment (Premium, Standard, Basic)
 - join_date: Date when customer joined
@@ -48,6 +51,7 @@ spark-sales-analysis/
 ## Requirements
 
 ### 1. Data Processing
+
 - Load and clean data from CSV files
 - Handle missing values appropriately
 - Validate data integrity
@@ -58,23 +62,27 @@ spark-sales-analysis/
 Implement the following analyses:
 
 #### Sales Analysis
+
 - Calculate monthly revenue trends
 - Identify top 10 products by revenue
 - Analyze revenue distribution by region
 - Calculate year-over-year growth rates
 
 #### Customer Insights
+
 - Analyze performance by customer segment
 - Track customer acquisition trends
 - Calculate average order value by segment
 - Determine customer retention rates
 
 #### Product Performance
+
 - Perform category-wise sales analysis
 - Identify seasonal trends in product categories
 - Calculate inventory turnover rates
 
 ### 3. Technical Requirements
+
 - Use PySpark SQL for data processing
 - Implement proper data cleaning and validation
 - Create reusable functions

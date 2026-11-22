@@ -5,6 +5,7 @@
 This tutorial will guide you through basic operations using Spark SQL. We'll create sample datasets and perform various analytical queries to understand Spark SQL's capabilities.
 
 ## Prerequisites
+
 - PySpark installed
 - Basic SQL knowledge
 - Basic Python knowledge

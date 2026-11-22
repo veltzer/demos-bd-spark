@@ -7,12 +7,14 @@ Two-phase aggregation is an optimization technique in Spark that breaks down agg
 ## How It Works
 
 ### Phase 1: Pre-Aggregation
+
 - Data is first aggregated within each partition locally
 - Reduces the amount of data that needs to be shuffled
 - Operates on partition-level data only
 - No data movement between nodes
 
 ### Phase 2: Final Aggregation
+
 - Pre-aggregated results are shuffled
 - Final aggregation is performed on the reduced dataset
 - Results are combined across all partitions
@@ -52,6 +54,7 @@ result = df.repartition(200, "key") \
 ## When to Use Two-Phase Aggregation
 
 Best scenarios for two-phase aggregation:
+
 - Large datasets with high cardinality
 - Skewed data distribution
 - Memory-intensive aggregations
@@ -123,6 +126,7 @@ spark.conf.set("spark.memory.fraction", 0.8)
 ## Performance Monitoring
 
 Key metrics to track:
+
 - Shuffle read/write sizes
 - Spill memory metrics
 - Task completion times

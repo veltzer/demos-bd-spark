@@ -5,11 +5,13 @@
 Learn how to create and manipulate RDDs (Resilient Distributed Datasets) in Apache Spark using Python data structures. This exercise covers the fundamental concepts of RDD creation and basic operations.
 
 ## Prerequisites
+
 - Apache Spark installed
 - Basic Python knowledge
 - Python environment set up with PySpark
 
 ## Learning Objectives
+
 - Understand what an RDD is
 - Create RDDs from Python collections
 - Perform basic RDD operations
@@ -31,12 +33,14 @@ sc = SparkContext(conf=conf)
 ### 2. Creating RDDs from Python Lists
 
 Create two different types of RDDs:
+
 - A simple RDD from numbers
 - An RDD from key-value pairs
 
 ### 3. Basic Operations
 
 Practice these operations:
+
 - Creating RDDs using `parallelize()`
 - Viewing RDD contents using `collect()`
 - Transforming data using `map()`
@@ -61,11 +65,13 @@ pairs = [("a", 1), ("b", 2), ("c", 3)]
 ## Expected Output
 
 The program should show:
+
 - The original numbers
 - The key-value pairs
 - The squared numbers
 
 ## Common Pitfalls to Avoid
+
 1. Don't forget to stop the SparkContext when done
 1. Remember that `collect()` brings all data to the driver - use with caution on large datasets
 1. Don't create multiple SparkContexts
@@ -73,6 +79,7 @@ The program should show:
 ## Extensions
 
 Once you complete the basic exercise, try these extensions:
+
 1. Create an RDD from a larger dataset (100+ elements)
 1. Try different transformations (multiply by 2, add 5, etc.)
 1. Filter elements based on a condition
@@ -80,12 +87,14 @@ Once you complete the basic exercise, try these extensions:
 ## Assessment Criteria
 
 You should be able to:
+
 - Successfully create RDDs from Python collections
 - Transform RDD data using simple operations
 - Print and verify the results
 - Properly shut down the SparkContext
 
 ## Notes
+
 - RDD operations are lazy - they won't execute until an action is called
 - The `local[*]` master URL means using all available CPU cores
 - `collect()` returns all elements to the driver program

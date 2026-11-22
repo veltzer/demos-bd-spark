@@ -5,6 +5,7 @@
 Learn how to process multiple text files using PySpark's RDD API. This exercise focuses on pure RDD operations without using DataFrames or SQL, demonstrating basic to advanced text processing techniques.
 
 ## Prerequisites
+
 - Apache Spark installed
 - A running local Spark standalone cluster
 - Basic Python knowledge
