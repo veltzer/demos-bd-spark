@@ -25,7 +25,7 @@ function check_spark_ui() {
 
 # Method 3: Make an HTTP request to Spark master UI
 function check_spark_http() {
-    if curl -s "http://localhost:8080" | grep -q "Spark Master"
+    if { curl -s "http://localhost:8080" || true; } | grep -q "Spark Master"
     then
         echo "Spark master is responding"
         return 0

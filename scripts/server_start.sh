@@ -15,7 +15,11 @@ export SPARK_WORKER_UI_ADDRESS="localhost"
 export SPARK_LOCAL_IP="0.0.0.0"
 export SPARK_PUBLIC_DNS="localhost"
 
-if ! check_spark_master
+set +e
+check_spark_master
+master_running=$?
+set -e
+if ((master_running != 0))
 then
 	"${SPARK_HOME}/sbin/start-master.sh"
 	"${SPARK_HOME}/sbin/start-worker.sh" "spark://localhost:7077"
