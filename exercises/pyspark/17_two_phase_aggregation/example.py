@@ -17,10 +17,9 @@ def create_skewed_data(num_rows, num_keys, skew_factor):
     data = []
     for _ in range(num_rows):
         # Create skewed distribution of keys
-        if random.random() < skew_factor:
-            key = random.randint(1, num_keys // 10)  # 10% of keys get more data
-        else:
-            key = random.randint(1, num_keys)
+        # 10% of keys get more data
+        max_key = num_keys // 10 if random.random() < skew_factor else num_keys
+        key = random.randint(1, max_key)
         value = random.randint(1, 1000)
         data.append((key, value))
     return data
@@ -121,8 +120,8 @@ def main():
         print(f"Results match: {count_single == count_two_phase}")
 
     # Calculate and show average results
-    avg_single_phase = sql_sum(single_phase_times) / num_trials
-    avg_two_phase = sql_sum(two_phase_times) / num_trials
+    avg_single_phase = sum(single_phase_times) / num_trials
+    avg_two_phase = sum(two_phase_times) / num_trials
 
     print("Final Results:")
     print(f"Average single-phase time: {avg_single_phase:.2f} seconds")

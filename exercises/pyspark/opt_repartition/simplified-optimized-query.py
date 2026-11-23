@@ -111,7 +111,7 @@ def run_query():
     # Show query results
     print(f"\nQuery Results (showing top 10 of {result_count} region/category combinations):")
     for row in top_results:
-        print(f"Region {row.region_id}, {row.product_category}: " +
+        print(f"Region {row.region_id}, {row.product_category}: "
               f"${row.total_revenue:.2f} from {row.transaction_count:,} transactions")
 
     # Return query metrics

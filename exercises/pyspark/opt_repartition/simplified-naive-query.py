@@ -49,14 +49,13 @@ def get_partition_info(df):
     avg_size = sql_sum(partition_sizes) / len(partition_sizes) if len(partition_sizes) > 0 else 0
     skew_factor = max(partition_sizes) / avg_size if avg_size > 0 else 0
 
-    partition_stats = {
+    return {
         "count": partition_count,
         "min": min(partition_sizes),
         "max": max(partition_sizes),
         "avg": avg_size,
         "skew_factor": skew_factor
     }
-    return partition_stats
 
 def run_query():
     """Run aggregation query WITHOUT repartitioning"""
@@ -95,7 +94,7 @@ def run_query():
     # Show query results
     print(f"\nQuery Results (showing top 10 of {result_count} region/category combinations):")
     for row in top_results:
-        print(f"Region {row.region_id}, {row.product_category}: " +
+        print(f"Region {row.region_id}, {row.product_category}: "
               f"${row.total_revenue:.2f} from {row.transaction_count:,} transactions")
 
     # Return query metrics

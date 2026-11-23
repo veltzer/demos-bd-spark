@@ -2,6 +2,7 @@
 
 unset SPARK_MASTER
 source scripts/share.sh
+: "${SPARK_HOME:?SPARK_HOME must be set}"
 
 export SPARK_MASTER_HOST="localhost"
 export SPARK_WORKER_HOST="localhost"

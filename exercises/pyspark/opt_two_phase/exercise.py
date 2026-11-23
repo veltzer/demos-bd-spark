@@ -10,8 +10,7 @@ count distinct and a two-phase approach with partition-level aggregation.
 import random
 import time
 
-import pyspark.sql.functions as F
-from pyspark.sql import SparkSession
+from pyspark.sql import SparkSession, functions
 
 
 def create_spark_session():
@@ -40,7 +39,7 @@ def unoptimized_analysis(df):
 
     # Count distinct users per event type
     result = df.groupBy('event_type').agg(
-        F.countDistinct('user_id').alias('unique_users')
+        functions.countDistinct('user_id').alias('unique_users')
     )
 
     # Force computation and show results

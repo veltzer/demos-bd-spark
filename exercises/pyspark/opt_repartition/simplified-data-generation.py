@@ -68,7 +68,7 @@ def generate_transactions():
     df = df.withColumn("amount", rand() * 500)
 
     # Add product category (10 categories, skewed distribution)
-    df = df.withColumn(
+    return df.withColumn(
         "product_category",
         when(rand() < 0.5, lit("electronics"))
         .when(rand() < 0.7, lit("clothing"))
@@ -77,7 +77,6 @@ def generate_transactions():
         .otherwise(lit("other"))
     )
 
-    return df
 
 # Generate data
 transactions_df = generate_transactions()

@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+: "${SPARK_MASTER:?SPARK_MASTER must be set}"
+
 # Package your application
 sbt package
 

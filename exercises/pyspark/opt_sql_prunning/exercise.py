@@ -5,10 +5,9 @@ Exercise
 """
 
 import random
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 
-from pyspark.sql import SparkSession
-from pyspark.sql import functions as F
+from pyspark.sql import SparkSession, functions
 
 
 def create_spark_session():
@@ -58,34 +57,34 @@ def write_partitioned_data(df, path):
 def query_without_partition_pruning(spark, path):
     """Query that doesn't benefit from partition pruning"""
     print("\nQuery WITHOUT partition pruning benefit:")
-    start_time = datetime.now()
+    start_time = datetime.now(tz=UTC)
 
     result = spark.read.parquet(path) \
         .groupBy("product", "region") \
-        .agg(F.sum("amount").alias("total_sales")) \
+        .agg(functions.sum("amount").alias("total_sales")) \
         .orderBy("total_sales", ascending=False)
 
     result.show(5)
-    print(f"Execution time: {(datetime.now() - start_time).total_seconds():.2f} seconds")
+    print(f"Execution time: {(datetime.now(tz=UTC) - start_time).total_seconds():.2f} seconds")
     print("\nExecution plan:")
     result.explain()
 
 def query_with_partition_pruning(spark, path, start_date, end_date):
     """Query that benefits from partition pruning"""
     print("\nQuery WITH partition pruning benefit:")
-    start_time = datetime.now()
+    start_time = datetime.now(tz=UTC)
 
     result = spark.read.parquet(path) \
-        .where(F.col("sale_date").between(
+        .where(functions.col("sale_date").between(
             start_date.strftime("%Y-%m-%d"),
             end_date.strftime("%Y-%m-%d")
         )) \
         .groupBy("product", "region") \
-        .agg(F.sum("amount").alias("total_sales")) \
+        .agg(functions.sum("amount").alias("total_sales")) \
         .orderBy("total_sales", ascending=False)
 
     result.show(5)
-    print(f"Execution time: {(datetime.now() - start_time).total_seconds():.2f} seconds")
+    print(f"Execution time: {(datetime.now(tz=UTC) - start_time).total_seconds():.2f} seconds")
     print("\nExecution plan:")
     result.explain()
 
@@ -103,16 +102,16 @@ def show_partition_info(spark, path):
     # Show partition column statistics
     print("\nPartition column statistics:")
     df.select(
-        F.min("sale_date").alias("min_date"),
-        F.max("sale_date").alias("max_date"),
-        F.count_distinct("sale_date").alias("num_partitions")
+        functions.min("sale_date").alias("min_date"),
+        functions.max("sale_date").alias("max_date"),
+        functions.count_distinct("sale_date").alias("num_partitions")
     ).show()
 
 def main():
     spark = create_spark_session()
 
     # Generate data for a 90-day period
-    end_date = datetime(2024, 2, 1)
+    end_date = datetime(2024, 2, 1, tzinfo=UTC)
     start_date = end_date - timedelta(days=90)
 
     print("Generating and writing partitioned data...")

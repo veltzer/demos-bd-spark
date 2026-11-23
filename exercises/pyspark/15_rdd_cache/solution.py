@@ -57,12 +57,12 @@ def run_queries_with_cache():
 
 # Run without cache
 print("Executing queries without cache...")
-time_no_cache = run_queries_without_cache()
+time_no_cache, _, _ = run_queries_without_cache()
 print(f"Time without cache: {time_no_cache:.2f} seconds")
 
 # Run with cache
 print("Executing queries with cache...")
-time_with_cache = run_queries_with_cache()
+time_with_cache, _, _ = run_queries_with_cache()
 print(f"Time with cache: {time_with_cache:.2f} seconds")
 
 print(f"Speedup: {(time_no_cache - time_with_cache) / time_no_cache * 100:.2f}%")

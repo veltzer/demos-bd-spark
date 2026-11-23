@@ -5,7 +5,8 @@ Solution
 """
 
 import logging
-from datetime import datetime
+from datetime import UTC, datetime
+from typing import Any
 
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import (
@@ -38,9 +39,9 @@ class SalesAnalysisReport:
             .getOrCreate()
 
         logger.info("Spark session initialized")
-        self.sales_df = None
-        self.products_df = None
-        self.customers_df = None
+        self.sales_df: Any = None
+        self.products_df: Any = None
+        self.customers_df: Any = None
 
     def load_data(self, sales_path, products_path, customers_path):
         """Load and cache the required datasets."""
@@ -70,18 +71,17 @@ class SalesAnalysisReport:
 
     def calculate_monthly_revenue(self):
         """Calculate monthly revenue trends."""
-        monthly_revenue = self.sales_df \
+        return self.sales_df \
             .withColumn('month', date_format(col('date'), 'yyyy-MM')) \
             .withColumn('revenue', col('quantity') * col('unit_price')) \
             .groupBy('month') \
             .agg(my_round(my_sum('revenue'), 2).alias('total_revenue')) \
             .orderBy('month')
 
-        return monthly_revenue
 
     def get_top_products(self, n=10):
         """Get top N products by revenue."""
-        top_products = self.sales_df \
+        return self.sales_df \
             .join(self.products_df, 'product_id') \
             .withColumn('revenue', col('quantity') * col('unit_price')) \
             .groupBy('product_id', 'product_name', 'category') \
@@ -89,11 +89,10 @@ class SalesAnalysisReport:
             .orderBy(desc('total_revenue')) \
             .limit(n)
 
-        return top_products
 
     def analyze_customer_segments(self):
         """Analyze performance by customer segment."""
-        segment_analysis = self.sales_df \
+        return self.sales_df \
             .join(self.customers_df, 'customer_id') \
             .withColumn('revenue', col('quantity') * col('unit_price')) \
             .groupBy('customer_segment') \
@@ -103,7 +102,6 @@ class SalesAnalysisReport:
                 my_round(my_sum('revenue'), 2).alias('total_revenue')
             )
 
-        return segment_analysis
 
     def calculate_retention_rate(self):
         """Calculate customer retention rate by month."""
@@ -116,7 +114,7 @@ class SalesAnalysisReport:
             )
 
         # Calculate retention by month
-        retention_rate = customer_activity \
+        return customer_activity \
             .withColumn('months_active', months_between(
                 col('last_purchase'),
                 col('first_purchase')
@@ -131,11 +129,10 @@ class SalesAnalysisReport:
                 my_round(col('retained_customers') / col('total_customers') * 100, 2)
             )
 
-        return retention_rate
 
     def analyze_product_categories(self):
         """Analyze sales patterns by product category."""
-        category_analysis = self.sales_df \
+        return self.sales_df \
             .join(self.products_df, 'product_id') \
             .withColumn('revenue', col('quantity') * col('unit_price')) \
             .withColumn('month', date_format(col('date'), 'yyyy-MM')) \
@@ -146,7 +143,6 @@ class SalesAnalysisReport:
             ) \
             .orderBy('category', 'month')
 
-        return category_analysis
 
     def generate_report(self, output_path):
         """Generate the complete sales analysis report."""
@@ -158,7 +154,7 @@ class SalesAnalysisReport:
         category_analysis = self.analyze_product_categories()
 
         # Save reports in both CSV and Parquet formats
-        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        timestamp = datetime.now(tz=UTC).strftime('%Y%m%d_%H%M%S')
 
         monthly_revenue.write.csv(f"{output_path}/monthly_revenue_{timestamp}.csv")
         monthly_revenue.write.parquet(f"{output_path}/monthly_revenue_{timestamp}.parquet")

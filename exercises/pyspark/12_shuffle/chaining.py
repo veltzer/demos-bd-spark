@@ -22,16 +22,14 @@ def inefficient_way():
     squares = evens.map(lambda x: x * x)
 
     # Step 3: Sum them
-    total = squares.reduce(lambda x, y: x + y)
+    return squares.reduce(lambda x, y: x + y)
 
-    return total
 
 # Optimized way: Chain operations together
 def optimized_way():
-    total = rdd.filter(lambda x: x % 2 == 0) \
+    return rdd.filter(lambda x: x % 2 == 0) \
               .map(lambda x: x * x) \
               .reduce(lambda x, y: x + y)
-    return total
 
 # Execute both versions
 print("Inefficient way result:", inefficient_way())

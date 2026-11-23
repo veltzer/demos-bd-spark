@@ -41,7 +41,7 @@ print("Inserting test data...")
 # Insert sample data into products
 spark.sql("""
     INSERT INTO products
-    SELECT 
+    SELECT
         id,
         concat('Product_', cast(id as string)) as name,
         concat('Category_', cast(id % 10 as string)) as category,
@@ -52,7 +52,7 @@ spark.sql("""
 # Insert sample data into sales
 spark.sql("""
     INSERT INTO sales
-    SELECT 
+    SELECT
         id,
         CAST(RAND() * 1000000 as INT) as product_id,
         CAST(RAND() * 100 as INT) as quantity,

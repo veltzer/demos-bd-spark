@@ -16,24 +16,29 @@ filter_ops = sc.accumulator(0)
 map_ops = sc.accumulator(0)
 reduce_ops = sc.accumulator(0)
 
+def count_filter(row):
+    filter_ops.add(1)  # Count filter operation
+    return row.value if row.value % 2 == 0 else None
+
+
+def count_square(x):
+    map_ops.add(1)  # Count map operation
+    return x * x
+
+
+def count_sum(x, y):
+    reduce_ops.add(1)  # Count reduce operation
+    return x + y
+
+
 # Inefficient way with operation counting
 def inefficient_way():
     # Step 1: Filter even numbers
-    evens = df.rdd.map(lambda x: (
-        filter_ops.add(1),  # Count filter operation
-        x.value % 2 == 0 and x.value or None
-    )[1]).filter(lambda x: x is not None)
+    evens = df.rdd.map(count_filter).filter(lambda x: x is not None)
     # Step 2: Square them
-    squares = evens.map(lambda x: (
-        map_ops.add(1),    # Count map operation
-        x * x
-    )[1])
+    squares = evens.map(count_square)
     # Step 3: Sum them
-    total = squares.reduce(lambda x, y: (
-        reduce_ops.add(1), # Count reduce operation
-        x + y
-    )[1])
-    return total
+    return squares.reduce(count_sum)
 
 # Reset accumulators
 filter_ops.value = 0
@@ -57,18 +62,9 @@ reduce_ops.value = 0
 
 # Optimized way with operation counting
 def optimized_way():
-    return df.rdd.map(lambda x: (
-        filter_ops.add(1),  # Count filter operation
-        x.value % 2 == 0 and x.value or None
-    )[1]).filter(lambda x: x is not None) \
-              .map(lambda x: (
-                  map_ops.add(1),  # Count map operation
-                  x * x
-              )[1]) \
-              .reduce(lambda x, y: (
-                  reduce_ops.add(1),  # Count reduce operation
-                  x + y
-              )[1])
+    return df.rdd.map(count_filter).filter(lambda x: x is not None) \
+              .map(count_square) \
+              .reduce(count_sum)
 
 print("Executing optimized way...")
 result2 = optimized_way()

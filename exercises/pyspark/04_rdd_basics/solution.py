@@ -24,11 +24,11 @@ def create_some_numbers():
 
 # numbers = [1, 2, 3, 4, 5]
 numbers = range(1000000)
-numbersRDD = sc.parallelize(numbers)
+numbers_rdd = sc.parallelize(numbers)
 
 # Let's see what's in it
 print("Elements in RDD:")
-for num in numbersRDD.collect():
+for num in numbers_rdd.collect():
     print(num)
 
 # sc.stop()
@@ -36,11 +36,11 @@ for num in numbersRDD.collect():
 
 # Create RDD from a list of tuples
 pairs = [("a", 1), ("b", 2), ("c", 3)]
-pairsRDD = sc.parallelize(pairs)
+pairs_rdd = sc.parallelize(pairs)
 print(dir(sc))
 
 print("Pairs in RDD:")
-for key, value in pairsRDD.collect():
+for key, value in pairs_rdd.collect():
     print(f"Key: {key}, Value: {value}")
 
 def do_something_with_value(x):
@@ -50,9 +50,9 @@ def square(x):
     return x*x
 
 # Simple transformations
-# squared = numbersRDD.map(lambda x: x * x)
-squared = numbersRDD.map(square)
-# squared = numbersRDD.map(do_something_with_value)
+# squared = numbers_rdd.map(lambda x: x * x)
+squared = numbers_rdd.map(square)
+# squared = numbers_rdd.map(do_something_with_value)
 print("Squared numbers:")
 print(sum(squared.collect()))
 

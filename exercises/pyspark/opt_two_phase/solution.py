@@ -8,8 +8,7 @@ import hashlib
 import random
 import time
 
-import pyspark.sql.functions as F
-from pyspark.sql import SparkSession
+from pyspark.sql import SparkSession, functions
 from pyspark.sql.types import StringType
 
 
@@ -46,7 +45,7 @@ def expensive_computation(value):
     return hashlib.md5(value.encode()).hexdigest()
 
 # Register UDF for expensive computation
-expensive_udf = F.udf(expensive_computation, StringType())
+expensive_udf = functions.udf(expensive_computation, StringType())
 
 def unoptimized_analysis(df):
     """Unoptimized version with expensive computation"""
@@ -55,11 +54,11 @@ def unoptimized_analysis(df):
 
     # Make computation more expensive
     result = df \
-        .withColumn('computed_value', expensive_udf(F.col('complex_value'))) \
+        .withColumn('computed_value', expensive_udf(functions.col('complex_value'))) \
         .groupBy('event_type') \
         .agg(
-            F.countDistinct('user_id', 'computed_value').alias('unique_combinations'),
-            F.count('*').alias('total_events')
+            functions.countDistinct('user_id', 'computed_value').alias('unique_combinations'),
+            functions.count('*').alias('total_events')
         )
 
     # Force computation and show results
@@ -85,11 +84,11 @@ def optimized_analysis(df):
 
     # Phase 2: Apply expensive computation on reduced dataset
     result = distinct_combinations \
-        .withColumn('computed_value', expensive_udf(F.col('complex_value'))) \
+        .withColumn('computed_value', expensive_udf(functions.col('complex_value'))) \
         .groupBy('event_type') \
         .agg(
-            F.countDistinct('user_id', 'computed_value').alias('unique_combinations'),
-            F.count('*').alias('total_events')
+            functions.countDistinct('user_id', 'computed_value').alias('unique_combinations'),
+            functions.count('*').alias('total_events')
         )
 
     # Force computation and show results

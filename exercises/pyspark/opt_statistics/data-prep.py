@@ -45,13 +45,12 @@ def generate_customers():
         .withColumn("active", expr("rand() > 0.2"))
 
     # Create skewed region_id distribution (region_id=1 will have ~70% of customers)
-    df = df.withColumn("region_id", when(expr("rand() < 0.7"), 1)
+    return df.withColumn("region_id", when(expr("rand() < 0.7"), 1)
                       .when(expr("rand() < 0.5"), 2)
                       .when(expr("rand() < 0.5"), 3)
                       .when(expr("rand() < 0.5"), 4)
                       .otherwise(5))
 
-    return df
 
 # Create orders with skewed distribution
 # - Most orders will be from a small subset of customers
@@ -96,7 +95,7 @@ def generate_orders():
     )
 
     # Add status with distribution
-    df = df.withColumn(
+    return df.withColumn(
         "status",
         when(expr("rand() < 0.7"), lit("COMPLETED"))
         .when(expr("rand() < 0.5"), lit("SHIPPED"))
@@ -104,7 +103,6 @@ def generate_orders():
         .otherwise(lit("CANCELLED"))
     )
 
-    return df
 
 # Main execution
 customers_df = generate_customers()

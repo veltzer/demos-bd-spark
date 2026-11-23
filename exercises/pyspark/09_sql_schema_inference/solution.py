@@ -32,7 +32,7 @@ passwd_df.createOrReplaceTempView("passwd_table")
 
 # SQL query to count users with bash shell
 query = """
-SELECT 
+SELECT
     shell,
     COUNT(*) as user_count
 FROM passwd_table

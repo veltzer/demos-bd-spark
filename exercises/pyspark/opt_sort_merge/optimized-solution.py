@@ -10,6 +10,7 @@ import json
 import os
 import sys
 import time
+from typing import Any
 
 from pyspark.sql import SparkSession
 
@@ -43,19 +44,18 @@ def get_executor_metrics():
     """Get current executor metrics from Spark"""
     # This is a simplified version - in a real environment,
     # you would collect more detailed metrics from the Spark UI
-    metrics = {}
+    metrics: dict[str, Any] = {}
     metrics['active_executors'] = len(spark.sparkContext.statusTracker().getExecutorInfos()) - 1  # Exclude driver
     metrics['executor_memory'] = spark.conf.get("spark.executor.memory")
     metrics['executor_cores'] = spark.conf.get("spark.executor.cores", "Not specified")
     metrics['default_parallelism'] = spark.sparkContext.defaultParallelism
     # Default values if we can't get actual metrics
-    metrics = {
+    return {
         'active_executors': 'Unknown',
         'executor_memory': spark.conf.get("spark.executor.memory", "Unknown"),
         'executor_cores': 'Unknown',
         'default_parallelism': 'Unknown'
     }
-    return metrics
 
 def verify_sorting(df, sort_column):
     """
@@ -66,8 +66,7 @@ def verify_sorting(df, sort_column):
     values = [row[sort_column] for row in sample]
 
     # Check if the sampled values are in sorted order
-    is_sorted = all(values[i] <= values[i+1] for i in range(len(values)-1))
-    return is_sorted
+    return all(values[i] <= values[i+1] for i in range(len(values)-1))
 
 def optimized_solution():
     """

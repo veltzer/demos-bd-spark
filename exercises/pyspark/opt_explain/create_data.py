@@ -5,7 +5,7 @@ Create data
 """
 
 import random
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 
 from pyspark.sql import SparkSession
 
@@ -18,7 +18,7 @@ spark = SparkSession.builder \
 # Create large table for meaningful explain analysis
 def create_orders_data(num_records):
     data = []
-    start_date = datetime(2024, 1, 1)
+    start_date = datetime(2024, 1, 1, tzinfo=UTC)
 
     for i in range(num_records):
         order_id = i

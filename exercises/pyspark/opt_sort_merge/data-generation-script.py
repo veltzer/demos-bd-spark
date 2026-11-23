@@ -46,7 +46,7 @@ def generate_product_data():
     """Generate product catalog data"""
     print("Generating product data...")
 
-    products = spark.range(0, NUM_PRODUCTS) \
+    return spark.range(0, NUM_PRODUCTS) \
         .withColumnRenamed("id", "product_id") \
         .withColumn("product_name", expr("concat('Product_', cast(product_id as string))")) \
         .withColumn("category", when(expr("product_id % 10 = 0"), "Electronics")
@@ -62,7 +62,6 @@ def generate_product_data():
         .withColumn("price", expr("10.0 + (rand() * 990.0)")) \
         .withColumn("stock_quantity", expr("cast(rand() * 1000 as int)"))
 
-    return products
 
 def generate_transaction_data(products_df):
     """Generate transaction data with references to product catalog"""
@@ -77,7 +76,7 @@ def generate_transaction_data(products_df):
 
     product_ids_expr = ",".join(map(str, product_ids))
 
-    transactions = spark.range(0, NUM_TRANSACTIONS) \
+    return spark.range(0, NUM_TRANSACTIONS) \
         .withColumnRenamed("id", "transaction_id") \
         .withColumn("customer_id", expr(f"cast(rand() * {NUM_CUSTOMERS} as int)")) \
         .withColumn("product_id",
@@ -89,7 +88,6 @@ def generate_transaction_data(products_df):
         .withColumn("quantity", expr("cast(rand() * 5 + 1 as int)")) \
         .withColumn("total_amount", expr("cast(rand() * 500 + 10 as double)"))
 
-    return transactions
 
 def shuffle_dataframe(df):
     """Completely randomize dataframe row order"""

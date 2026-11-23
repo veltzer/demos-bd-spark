@@ -55,7 +55,7 @@ spark.udf.register("get_third_octet", extract_third_octet, IntegerType())
 # Use UDF in SQL query
 print("Method 2: Using Spark SQL")
 spark.sql("""
-    SELECT 
+    SELECT
         server_name,
         ip_address,
         get_third_octet(ip_address) as third_octet

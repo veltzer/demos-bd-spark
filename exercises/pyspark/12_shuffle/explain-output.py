@@ -4,8 +4,7 @@
 Explain output
 """
 
-import pyspark.sql.functions as F
-from pyspark.sql import SparkSession
+from pyspark.sql import SparkSession, functions
 
 
 def show_plan(df, title):
@@ -15,7 +14,7 @@ def show_plan(df, title):
     # Get the plan explanation
     plan = []
     # pylint: disable=protected-access, unnecessary-lambda
-    df._jdf.explain(True, lambda x: plan.append(x))
+    df._jdf.explain(True, plan.append)
     print("\n".join(plan))
 
 def main():
@@ -35,14 +34,14 @@ def main():
 
     # Inefficient approach using groupBy + collect_list
     inefficient = df.groupBy("product") \
-        .agg(F.collect_list("amount").alias("amounts")) \
+        .agg(functions.collect_list("amount").alias("amounts")) \
         .selectExpr("product", "aggregate(amounts, 0D, (acc, x) -> acc + x) as total")
 
     # show_plan(inefficient, "INEFFICIENT PLAN (groupBy + collect_list + aggregate):")
 
     # Efficient approach using direct sum
     efficient = df.groupBy("product") \
-        .agg(F.sum("amount").alias("total"))
+        .agg(functions.sum("amount").alias("total"))
 
     show_plan(efficient, "EFFICIENT PLAN (groupBy + sum):")
 

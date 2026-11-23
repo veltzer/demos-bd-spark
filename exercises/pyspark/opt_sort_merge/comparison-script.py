@@ -9,7 +9,7 @@ solutions and generates visualization charts.
 import json
 import os
 import sys
-from datetime import datetime
+from datetime import UTC, datetime
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -63,7 +63,7 @@ def create_time_comparison_chart(naive, optimized):
     width = 0.35
 
     # Create bars
-    ax = plt.subplot(111)
+    _fig, ax = plt.subplots()
     bars1 = ax.bar(x - width/2, naive_times, width, label='Unsorted Data (Naive)', color='#ff9999')
     bars2 = ax.bar(x + width/2, optimized_times, width, label='Pre-sorted Data (Optimized)', color='#66b3ff')
 
@@ -120,7 +120,7 @@ def create_speedup_chart(naive, optimized):
     bars = plt.bar(metrics, speedups, color=['#66b3ff', '#5cb85c'])
 
     # Add labels
-    plt.ylabel('Speedup Factor (×)', fontsize=12)
+    plt.ylabel('Speedup Factor (x)', fontsize=12)
     plt.title('Performance Speedup: Pre-sorted vs. Unsorted Data', fontsize=14)
     plt.axhline(y=1, color='r', linestyle='--', alpha=0.7)
 
@@ -128,17 +128,17 @@ def create_speedup_chart(naive, optimized):
     for c_bar in bars:
         height = c_bar.get_height()
         plt.text(c_bar.get_x() + c_bar.get_width()/2., height + 0.1,
-                f'{height:.2f}×',
+                f'{height:.2f}x',
                 ha='center', va='bottom', fontweight='bold')
 
     # Add explanatory text
     if join_speedup > 1:
         plt.figtext(0.5, 0.01,
-                  f"Pre-sorted data provides a {join_speedup:.1f}× speedup for join operations",
+                  f"Pre-sorted data provides a {join_speedup:.1f}x speedup for join operations",
                   ha='center', fontsize=10, style='italic')
 
     # Save chart
-    plt.tight_layout(rect=[0, 0.03, 1, 0.98])
+    plt.tight_layout(rect=(0, 0.03, 1, 0.98))
     plt.savefig(f"{OUTPUT_DIR}/speedup_chart.png")
     print(f"Speedup chart saved to: {OUTPUT_DIR}/speedup_chart.png")
 
@@ -156,7 +156,7 @@ def create_summary_report(naive, optimized):
         "SORT-MERGE PERFORMANCE COMPARISON SUMMARY",
         "=" * 80,
         "",
-        f"Report generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
+        f"Report generated on: {datetime.now(tz=UTC).strftime('%Y-%m-%d %H:%M:%S')}",
         "",
         "DATASET INFORMATION:",
         f"  Transactions: {naive['transactions_count']:,} records",
@@ -173,8 +173,8 @@ def create_summary_report(naive, optimized):
         f"    - Join operation time: {optimized['join_time_seconds']:.2f} seconds",
         "",
         "PERFORMANCE IMPROVEMENT:",
-        f"  Join operation speedup: {join_speedup:.2f}×",
-        f"  Total execution speedup: {total_speedup:.2f}×",
+        f"  Join operation speedup: {join_speedup:.2f}x",
+        f"  Total execution speedup: {total_speedup:.2f}x",
         f"  Join time saved: {join_time_saved:.2f} seconds",
         f"  Total time saved: {total_time_saved:.2f} seconds",
         "",
