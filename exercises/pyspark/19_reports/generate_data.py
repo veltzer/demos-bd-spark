@@ -10,6 +10,9 @@ from datetime import UTC, datetime, timedelta
 import numpy as np
 import pandas as pd
 
+# Seeded generator for reproducibility
+rng = np.random.default_rng(42)
+
 
 def generate_products(num_products=100):
     """Generate product data."""
@@ -19,8 +22,8 @@ def generate_products(num_products=100):
     products = {
         'product_id': range(1, num_products + 1),
         'product_name': [f'Product_{i}' for i in range(1, num_products + 1)],
-        'category': np.random.choice(categories, num_products),
-        'supplier_id': np.random.randint(1, 21, num_products)  # 20 suppliers
+        'category': rng.choice(categories, num_products),
+        'supplier_id': rng.integers(1, 21, num_products)  # 20 suppliers
     }
 
     return pd.DataFrame(products)
@@ -33,15 +36,15 @@ def generate_customers(num_customers=1000):
     # Generate join dates over the last 3 years
     end_date = datetime.now(tz=UTC)
     start_date = end_date - timedelta(days=3*365)
-    join_dates = [start_date + timedelta(days=np.random.randint(0, 3*365))
+    join_dates = [start_date + timedelta(days=int(rng.integers(0, 3*365)))
                  for _ in range(num_customers)]
 
     customers = {
         'customer_id': range(1, num_customers + 1),
-        'customer_segment': np.random.choice(segments, num_customers,
+        'customer_segment': rng.choice(segments, num_customers,
                                            p=[0.2, 0.5, 0.3]),  # weighted probabilities
         'join_date': join_dates,
-        'country': np.random.choice(countries, num_customers)
+        'country': rng.choice(countries, num_customers)
     }
 
     return pd.DataFrame(customers)
@@ -60,11 +63,11 @@ def generate_sales(products_df, customers_df, num_transactions=50000):
     # Generate transaction data
     transactions = {
         'transaction_id': range(1, num_transactions + 1),
-        'date': np.random.choice(days, num_transactions, p=weights),
-        'product_id': np.random.choice(products_df['product_id'], num_transactions),
-        'customer_id': np.random.choice(customers_df['customer_id'], num_transactions),
-        'quantity': np.random.randint(1, 11, num_transactions),  # 1-10 items
-        'unit_price': np.random.uniform(10, 1000, num_transactions).round(2)
+        'date': rng.choice(days, num_transactions, p=weights),
+        'product_id': rng.choice(products_df['product_id'], num_transactions),
+        'customer_id': rng.choice(customers_df['customer_id'], num_transactions),
+        'quantity': rng.integers(1, 11, num_transactions),  # 1-10 items
+        'unit_price': rng.uniform(10, 1000, num_transactions).round(2)
     }
 
     # Sort by date
@@ -84,9 +87,6 @@ def create_data_directory():
 
 def main():
     """Generate and save all datasets."""
-    # Set random seed for reproducibility
-    np.random.seed(42)
-
     # Create data directory
     create_data_directory()
 

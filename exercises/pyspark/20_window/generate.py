@@ -13,7 +13,7 @@ import pandas as pd
 def generate_sales_data(num_stores=5, days=30, seed=42):
     """Generate sample sales data for the window functions exercise."""
 
-    np.random.seed(seed)
+    rng = np.random.default_rng(seed)
 
     # Generate dates
     start_date = datetime(2024, 1, 1, tzinfo=UTC)
@@ -23,10 +23,10 @@ def generate_sales_data(num_stores=5, days=30, seed=42):
     data = []
     for store_id in range(1, num_stores + 1):
         # Generate base amount for each store
-        base_amount = np.random.uniform(800, 1200)
+        base_amount = rng.uniform(800, 1200)
         for date in dates:
             # Add some randomness to daily sales
-            daily_variation = np.random.normal(0, base_amount * 0.1)
+            daily_variation = rng.normal(0, base_amount * 0.1)
             # Add weekly pattern (weekend boost)
             weekend_boost = base_amount * 0.2 if date.weekday() >= 5 else 0
             amount = max(0, base_amount + daily_variation + weekend_boost)

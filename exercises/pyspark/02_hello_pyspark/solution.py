@@ -13,12 +13,12 @@ from wurlitzer import pipes
 
 HIDE=True
 if HIDE:
-    with open(os.devnull, "w") as devnull:  # noqa: SIM117
-        with pipes(stdout=devnull, stderr=devnull), \
-             redirect_stdout(devnull), \
-             redirect_stderr(devnull):
-            conf = SparkConf().setAppName("VersionCheck").setMaster(os.environ["SPARK_MASTER"])
-            sc = SparkContext(conf=conf)
+    with open(os.devnull, "w") as devnull, \
+         pipes(stdout=devnull, stderr=devnull), \
+         redirect_stdout(devnull), \
+         redirect_stderr(devnull):
+        conf = SparkConf().setAppName("VersionCheck").setMaster(os.environ["SPARK_MASTER"])
+        sc = SparkContext(conf=conf)
 else:
     conf = SparkConf().setAppName("VersionCheck").setMaster(os.environ["SPARK_MASTER"])
     sc = SparkContext(conf=conf)

@@ -5,7 +5,7 @@ Solution to exercise of word counting of linux documentation
 """
 
 import os
-from operator import add
+from operator import add, itemgetter
 
 from pyspark import SparkConf, SparkContext
 
@@ -40,15 +40,15 @@ word_counts = lines_rdd \
     .reduceByKey(add)
 
 # Sort by count (descending) and take the top result
-# pyspark's stubs bound the sort key by a SupportsOrdering protocol that
-# pyrefly does not consider int to satisfy; the sort itself is fine.
-word, times = word_counts.sortBy(lambda x: x[1], ascending=False).first()  # pyrefly: ignore[bad-specialization]
+# itemgetter rather than a lambda: pyspark's stubs bound the sort key by a
+# SupportsOrdering protocol that pyrefly does not infer for a lambda's int.
+word, times = word_counts.sortBy(itemgetter(1), ascending=False).first()
 
 print(f"Most common word: '{word}' (appears {times} times)")
 
 # Optional: show top 10 words
 print("Top 10 most common words:")
-for word, count in word_counts.sortBy(lambda x: x[1], ascending=False).take(10):  # pyrefly: ignore[bad-specialization]
+for word, count in word_counts.sortBy(itemgetter(1), ascending=False).take(10):
     print(f"'{word}': {count} times")
 
 # Clean up

@@ -8,6 +8,7 @@ import os
 
 import plotly.express as px
 import streamlit as st
+from pyspark.errors import AnalysisException
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, date_format, desc, to_date
 from pyspark.sql.functions import round as my_round
@@ -59,8 +60,7 @@ def load_spark_data():
     try:
         sales_df = spark.read.parquet("reports/monthly_revenue.parquet")
         products_df = spark.read.parquet("reports/top_products.parquet")
-    # pylint: disable=broad-exception-caught
-    except Exception as _:  # noqa: BLE001
+    except AnalysisException:
         st.error("Data not found. Generating new data...")
         generate_spark_data()
         sales_df = spark.read.parquet("reports/monthly_revenue.parquet")

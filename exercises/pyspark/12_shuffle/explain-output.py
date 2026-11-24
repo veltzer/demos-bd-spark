@@ -11,11 +11,8 @@ def show_plan(df, title):
     """ Function to capture and print explain plan """
     print(f"{title}")
     print("=" * len(title))
-    # Get the plan explanation
-    plan = []
-    # pylint: disable=protected-access, unnecessary-lambda
-    df._jdf.explain(True, plan.append)
-    print("\n".join(plan))
+    # Print the plan explanation using the public API
+    df.explain(True)
 
 def main():
     spark = SparkSession.builder.appName("ExplainOutput").getOrCreate()
