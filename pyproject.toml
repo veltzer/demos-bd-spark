@@ -37,12 +37,6 @@ search-path = [
     "scripts",
     ".",
 ]
-# Third-party libraries without type information.
-ignore-missing-imports = [
-    "matplotlib.*",
-    "pandas.*",
-    "plotly.*",
-]
 
 [tool.pyrefly.errors]
 no-any-return = "error"
