@@ -43,3 +43,6 @@ ignore-missing-imports = [
     "pandas.*",
     "plotly.*",
 ]
+
+[tool.pyrefly.errors]
+no-any-return = "error"
