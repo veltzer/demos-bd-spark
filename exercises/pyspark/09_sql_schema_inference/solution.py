@@ -15,13 +15,13 @@ spark = SparkSession.builder.appName(cdir).getOrCreate()
 
 # Define the schema for the passwd file
 passwd_schema = StructType([
-    StructField("username", StringType(), True),
-    StructField("password", StringType(), True),
-    StructField("uid", IntegerType(), True),
-    StructField("gid", IntegerType(), True),
-    StructField("comment", StringType(), True),
-    StructField("home_directory", StringType(), True),
-    StructField("shell", StringType(), True)
+    StructField("username", StringType(), nullable=True),
+    StructField("password", StringType(), nullable=True),
+    StructField("uid", IntegerType(), nullable=True),
+    StructField("gid", IntegerType(), nullable=True),
+    StructField("comment", StringType(), nullable=True),
+    StructField("home_directory", StringType(), nullable=True),
+    StructField("shell", StringType(), nullable=True)
 ])
 
 # Read and parse the passwd file

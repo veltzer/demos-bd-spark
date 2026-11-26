@@ -69,7 +69,7 @@ def generate_transaction_data(products_df):
 
     # Get list of product IDs to ensure referential integrity
     product_ids = [row.product_id for row in
-                  products_df.select("product_id").sample(False, 0.1).collect()]
+                  products_df.select("product_id").sample(withReplacement=False, fraction=0.1).collect()]
 
     if len(product_ids) > 1000:
         product_ids = product_ids[:1000]  # Limit to 1000 products for performance

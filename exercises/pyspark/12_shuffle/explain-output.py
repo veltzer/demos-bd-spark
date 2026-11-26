@@ -12,7 +12,7 @@ def show_plan(df, title):
     print(f"{title}")
     print("=" * len(title))
     # Print the plan explanation using the public API
-    df.explain(True)
+    df.explain(extended=True)
 
 def main():
     spark = SparkSession.builder.appName("ExplainOutput").getOrCreate()
