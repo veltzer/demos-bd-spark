@@ -83,3 +83,8 @@ src_dirs = ["exercises/scala/03_manipulate_csv_interactively/spark_job"]
 src_dirs = ["exercises/pyspark/06_processing_text_files"]
 args = ["-c", ".oxlintrc.repo.json"]
 dep_inputs = [".oxlintrc.repo.json"]
+
+# every lint suppression names a rule and says why (see the fleet's CLAUDE.md)
+[processor.checker.suppressions]
+src_dirs = [".github", "config", "docs", "exercises", "scripts"]
+src_files = [".auto.enter.sh", ".auto.exit.sh", ".yamllint.yaml", "README.md"]
