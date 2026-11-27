@@ -4,7 +4,7 @@
 
 ## Introduction
 
-## In this exercise, you'll learn how table statistics affect query performance in Spark SQL
+In this exercise, you'll learn how table statistics affect query performance in Spark SQL.
 
 ---
 
