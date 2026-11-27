@@ -12,7 +12,7 @@ from pyspark.sql.functions import count
 from pyspark.sql.functions import sum as sql_sum
 
 
-def create_skewed_data(num_rows, num_keys, skew_factor):
+def create_skewed_data(num_rows: int, num_keys: int, skew_factor: float) -> list[tuple[int, int]]:
     """ Create sample data with skewed keys """
     data = []
     for _ in range(num_rows):
@@ -24,7 +24,7 @@ def create_skewed_data(num_rows, num_keys, skew_factor):
         data.append((key, value))
     return data
 
-def single_phase_aggregation(df):
+def single_phase_aggregation(df: DataFrame):
     """ Function for single-phase aggregation """
     start_time = time.time()
 
@@ -44,7 +44,7 @@ def single_phase_aggregation(df):
 
     return end_time - start_time, cnt
 
-def two_phase_aggregation(df):
+def two_phase_aggregation(df: DataFrame):
     """ Function for two-phase aggregation """
     start_time = time.time()
 
@@ -69,7 +69,7 @@ def two_phase_aggregation(df):
     return end_time - start_time, cnt
 
 
-def show_partition_stats(df_to_analyze: DataFrame):
+def show_partition_stats(df_to_analyze: DataFrame) -> dict[str, float | int]:
     partition_sizes = df_to_analyze.rdd.mapPartitions(
         lambda x: [sum(1 for _ in x)]
     ).collect()
@@ -81,7 +81,7 @@ def show_partition_stats(df_to_analyze: DataFrame):
     }
 
 
-def main():
+def main() -> None:
     # Create Spark session
     spark = SparkSession.builder.appName("TwoPhaseAggregationDemo").getOrCreate()
     print("Generating test data...")

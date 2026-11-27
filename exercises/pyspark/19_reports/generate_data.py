@@ -6,15 +6,19 @@ Generate data
 
 import os
 from datetime import UTC, datetime, timedelta
+from typing import TYPE_CHECKING
 
 import numpy as np
 import pandas as pd
+
+if TYPE_CHECKING:
+    from pandas.core.frame import DataFrame
 
 # Seeded generator for reproducibility
 rng = np.random.default_rng(42)
 
 
-def generate_products(num_products=100):
+def generate_products(num_products: int = 100) -> DataFrame:
     """Generate product data."""
     categories = ['Electronics', 'Clothing', 'Books', 'Home & Garden', 'Sports',
                  'Toys', 'Food & Beverages', 'Beauty', 'Automotive', 'Health']
@@ -28,7 +32,7 @@ def generate_products(num_products=100):
 
     return pd.DataFrame(products)
 
-def generate_customers(num_customers=1000):
+def generate_customers(num_customers: int = 1000) -> DataFrame:
     """Generate customer data."""
     segments = ['Premium', 'Standard', 'Basic']
     countries = ['USA', 'UK', 'Canada', 'Australia', 'Germany', 'France', 'Japan', 'Spain']
@@ -49,7 +53,7 @@ def generate_customers(num_customers=1000):
 
     return pd.DataFrame(customers)
 
-def generate_sales(products_df, customers_df, num_transactions=50000):
+def generate_sales(products_df: DataFrame, customers_df: DataFrame, num_transactions: int = 50000) -> DataFrame:
     """Generate sales transaction data."""
     # Date range for the last year
     end_date = datetime.now(tz=UTC)
@@ -83,12 +87,12 @@ def generate_sales(products_df, customers_df, num_transactions=50000):
 
     return df
 
-def create_data_directory():
+def create_data_directory() -> None:
     """Create directory for data files if it doesn't exist."""
     if not os.path.exists('data'):
         os.makedirs('data')
 
-def main():
+def main() -> None:
     """Generate and save all datasets."""
     # Create data directory
     create_data_directory()

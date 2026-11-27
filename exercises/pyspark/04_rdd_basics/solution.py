@@ -43,10 +43,10 @@ print("Pairs in RDD:")
 for key, value in pairs_rdd.collect():
     print(f"Key: {key}, Value: {value}")
 
-def do_something_with_value(x):
+def do_something_with_value(x: int):
     return x+1
 
-def square(x):
+def square(x: int):
     return x*x
 
 # Simple transformations

@@ -14,7 +14,7 @@ numbers = range(1, 100000000)
 rdd = sc.parallelize(numbers)
 
 # Inefficient way: Multiple separate operations
-def inefficient_way():
+def inefficient_way() -> int:
     # Step 1: Filter even numbers
     evens = rdd.filter(lambda x: x % 2 == 0)
 
@@ -26,7 +26,7 @@ def inefficient_way():
 
 
 # Optimized way: Chain operations together
-def optimized_way():
+def optimized_way() -> int:
     return rdd.filter(lambda x: x % 2 == 0) \
               .map(lambda x: x * x) \
               .reduce(lambda x, y: x + y)

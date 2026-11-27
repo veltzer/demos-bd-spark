@@ -9,16 +9,20 @@ caching/persistence strategies.
 """
 
 import time
+from typing import TYPE_CHECKING
 
 from pyspark.sql import SparkSession
 
+if TYPE_CHECKING:
+    from pyspark.core.rdd import RDD
 
-def create_spark_session():
+
+def create_spark_session() -> SparkSession:
     return SparkSession.builder \
         .appName("RDD Caching Exercise") \
         .getOrCreate()
 
-def generate_large_dataset(spark: SparkSession, size: int = 10000):
+def generate_large_dataset(spark: SparkSession, size: int = 10000) -> RDD[int]:
     """Generate a large dataset with repeated values"""
     return spark.sparkContext.parallelize(range(size), 100)
 
@@ -27,7 +31,7 @@ def expensive_computation(x: int) -> tuple[int, int]:
     time.sleep(0.001)  # Simulate complexity
     return (x % 100, x)
 
-def unoptimized_analysis():
+def unoptimized_analysis() -> None:
     """Unoptimized version with repeated computations"""
     spark = create_spark_session()
 

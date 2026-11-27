@@ -7,9 +7,13 @@ of repartitioning in PySpark.
 """
 
 import random
+from typing import TYPE_CHECKING
 
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import expr, lit, rand, when
+
+if TYPE_CHECKING:
+    from pyspark.sql.dataframe import DataFrame
 
 # Initialize Spark Session with Hive support
 spark = SparkSession.builder \
@@ -28,7 +32,7 @@ NUM_CUSTOMERS = 500000      # 500,000 customers
 NUM_PRODUCTS = 10000        # 10,000 different products
 NUM_REGIONS = 10            # 10 geographical regions
 
-def generate_transactions():
+def generate_transactions() -> DataFrame:
     """Generate transaction data with deliberate skew"""
     print("Generating transaction data...")
 

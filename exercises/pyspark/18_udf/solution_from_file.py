@@ -9,13 +9,13 @@ from pyspark.sql.functions import udf
 from pyspark.sql.types import IntegerType
 
 
-def create_spark_session():
+def create_spark_session() -> SparkSession:
     """Create and return a Spark session"""
     return SparkSession.builder \
         .appName("IP Address Analysis") \
         .getOrCreate()
 
-def extract_third_octet(ip):
+def extract_third_octet(ip: str) -> int | None:
     """Extract the third number from an IP address.
 
     Args:
@@ -31,7 +31,7 @@ def extract_third_octet(ip):
     except (IndexError, ValueError):
         return None
 
-def analyze_with_dataframe(spark, input_path):
+def analyze_with_dataframe(spark: SparkSession, input_path: str) -> None:
     """Analyze IP addresses using DataFrame API
 
     Args:
@@ -63,7 +63,7 @@ def analyze_with_dataframe(spark, input_path):
         .orderBy("third_octet") \
         .show()
 
-def analyze_with_sql(spark, input_path):
+def analyze_with_sql(spark: SparkSession, input_path: str) -> None:
     """Analyze IP addresses using Spark SQL
 
     Args:
@@ -102,7 +102,7 @@ def analyze_with_sql(spark, input_path):
         ORDER BY third_octet
     """).show()
 
-def main():
+def main() -> None:
     """Main function to run the analysis"""
     # Create Spark session
     spark = create_spark_session()

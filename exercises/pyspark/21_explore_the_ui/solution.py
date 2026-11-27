@@ -12,7 +12,7 @@ from pyspark.sql.functions import round as my_round
 from pyspark.sql.functions import sum as my_sum
 
 
-def create_sample_data(spark, num_rows=100000):
+def create_sample_data(spark: SparkSession, num_rows: int = 100000):
     """Create a large enough dataset to make the DAG interesting"""
     data = [(i,
             f"user_{i % 1000}",
@@ -26,7 +26,7 @@ def create_sample_data(spark, num_rows=100000):
     return spark.createDataFrame(data,
                                ["id", "user", "product", "rating", "category", "tags", "price"])
 
-def generate_complex_dag():
+def generate_complex_dag() -> None:
     # Create Spark session
     cdir = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
     spark = SparkSession.builder.appName(cdir).getOrCreate()

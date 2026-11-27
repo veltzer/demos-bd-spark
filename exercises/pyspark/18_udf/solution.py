@@ -27,7 +27,7 @@ sample_data = [
 df = spark.createDataFrame(sample_data, ["server_name", "ip_address", "date"])
 
 # Method 1: Using UDF in DataFrame API
-def extract_third_octet(ip):
+def extract_third_octet(ip: str) -> int | None:
     """Extract the third number from an IP address."""
     if ip is None:
         return None

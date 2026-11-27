@@ -10,15 +10,15 @@ count distinct and a two-phase approach with partition-level aggregation.
 import random
 import time
 
-from pyspark.sql import SparkSession, functions
+from pyspark.sql import DataFrame, SparkSession, functions
 
 
-def create_spark_session():
+def create_spark_session() -> SparkSession:
     return SparkSession.builder \
         .appName("Count Distinct Exercise") \
         .getOrCreate()
 
-def generate_skewed_data(spark, size=100000):
+def generate_skewed_data(spark: SparkSession, size: int = 100000):
     """Generate dataset with skewed distribution for user_id and event_type"""
     data = []
     for _ in range(size):
@@ -32,7 +32,7 @@ def generate_skewed_data(spark, size=100000):
 
     return spark.createDataFrame(data, ['user_id', 'event_type', 'timestamp'])
 
-def unoptimized_analysis(df):
+def unoptimized_analysis(df: DataFrame) -> None:
     """Unoptimized version using straightforward countDistinct"""
     print("Starting unoptimized analysis...")
     start_time = time.time()
@@ -52,7 +52,7 @@ def unoptimized_analysis(df):
     print("\nUnoptimized query plan:")
     result.explain()
 
-def main():
+def main() -> None:
     spark = create_spark_session()
     # Generate test data
     df = generate_skewed_data(spark)

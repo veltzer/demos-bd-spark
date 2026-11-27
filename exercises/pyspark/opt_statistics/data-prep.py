@@ -8,9 +8,13 @@ This script creates two tables with skewed data distribution:
 """
 
 import random
+from typing import TYPE_CHECKING
 
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import expr, lit, when
+
+if TYPE_CHECKING:
+    from pyspark.sql.dataframe import DataFrame
 
 # Initialize Spark Session with Hive support to ensure tables are properly registered
 spark = SparkSession.builder \
@@ -33,7 +37,7 @@ NUM_PARTITIONS = 100     # Number of partitions to write
 
 # Create a skewed customer distribution
 # Most customers will be in region_id=1, fewer in other regions
-def generate_customers():
+def generate_customers() -> DataFrame:
     print("Generating customer data...")
 
     # Create basic customer dataframe
@@ -55,7 +59,7 @@ def generate_customers():
 # Create orders with skewed distribution
 # - Most orders will be from a small subset of customers
 # - Product distribution will be skewed (some products ordered frequently)
-def generate_orders():
+def generate_orders() -> DataFrame:
     print("Generating order data...")
 
     # Create a dataframe with order IDs

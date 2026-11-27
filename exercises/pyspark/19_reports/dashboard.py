@@ -5,6 +5,7 @@ Dashboard
 """
 
 import os
+from typing import TYPE_CHECKING
 
 import plotly.express as px
 import streamlit as st
@@ -14,17 +15,20 @@ from pyspark.sql.functions import col, date_format, desc, to_date
 from pyspark.sql.functions import round as my_round
 from pyspark.sql.functions import sum as my_sum
 
+if TYPE_CHECKING:
+    from pyspark.sql.dataframe import DataFrame
+
 # Initialize Spark
 spark = SparkSession.builder \
     .appName("Dashboard") \
     .getOrCreate()
 
-def ensure_directory(path):
+def ensure_directory(path: str) -> None:
     """Create directory if it doesn't exist."""
     if not os.path.exists(path):
         os.makedirs(path)
 
-def generate_spark_data():
+def generate_spark_data() -> None:
     """Generate and save the Spark analysis results."""
     # Read the original data
     sales_df = spark.read.csv("data/sales_transactions.csv", header=True, inferSchema=True)
@@ -55,7 +59,7 @@ def generate_spark_data():
     monthly_revenue.write.mode('overwrite').parquet("reports/monthly_revenue.parquet")
     top_products.write.mode('overwrite').parquet("reports/top_products.parquet")
 
-def load_spark_data():
+def load_spark_data() -> tuple[DataFrame, DataFrame]:
     """Load the Spark analysis results."""
     try:
         sales_df = spark.read.parquet("reports/monthly_revenue.parquet")
@@ -68,7 +72,7 @@ def load_spark_data():
 
     return sales_df, products_df
 
-def create_dashboard():
+def create_dashboard() -> None:
     st.title("Sales Analytics Dashboard")
 
     # Add refresh button

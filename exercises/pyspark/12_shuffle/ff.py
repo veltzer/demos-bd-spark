@@ -4,7 +4,7 @@
 Solution
 """
 
-from pyspark.sql import SparkSession
+from pyspark.sql import Row, SparkSession
 
 spark = SparkSession.builder.appName("OperationCounter").getOrCreate()
 sc = spark.sparkContext
@@ -16,17 +16,20 @@ filter_ops = sc.accumulator(0)
 map_ops = sc.accumulator(0)
 reduce_ops = sc.accumulator(0)
 
-def count_filter(row):
+def count_filter(row: Row):
     filter_ops.add(1)  # Count filter operation
     return row.value if row.value % 2 == 0 else None
 
 
-def count_square(x):
+def count_square(x: int | None):
+    if x is None:
+        # the filter before this step dropped these; its type cannot say so
+        raise ValueError("an odd value got past the filter")
     map_ops.add(1)  # Count map operation
     return x * x
 
 
-def count_sum(x, y):
+def count_sum(x: int, y: int):
     reduce_ops.add(1)  # Count reduce operation
     return x + y
 

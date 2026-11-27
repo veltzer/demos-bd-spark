@@ -10,9 +10,13 @@ import json
 import os
 import sys
 from datetime import UTC, datetime
+from typing import TYPE_CHECKING
 
 import matplotlib.pyplot as plt
 import numpy as np
+
+if TYPE_CHECKING:
+    from matplotlib.container import BarContainer
 
 # Constants
 RESULTS_DIR = "results"
@@ -20,7 +24,7 @@ NAIVE_RESULTS = f"{RESULTS_DIR}/naive_performance.json"
 OPTIMIZED_RESULTS = f"{RESULTS_DIR}/optimized_performance.json"
 OUTPUT_DIR = f"{RESULTS_DIR}/visualizations"
 
-def check_results_exist():
+def check_results_exist() -> bool:
     """Check if both result files exist"""
     if not os.path.exists(NAIVE_RESULTS) or not os.path.exists(OPTIMIZED_RESULTS):
         print("Error: Results files not found.")
@@ -29,7 +33,7 @@ def check_results_exist():
         return False
     return True
 
-def ensure_output_dir():
+def ensure_output_dir() -> None:
     """Ensure output directory for visualizations exists"""
     if not os.path.exists(OUTPUT_DIR):
         os.makedirs(OUTPUT_DIR)
@@ -44,7 +48,7 @@ def load_results():
 
     return naive, optimized
 
-def create_time_comparison_chart(naive, optimized):
+def create_time_comparison_chart(naive: dict[str, float], optimized: dict[str, float]) -> None:
     """Create a bar chart comparing execution times"""
     plt.figure(figsize=(12, 6))
 
@@ -83,7 +87,7 @@ def create_time_comparison_chart(naive, optimized):
                      fontweight='bold')
 
     # Add exact time values on bars
-    def add_labels(bars):
+    def add_labels(bars: BarContainer) -> None:
         for c_bar in bars:
             height = c_bar.get_height()
             ax.annotate(f'{height:.2f}s',
@@ -104,7 +108,7 @@ def create_time_comparison_chart(naive, optimized):
     plt.savefig(f"{OUTPUT_DIR}/time_comparison.png")
     print(f"Time comparison chart saved to: {OUTPUT_DIR}/time_comparison.png")
 
-def create_speedup_chart(naive, optimized):
+def create_speedup_chart(naive: dict[str, float], optimized: dict[str, float]) -> None:
     """Create a chart showing speedup factors"""
     # Calculate speedup metrics
     join_speedup = naive['join_time_seconds'] / optimized['join_time_seconds'] if optimized['join_time_seconds'] > 0 else 0
@@ -142,7 +146,7 @@ def create_speedup_chart(naive, optimized):
     plt.savefig(f"{OUTPUT_DIR}/speedup_chart.png")
     print(f"Speedup chart saved to: {OUTPUT_DIR}/speedup_chart.png")
 
-def create_summary_report(naive, optimized):
+def create_summary_report(naive: dict[str, float], optimized: dict[str, float]) -> str:
     """Create a text summary report of the performance comparison"""
     # Calculate key metrics
     join_speedup = naive['join_time_seconds'] / optimized['join_time_seconds'] if optimized['join_time_seconds'] > 0 else 0
@@ -217,7 +221,7 @@ def create_summary_report(naive, optimized):
     print(f"Summary report saved to: {report_path}")
     return '\n'.join(report)
 
-def main():
+def main() -> None:
     """Main execution function"""
     if not check_results_exist():
         sys.exit(1)

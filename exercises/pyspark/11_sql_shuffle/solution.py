@@ -21,7 +21,7 @@ orders_df = spark.createDataFrame(orders_data, ["order_id", "customer_id", "amou
 customers_df = spark.createDataFrame(customers_data, ["customer_id", "customer_name"])
 
 # Non-optimized way: Multiple shuffles due to separate operations
-def non_optimized_way():
+def non_optimized_way() -> float:
     start_time = time.time()
 
     # First join operations (causes shuffle)
@@ -39,7 +39,7 @@ def non_optimized_way():
     return end_time - start_time
 
 # Optimized way: Reduce shuffles by pre-aggregating before join
-def optimized_way():
+def optimized_way() -> float:
     start_time = time.time()
 
     # Pre-aggregate orders before joining (reduces data to be shuffled)

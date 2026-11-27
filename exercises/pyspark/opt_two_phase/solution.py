@@ -8,18 +8,18 @@ import hashlib
 import random
 import time
 
-from pyspark.sql import SparkSession, functions
+from pyspark.sql import DataFrame, SparkSession, functions
 from pyspark.sql.types import StringType
 
 
-def create_spark_session():
+def create_spark_session() -> SparkSession:
     return SparkSession.builder \
         .appName("Count Distinct Exercise") \
         .config("spark.sql.shuffle.partitions", "100") \
         .config("spark.default.parallelism", "100") \
         .getOrCreate()
 
-def generate_very_skewed_data(spark, size=100000):
+def generate_very_skewed_data(spark: SparkSession, size: int = 100000):
     """Generate highly skewed dataset with expensive computation"""
     data = []
     # Create very skewed distribution
@@ -40,14 +40,14 @@ def generate_very_skewed_data(spark, size=100000):
     df = spark.createDataFrame(data, ['user_id', 'event_type', 'complex_value'])
     return df.repartition(100)
 
-def expensive_computation(value):
+def expensive_computation(value: str) -> str:
     """Add computational overhead"""
     return hashlib.md5(value.encode()).hexdigest()
 
 # Register UDF for expensive computation
 expensive_udf = functions.udf(expensive_computation, StringType())
 
-def unoptimized_analysis(df):
+def unoptimized_analysis(df: DataFrame) -> float:
     """Unoptimized version with expensive computation"""
     print("Starting unoptimized analysis...")
     start_time = time.time()
@@ -71,7 +71,7 @@ def unoptimized_analysis(df):
 
     return end_time - start_time
 
-def optimized_analysis(df):
+def optimized_analysis(df: DataFrame) -> float:
     """Optimized version using two-phase aggregation"""
     print("Starting optimized analysis...")
     start_time = time.time()
@@ -101,7 +101,7 @@ def optimized_analysis(df):
 
     return end_time - start_time
 
-def main():
+def main() -> None:
     spark = create_spark_session()
 
     # Generate test data

@@ -5,12 +5,16 @@ Generate data
 """
 
 from datetime import UTC, datetime, timedelta
+from typing import TYPE_CHECKING
 
 import numpy as np
 import pandas as pd
 
+if TYPE_CHECKING:
+    from pandas.core.frame import DataFrame
 
-def generate_sales_data(num_stores=5, days=30, seed=42):
+
+def generate_sales_data(num_stores: int = 5, days: int = 30, seed: int = 42) -> DataFrame:
     """Generate sample sales data for the window functions exercise."""
 
     rng = np.random.default_rng(seed)
@@ -39,7 +43,7 @@ def generate_sales_data(num_stores=5, days=30, seed=42):
     df = pd.DataFrame(data)
     return df.sort_values(['store_id', 'date'])
 
-def main():
+def main() -> None:
     # Generate sample data
     df = generate_sales_data()
     # Save to CSV

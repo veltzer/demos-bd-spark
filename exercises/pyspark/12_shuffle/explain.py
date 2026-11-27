@@ -4,7 +4,12 @@
 Explain
 """
 
+from typing import TYPE_CHECKING
+
 from pyspark.sql import SparkSession
+
+if TYPE_CHECKING:
+    from pyspark.sql.dataframe import DataFrame
 
 spark = SparkSession.builder.appName("SimpleOptimization").getOrCreate()
 sc = spark.sparkContext
@@ -15,7 +20,7 @@ rdd = sc.parallelize(numbers)
 df = spark.createDataFrame([(x,) for x in numbers], ["value"])
 
 # Inefficient way with separate operations
-def inefficient_way():
+def inefficient_way() -> DataFrame:
     evens = df.filter("value % 2 = 0")
     squares = evens.selectExpr("value * value as square")
     result = squares.agg({"square": "sum"})
@@ -23,7 +28,7 @@ def inefficient_way():
     return result
 
 # Optimized way with chained operations
-def optimized_way():
+def optimized_way() -> DataFrame:
     result = df.filter("value % 2 = 0") \
                .selectExpr("value * value as square") \
                .agg({"square": "sum"})

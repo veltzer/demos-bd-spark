@@ -6,8 +6,12 @@ Create data
 
 import random
 from datetime import UTC, datetime, timedelta
+from typing import TYPE_CHECKING
 
 from pyspark.sql import SparkSession
+
+if TYPE_CHECKING:
+    from pyspark.sql.dataframe import DataFrame
 
 # Initialize Spark
 spark = SparkSession.builder \
@@ -16,7 +20,7 @@ spark = SparkSession.builder \
     .getOrCreate()
 
 # Create large table for meaningful explain analysis
-def create_orders_data(num_records):
+def create_orders_data(num_records: int) -> DataFrame:
     data = []
     start_date = datetime(2024, 1, 1, tzinfo=UTC)
 
@@ -37,7 +41,7 @@ def create_orders_data(num_records):
     )
 
 # Create smaller dimension tables
-def create_customers_data():
+def create_customers_data() -> DataFrame:
     data = []
     segments = ['Retail', 'Wholesale', 'Enterprise']
     countries = ['USA', 'UK', 'Canada', 'France', 'Germany']
@@ -56,7 +60,7 @@ def create_customers_data():
         ["customer_id", "name", "segment", "country", "credit_limit"]
     )
 
-def create_products_data():
+def create_products_data() -> DataFrame:
     data = []
     categories = ['Electronics', 'Clothing', 'Food', 'Books', 'Home']
 

@@ -9,12 +9,12 @@ import os
 from pyspark import SparkConf, SparkContext
 
 
-def create_spark():
+def create_spark() -> SparkContext:
     """Create and configure SparkContext"""
     conf = SparkConf().setAppName("Text Processing").setMaster("spark://localhost:7077")
     return SparkContext(conf=conf)
 
-def analyze_files(sc: SparkContext, input_dir: str):
+def analyze_files(sc: SparkContext, input_dir: str) -> None:
     """Analyze text files in the input directory"""
     # Read all text files
     files_rdd = sc.wholeTextFiles(os.path.join(input_dir, "*.txt"))
@@ -71,7 +71,7 @@ def analyze_files(sc: SparkContext, input_dir: str):
     for sentence in ai_sentences:
         print(f"- {sentence}")
 
-def main():
+def main() -> None:
     """Main function to run the analysis"""
     sc = create_spark()
 

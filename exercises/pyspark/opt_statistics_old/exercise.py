@@ -14,7 +14,7 @@ spark = SparkSession.builder \
     .enableHiveSupport() \
     .getOrCreate()
 
-def run_sales_analysis():
+def run_sales_analysis() -> None:
     print("Running unoptimized query...")
     start_time = time.time()
 

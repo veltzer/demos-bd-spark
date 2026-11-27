@@ -7,16 +7,16 @@ Exercise
 import random
 from datetime import UTC, datetime, timedelta
 
-from pyspark.sql import SparkSession, functions
+from pyspark.sql import DataFrame, SparkSession, functions
 
 
-def create_spark_session():
+def create_spark_session() -> SparkSession:
     return SparkSession.builder \
         .appName("Partition Pruning Exercise") \
         .config("spark.sql.sources.partitionOverwriteMode", "dynamic") \
         .getOrCreate()
 
-def generate_sales_data(spark, start_date, end_date, num_records=1000000):
+def generate_sales_data(spark: SparkSession, start_date: datetime, end_date: datetime, num_records: int = 1000000):
     """Generate sample sales data for demonstration"""
 
     # Generate dates between start and end date
@@ -47,14 +47,14 @@ def generate_sales_data(spark, start_date, end_date, num_records=1000000):
         ["order_id", "product", "region", "amount", "sale_date"]
     )
 
-def write_partitioned_data(df, path):
+def write_partitioned_data(df: DataFrame, path: str) -> None:
     """Write data partitioned by sale_date"""
     df.write \
         .partitionBy("sale_date") \
         .mode("overwrite") \
         .parquet(path)
 
-def query_without_partition_pruning(spark, path):
+def query_without_partition_pruning(spark: SparkSession, path: str) -> None:
     """Query that doesn't benefit from partition pruning"""
     print("\nQuery WITHOUT partition pruning benefit:")
     start_time = datetime.now(tz=UTC)
@@ -69,7 +69,7 @@ def query_without_partition_pruning(spark, path):
     print("\nExecution plan:")
     result.explain()
 
-def query_with_partition_pruning(spark, path, start_date, end_date):
+def query_with_partition_pruning(spark: SparkSession, path: str, start_date: datetime, end_date: datetime) -> None:
     """Query that benefits from partition pruning"""
     print("\nQuery WITH partition pruning benefit:")
     start_time = datetime.now(tz=UTC)
@@ -88,7 +88,7 @@ def query_with_partition_pruning(spark, path, start_date, end_date):
     print("\nExecution plan:")
     result.explain()
 
-def show_partition_info(spark, path):
+def show_partition_info(spark: SparkSession, path: str) -> None:
     """Show information about partitions"""
     print("\nPartition information:")
 
@@ -107,7 +107,7 @@ def show_partition_info(spark, path):
         functions.count_distinct("sale_date").alias("num_partitions")
     ).show()
 
-def main():
+def main() -> None:
     spark = create_spark_session()
 
     # Generate data for a 90-day period

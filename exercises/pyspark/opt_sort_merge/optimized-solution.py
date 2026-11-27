@@ -10,9 +10,12 @@ import json
 import os
 import sys
 import time
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from pyspark.sql import SparkSession
+
+if TYPE_CHECKING:
+    from pyspark.sql.dataframe import DataFrame
 
 # Initialize Spark Session
 spark = SparkSession.builder \
@@ -26,7 +29,7 @@ SORTED_TRANSACTIONS = f"{DATA_DIR}/sorted_transactions"
 SORTED_PRODUCTS = f"{DATA_DIR}/sorted_products"
 RESULTS_DIR = "results"
 
-def check_data_exists():
+def check_data_exists() -> bool:
     """Verify that required data exists"""
     if not os.path.exists(SORTED_TRANSACTIONS) or not os.path.exists(SORTED_PRODUCTS):
         print("Error: Required data files not found.")
@@ -35,12 +38,12 @@ def check_data_exists():
         return False
     return True
 
-def ensure_results_dir():
+def ensure_results_dir() -> None:
     """Ensure results directory exists"""
     if not os.path.exists(RESULTS_DIR):
         os.makedirs(RESULTS_DIR)
 
-def get_executor_metrics():
+def get_executor_metrics() -> dict[str, str | None]:
     """Get current executor metrics from Spark"""
     # This is a simplified version - in a real environment,
     # you would collect more detailed metrics from the Spark UI
@@ -57,7 +60,7 @@ def get_executor_metrics():
         'default_parallelism': 'Unknown'
     }
 
-def verify_sorting(df, sort_column):
+def verify_sorting(df: DataFrame, sort_column: str) -> bool:
     """
     Verify that a dataframe is actually sorted by checking a sample
     Note: This is not a comprehensive check, just a sanity check
@@ -68,7 +71,7 @@ def verify_sorting(df, sort_column):
     # Check if the sampled values are in sorted order
     return all(values[i] <= values[i+1] for i in range(len(values)-1))
 
-def optimized_solution():
+def optimized_solution() -> dict[str, bool | float | int | str | dict[str, str | None]]:
     """
     Perform join on pre-sorted data, allowing Spark to skip
     the sorting phase during join.
@@ -171,7 +174,7 @@ def optimized_solution():
 
     return performance
 
-def main():
+def main() -> None:
     if not check_data_exists():
         sys.exit(1)
 

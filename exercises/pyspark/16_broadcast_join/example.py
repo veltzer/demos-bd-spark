@@ -20,7 +20,7 @@ large_df = spark.createDataFrame(large_data, ["id", "product_id", "value"])
 small_data = [(f"product_{i}", f"Product Name {i}") for i in range(1000)]
 small_df = spark.createDataFrame(small_data, ["product_id", "product_name"])
 
-def regular_join():
+def regular_join() -> tuple[float, int]:
     start_time = time.time()
 
     # Regular join
@@ -37,7 +37,7 @@ def regular_join():
 
     return end_time - start_time, count
 
-def broadcast_join():
+def broadcast_join() -> tuple[float, int]:
     start_time = time.time()
 
     # Broadcast join

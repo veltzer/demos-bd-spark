@@ -13,7 +13,7 @@ spark = SparkSession.builder \
     .appName("Statistics Exercise - Optimized Query") \
     .getOrCreate()
 
-def compute_statistics():
+def compute_statistics() -> None:
     print("Computing table statistics...")
 
     # Compute table-level statistics
@@ -32,7 +32,7 @@ def compute_statistics():
 
     print("Statistics computation complete!")
 
-def run_optimized_sales_analysis():
+def run_optimized_sales_analysis() -> None:
     # Compute statistics first
     compute_statistics()
 
@@ -73,7 +73,7 @@ def run_optimized_sales_analysis():
         ORDER BY total_revenue DESC
     """).show(truncate=False)
 
-def show_table_statistics():
+def show_table_statistics() -> None:
     print("\nProduct Table Statistics:")
     spark.sql("DESCRIBE EXTENDED products").show(truncate=False)
 

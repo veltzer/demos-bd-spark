@@ -30,7 +30,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 class SalesAnalysisReport:
-    def __init__(self, spark_session=None):
+    def __init__(self, spark_session: SparkSession | None = None) -> None:
         """Initialize the sales analysis report with a Spark session."""
         self.spark = spark_session or SparkSession.builder \
             .appName("Sales Analysis Report") \
@@ -43,7 +43,7 @@ class SalesAnalysisReport:
         self.products_df: Any = None
         self.customers_df: Any = None
 
-    def load_data(self, sales_path, products_path, customers_path):
+    def load_data(self, sales_path: str, products_path: str, customers_path: str) -> None:
         """Load and cache the required datasets."""
         self.sales_df = self.spark.read.csv(sales_path, header=True, inferSchema=True)
         self.products_df = self.spark.read.csv(products_path, header=True, inferSchema=True)
@@ -56,7 +56,7 @@ class SalesAnalysisReport:
 
         logger.info("Data loaded successfully")
 
-    def clean_data(self):
+    def clean_data(self) -> None:
         """Clean and validate the data."""
         # Remove duplicates
         self.sales_df = self.sales_df.dropDuplicates(['transaction_id'])
@@ -79,7 +79,7 @@ class SalesAnalysisReport:
             .orderBy('month')
 
 
-    def get_top_products(self, n=10):
+    def get_top_products(self, n: int = 10):
         """Get top N products by revenue."""
         return self.sales_df \
             .join(self.products_df, 'product_id') \
@@ -144,7 +144,7 @@ class SalesAnalysisReport:
             .orderBy('category', 'month')
 
 
-    def generate_report(self, output_path):
+    def generate_report(self, output_path: str) -> None:
         """Generate the complete sales analysis report."""
         # Create report components
         monthly_revenue = self.calculate_monthly_revenue()
@@ -173,7 +173,7 @@ class SalesAnalysisReport:
 
         logger.info("Report generated successfully")
 
-    def cleanup(self):
+    def cleanup(self) -> None:
         """Clean up resources."""
         # Uncache DataFrames
         self.sales_df.unpersist()
@@ -185,7 +185,7 @@ class SalesAnalysisReport:
 
         logger.info("Cleanup completed")
 
-def main():
+def main() -> None:
     """Main function to run the sales analysis report."""
     # Initialize report
     report = SalesAnalysisReport()

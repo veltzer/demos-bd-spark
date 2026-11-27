@@ -18,14 +18,14 @@ sc = spark.sparkContext
 data = range(1, 10000000)
 rdd = sc.parallelize(data)
 
-def complex_computation(x):
+def complex_computation(x: int):
     # Simulate complex computation with some CPU work
     result = 0
     for i in range(100):
         result += (x * i) % 17
     return result
 
-def without_cache():
+def without_cache() -> tuple[float, int, int]:
     """ Without caching - will recompute everything twice """
     start_time = time.time()
 
@@ -43,7 +43,7 @@ def without_cache():
     end_time = time.time()
     return end_time - start_time, result1, result2
 
-def with_cache():
+def with_cache() -> tuple[float, int, int]:
     """ With caching - compute once, reuse results """
     start_time = time.time()
 

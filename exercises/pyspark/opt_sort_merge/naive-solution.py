@@ -26,7 +26,7 @@ UNSORTED_TRANSACTIONS = f"{DATA_DIR}/unsorted_transactions"
 UNSORTED_PRODUCTS = f"{DATA_DIR}/unsorted_products"
 RESULTS_DIR = "results"
 
-def check_data_exists():
+def check_data_exists() -> bool:
     """Verify that required data exists"""
     if not os.path.exists(UNSORTED_TRANSACTIONS) or not os.path.exists(UNSORTED_PRODUCTS):
         print("Error: Required data files not found.")
@@ -35,12 +35,12 @@ def check_data_exists():
         return False
     return True
 
-def ensure_results_dir():
+def ensure_results_dir() -> None:
     """Ensure results directory exists"""
     if not os.path.exists(RESULTS_DIR):
         os.makedirs(RESULTS_DIR)
 
-def get_executor_metrics():
+def get_executor_metrics() -> dict[str, str | None]:
     """Get current executor metrics from Spark"""
     # This is a simplified version - in a real environment,
     # you would collect more detailed metrics from the Spark UI
@@ -57,7 +57,7 @@ def get_executor_metrics():
         'default_parallelism': 'Unknown'
     }
 
-def naive_solution():
+def naive_solution() -> dict[str, float | int | str | dict[str, str | None]]:
     """
     Perform join on unsorted data, letting Spark handle sorting
     during the join operation.
@@ -145,7 +145,7 @@ def naive_solution():
 
     return performance
 
-def main():
+def main() -> None:
     if not check_data_exists():
         sys.exit(1)
 

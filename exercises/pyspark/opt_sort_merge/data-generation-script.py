@@ -10,9 +10,13 @@ proper global sorting of the sorted datasets.
 import os
 import shutil
 import time
+from typing import TYPE_CHECKING
 
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import expr, rand, when
+
+if TYPE_CHECKING:
+    from pyspark.sql.dataframe import DataFrame
 
 # Initialize Spark Session
 spark = SparkSession.builder \
@@ -30,7 +34,7 @@ NUM_CUSTOMERS = 500000       # 500,000 customers
 OUTPUT_DIR = "data"
 NUM_PARTITIONS = 200         # Number of partitions for output
 
-def create_output_dir():
+def create_output_dir() -> None:
     """Create output directory structure"""
     # If directory exists, remove it to avoid data mixing
     if os.path.exists(OUTPUT_DIR):
@@ -42,7 +46,7 @@ def create_output_dir():
     os.makedirs(f"{OUTPUT_DIR}/sorted_transactions")
     os.makedirs(f"{OUTPUT_DIR}/sorted_products")
 
-def generate_product_data():
+def generate_product_data() -> DataFrame:
     """Generate product catalog data"""
     print("Generating product data...")
 
@@ -63,7 +67,7 @@ def generate_product_data():
         .withColumn("stock_quantity", expr("cast(rand() * 1000 as int)"))
 
 
-def generate_transaction_data(products_df):
+def generate_transaction_data(products_df: DataFrame) -> DataFrame:
     """Generate transaction data with references to product catalog"""
     print("Generating transaction data...")
 
@@ -89,11 +93,11 @@ def generate_transaction_data(products_df):
         .withColumn("total_amount", expr("cast(rand() * 500 + 10 as double)"))
 
 
-def shuffle_dataframe(df):
+def shuffle_dataframe(df: DataFrame):
     """Completely randomize dataframe row order"""
     return df.orderBy(rand())
 
-def save_datasets(products_df, transactions_df):
+def save_datasets(products_df: DataFrame, transactions_df: DataFrame) -> None:
     """Save datasets in both sorted and unsorted versions, ensuring proper global sorting"""
     # Save unsorted datasets (randomly shuffled)
     print("Saving unsorted datasets...")
@@ -141,7 +145,7 @@ def save_datasets(products_df, transactions_df):
         f.write("Datasets were generated with guaranteed global sorting on product_id.\n")
         f.write(f"Generation timestamp: {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
 
-def verify_data():
+def verify_data() -> None:
     """Verify datasets were created correctly and check sorting"""
     datasets = {
         "unsorted_products": f"{OUTPUT_DIR}/unsorted_products",
@@ -167,7 +171,7 @@ def verify_data():
         else:
             print(f"  {name}: Directory not found")
 
-def main():
+def main() -> None:
     """Main execution function"""
     print("Generating data for Sort-Merge Performance Exercise...")
 

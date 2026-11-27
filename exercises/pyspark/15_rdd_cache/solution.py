@@ -5,8 +5,12 @@ Solution
 """
 
 import time
+from typing import TYPE_CHECKING
 
 from pyspark.sql import SparkSession
+
+if TYPE_CHECKING:
+    from pyspark.sql.types import Row
 
 # Create Spark session
 spark = SparkSession.builder.appName("SQLCachingDemo").getOrCreate()
@@ -16,7 +20,7 @@ n_rows = 1000000
 data = [(i, f"product_{i % 1000}", i * 10) for i in range(n_rows)]
 df = spark.createDataFrame(data, ["id", "product", "price"])
 
-def run_queries_without_cache():
+def run_queries_without_cache() -> tuple[float, list[Row], list[Row]]:
     start_time = time.time()
 
     # Query 1: Average price by product
@@ -30,7 +34,7 @@ def run_queries_without_cache():
     end_time = time.time()
     return end_time - start_time, avg_price, product_counts
 
-def run_queries_with_cache():
+def run_queries_with_cache() -> tuple[float, list[Row], list[Row]]:
     start_time = time.time()
 
     # Cache the DataFrame

@@ -10,7 +10,7 @@ import random
 from faker import Faker
 
 
-def generate_csv(filename, num_rows):
+def generate_csv(filename: str, num_rows: int) -> None:
     fake = Faker()
     departments = ["Engineering", "Marketing", "HR", "Sales", "Finance"]
 

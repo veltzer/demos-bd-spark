@@ -9,10 +9,14 @@ handles partition information collection to avoid errors.
 import os
 import sys
 import time
+from typing import TYPE_CHECKING, Any
 
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import avg, count, desc
 from pyspark.sql.functions import sum as my_sum
+
+if TYPE_CHECKING:
+    from pyspark.sql.dataframe import DataFrame
 
 # Initialize Spark Session with Hive support
 spark = SparkSession.builder \
@@ -23,7 +27,7 @@ spark = SparkSession.builder \
 
 spark.sparkContext.setLogLevel("WARN")
 
-def check_table_exists():
+def check_table_exists() -> bool:
     """Check if the transactions table exists"""
     tables = [t.name for t in spark.catalog.listTables()]
     if "transactions" not in tables:
@@ -46,7 +50,7 @@ def check_previous_metrics() -> dict[str, float]:
             metrics[key] = float(value)
     return metrics
 
-def get_simple_partition_info(df):
+def get_simple_partition_info(df: DataFrame):
     """Get basic information about dataframe partitioning without using problematic operations"""
     partition_count = df.rdd.getNumPartitions()
     return {
@@ -124,7 +128,7 @@ def run_query():
         "result_partitioning": result_partitioning
     }
 
-def print_performance_report(metrics, previous_metrics=None):
+def print_performance_report(metrics: dict[str, Any], previous_metrics: dict[str, float] | None=None) -> None:
     """Print a performance report based on execution metrics"""
     print("\n" + "=" * 80)
     print("PERFORMANCE REPORT - FIXED OPTIMIZED QUERY")
@@ -166,7 +170,7 @@ def print_performance_report(metrics, previous_metrics=None):
     print("   - Your query is complex enough to benefit from balanced workload")
     print("3. Consider caching the repartitioned data if using it multiple times")
 
-def main():
+def main() -> None:
     # Verify table exists
     if not check_table_exists():
         spark.stop()

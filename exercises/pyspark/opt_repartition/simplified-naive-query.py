@@ -9,10 +9,14 @@ WITHOUT proper repartitioning, demonstrating performance challenges with skewed 
 import os
 import sys
 import time
+from typing import TYPE_CHECKING, Any
 
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import avg, count, desc
 from pyspark.sql.functions import sum as sql_sum
+
+if TYPE_CHECKING:
+    from pyspark.sql.dataframe import DataFrame
 
 # Initialize Spark Session with Hive support
 spark = SparkSession.builder \
@@ -23,7 +27,7 @@ spark = SparkSession.builder \
 
 spark.sparkContext.setLogLevel("WARN")
 
-def check_table_exists():
+def check_table_exists() -> bool:
     """Check if the transactions table exists"""
     tables = [t.name for t in spark.catalog.listTables()]
     if "transactions" not in tables:
@@ -32,7 +36,7 @@ def check_table_exists():
         return False
     return True
 
-def get_partition_info(df):
+def get_partition_info(df: DataFrame):
     """Get information about dataframe partitioning"""
     partition_count = df.rdd.getNumPartitions()
     partition_sizes = df.rdd.glom().map(len).collect()
@@ -46,7 +50,7 @@ def get_partition_info(df):
             "skew_factor": 0
         }
 
-    avg_size = sql_sum(partition_sizes) / len(partition_sizes) if len(partition_sizes) > 0 else 0
+    avg_size = sum(partition_sizes) / len(partition_sizes) if len(partition_sizes) > 0 else 0
     skew_factor = max(partition_sizes) / avg_size if avg_size > 0 else 0
 
     return {
@@ -104,7 +108,7 @@ def run_query():
         "result_partitioning": result_partitioning
     }
 
-def print_performance_report(metrics):
+def print_performance_report(metrics: dict[str, Any]) -> None:
     """Print a performance report based on execution metrics"""
     print("\n" + "=" * 80)
     print("PERFORMANCE REPORT - NAIVE QUERY (WITHOUT REPARTITIONING)")
@@ -135,7 +139,7 @@ def print_performance_report(metrics):
     print("\nNext step: Run optimized_query.py to see how repartitioning improves performance")
 
 
-def main():
+def main() -> None:
     # Verify table exists
     if not check_table_exists():
         spark.stop()

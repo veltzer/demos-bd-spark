@@ -4,17 +4,22 @@
 Explain output
 """
 
+from typing import TYPE_CHECKING
+
 from pyspark.sql import SparkSession, functions
 
+if TYPE_CHECKING:
+    from pyspark.sql.dataframe import DataFrame
 
-def show_plan(df, title):
+
+def show_plan(df: DataFrame, title: str) -> None:
     """ Function to capture and print explain plan """
     print(f"{title}")
     print("=" * len(title))
     # Print the plan explanation using the public API
     df.explain(extended=True)
 
-def main():
+def main() -> None:
     spark = SparkSession.builder.appName("ExplainOutput").getOrCreate()
 
     # Create sample data

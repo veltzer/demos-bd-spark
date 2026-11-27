@@ -9,7 +9,7 @@ from pyspark.sql.functions import sum as sql_sum
 from pyspark.sql.window import Window
 
 
-def main():
+def main() -> None:
     # Create Spark session
     spark = SparkSession.builder.appName("WindowFunctionsSolution").getOrCreate()
 

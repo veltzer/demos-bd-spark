@@ -23,7 +23,7 @@ spark = SparkSession.builder \
 
 spark.sparkContext.setLogLevel("WARN")
 
-def analyze_tables():
+def analyze_tables() -> None:
     print("Collecting table statistics...")
 
     # Analyze customers table including partitions and columns
@@ -38,7 +38,7 @@ def analyze_tables():
 
     print("Statistics collection complete")
 
-def run_query():
+def run_query() -> float:
     print("Running query WITH collected statistics...")
     print("-" * 80)
 
@@ -92,7 +92,7 @@ def run_query():
 
     return execution_time
 
-def main():
+def main() -> None:
     # Check if tables exist
     tables = spark.catalog.listTables()
     table_names = [t.name for t in tables]
