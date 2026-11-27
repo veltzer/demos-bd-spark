@@ -7,7 +7,7 @@ Example
 import random
 import time
 
-from pyspark.sql import SparkSession
+from pyspark.sql import DataFrame, SparkSession
 from pyspark.sql.functions import count
 from pyspark.sql.functions import sum as sql_sum
 
@@ -69,7 +69,7 @@ def two_phase_aggregation(df):
     return end_time - start_time, cnt
 
 
-def show_partition_stats(df_to_analyze):
+def show_partition_stats(df_to_analyze: DataFrame):
     partition_sizes = df_to_analyze.rdd.mapPartitions(
         lambda x: [sum(1 for _ in x)]
     ).collect()

@@ -75,8 +75,11 @@ def generate_sales(products_df, customers_df, num_transactions=50000):
     df = df.sort_values('date')
 
     # Add some seasonality and trends
-    df['unit_price'] = df.apply(lambda x:
-        x['unit_price'] * (1 + 0.1 * np.sin(x['date'].dayofyear * 2 * np.pi / 365)), axis=1)
+    def seasonal_price(row: pd.Series) -> float:
+        price: float = row['unit_price'] * (1 + 0.1 * np.sin(row['date'].dayofyear * 2 * np.pi / 365))
+        return price
+
+    df['unit_price'] = df.apply(seasonal_price, axis=1)
 
     return df
 

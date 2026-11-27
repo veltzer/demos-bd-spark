@@ -14,7 +14,7 @@ def create_spark():
     conf = SparkConf().setAppName("Text Processing").setMaster("spark://localhost:7077")
     return SparkContext(conf=conf)
 
-def analyze_files(sc, input_dir):
+def analyze_files(sc: SparkContext, input_dir: str):
     """Analyze text files in the input directory"""
     # Read all text files
     files_rdd = sc.wholeTextFiles(os.path.join(input_dir, "*.txt"))
@@ -52,13 +52,15 @@ def analyze_files(sc, input_dir):
 
     # Filter out empty strings and common words
     common_words = {'the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by'}
-    valid_words = cleaned_words.filter(lambda word: word and word not in common_words)
+    valid_words = cleaned_words.filter(lambda word: word != "" and word not in common_words)
 
     # Count word frequencies
     word_counts = valid_words.map(lambda word: (word, 1)).reduceByKey(lambda a, b: a + b)
 
     print("=== Most Common Words ===")
-    for word, count in word_counts.top(10, key=lambda x: x[1]):
+    # pyspark's SupportsOrdering protocol names the parameter of __lt__, and
+    # int takes it by position only: the stub rejects every builtin key
+    for word, count in word_counts.top(10, key=lambda x: x[1]):  # pyrefly: ignore[bad-specialization]
         print(f"{word}: {count} occurrences")
 
     # Additional analysis: sentences containing "AI" or "artificial intelligence"

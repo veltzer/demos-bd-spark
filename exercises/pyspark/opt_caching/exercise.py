@@ -18,11 +18,11 @@ def create_spark_session():
         .appName("RDD Caching Exercise") \
         .getOrCreate()
 
-def generate_large_dataset(spark, size=10000):
+def generate_large_dataset(spark: SparkSession, size: int = 10000):
     """Generate a large dataset with repeated values"""
     return spark.sparkContext.parallelize(range(size), 100)
 
-def expensive_computation(x):
+def expensive_computation(x: int) -> tuple[int, int]:
     """Simulate an expensive computation"""
     time.sleep(0.001)  # Simulate complexity
     return (x % 100, x)
