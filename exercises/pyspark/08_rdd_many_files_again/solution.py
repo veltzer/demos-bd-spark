@@ -19,7 +19,7 @@ sc = SparkContext(conf=conf)
 sc.setLogLevel("ERROR")
 
 # Read all text files from the docs directory
-# DOCS_PATH = "/usr/share/doc"
+# DOCS_PATH = "/usr/share/doc"  # noqa: ERA001  teaching: kept in the comment for the reader
 DOCS_PATH = "/usr/share/doc/gzip"
 
 # Create RDD from text files

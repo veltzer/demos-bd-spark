@@ -69,11 +69,11 @@ def run_query():
     print(f"Execution time: {execution_time:.2f} seconds")
 
     # Get and print query execution details
-    # explain_output = result._jdf.queryExecution().toString()
-    # print("\nQuery Execution Plan:")
-    # print("-" * 80)
-    # print(explain_output)
-    # print("-" * 80)
+    # explain_output = result._jdf.queryExecution().toString()  # noqa: ERA001  teaching: kept in the comment for the reader
+    # print("\nQuery Execution Plan:")  # noqa: ERA001  teaching: kept in the comment for the reader
+    # print("-" * 80)  # noqa: ERA001  teaching: kept in the comment for the reader
+    # print(explain_output)  # noqa: ERA001  teaching: kept in the comment for the reader
+    # print("-" * 80)  # noqa: ERA001  teaching: kept in the comment for the reader
 
     return execution_time
 

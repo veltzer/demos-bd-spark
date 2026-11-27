@@ -34,7 +34,7 @@ def main():
         .agg(functions.collect_list("amount").alias("amounts")) \
         .selectExpr("product", "aggregate(amounts, 0D, (acc, x) -> acc + x) as total")
 
-    # show_plan(inefficient, "INEFFICIENT PLAN (groupBy + collect_list + aggregate):")
+    # show_plan(inefficient, "INEFFICIENT PLAN (groupBy + collect_list + aggregate):")  # noqa: ERA001  teaching: kept in the comment for the reader
 
     # Efficient approach using direct sum
     efficient = df.groupBy("product") \

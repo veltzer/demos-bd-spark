@@ -69,5 +69,5 @@ print(f"Optimized execution time: {opt_time:.2f} seconds")
 print(f"Improvement: {((non_opt_time - opt_time) / non_opt_time) * 100:.2f}%")
 
 # Cache the DataFrames if you want to run multiple times for comparison
-# orders_df.cache()
-# customers_df.cache()
+# orders_df.cache()  # noqa: ERA001  teaching: kept in the comment for the reader
+# customers_df.cache()  # noqa: ERA001  teaching: kept in the comment for the reader
