@@ -32,7 +32,7 @@ def check_table_exists():
         return False
     return True
 
-def check_previous_metrics():
+def check_previous_metrics() -> dict[str, float]:
     """Check if naive query metrics exist for comparison"""
     if not os.path.exists("naive_query_metrics.txt"):
         print("Warning: naive_query_metrics.txt not found.")
